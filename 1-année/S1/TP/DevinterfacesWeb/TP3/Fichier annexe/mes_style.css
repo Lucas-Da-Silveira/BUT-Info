@@ -1,0 +1,8 @@
+nav a {
+   background-color:yellowgreen;
+}
+
+a:hover {
+    background-color:pink;
+}
+

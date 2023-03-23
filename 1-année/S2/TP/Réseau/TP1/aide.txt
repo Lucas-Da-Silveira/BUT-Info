@@ -1,0 +1,17 @@
+compilation : 
+gcc -c -Wall nom ficher.c 
+
+Edition lien :
+gcc nom ficher.o -o nom ficher
+
+executer:
+./nomfichier
+
+\0 = NULL = 0 dans la table ASCII
+
+
+char t[3]={'a','b','c'}; == tableau de caractère pas de \0 à la fin
+
+char t1[4]={'a','b','c','\0'}; == chaîne de caractère
+
+Il ne faut jamais compiler un .h

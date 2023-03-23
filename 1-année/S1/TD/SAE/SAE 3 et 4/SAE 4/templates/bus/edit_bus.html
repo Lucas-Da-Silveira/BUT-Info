@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier un bus</title>
+{% endblock %}
+
+{% block body %}
+  <h2 class="text-align-center">Modifier un bus</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  <!-- {{ bus }} -->
+  <form method="post" action="/bus/edit">
+    <fieldset>
+        <div class="container formulaire w-75 margin-top-40">
+            <div class="border rounded w-50">
+                <legend>Bus</legend>
+                <input type="hidden" name="id" value="{{ bus.id_bus }}">
+                <div class="form-group row margin-bot">
+                    <label for="date-achat" class="col-sm-3 col-form-label margin-left">Date d'achat</label>
+                    <div class="col-sm-6">
+                        <input id="date-achat" class="form-control" type="date" name="date-achat" size="18" value="{{bus.date_achat}}">
+                    </div>
+                </div>
+
+                <div class="form-group row margin-bot">
+                    <label for="conso" class="col-sm-3 col-form-label margin-left">Consommation anuelle</label>
+                    <div class="col-sm-6">
+                        <input id="conso" class="form-control" type="text" name="conso" size="18" value="{{bus.conso_annuelle}}">
+                    </div>
+                </div>
+
+                <div class="form-group row margin-bot">
+                    <label for="id-reservoir" class="col-sm-3 col-form-label margin-left">ID Réservoir</label>
+                    <div class="col-sm-6">
+                        <select id="id-reservoir" class="form-control" name="id-reservoir" required>
+                            <option value="{{ bus.id_reservoir }}">{{ bus.id_reservoir }}</option>
+                            {% for res in reservoir %}
+                                <option value="{{ res.id_reservoir}}"> {{ res.id_reservoir }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="col text-center margin-bot">
+                    <input class="btn btn-primary" type="submit" value="Editer" name="Editer">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+  </form>
+{% endblock %}

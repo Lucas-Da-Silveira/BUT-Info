@@ -1,0 +1,32 @@
+Algo pizza
+
+
+Variables:
+numéro1 Entier
+numéro2 Entier
+diamètre1 Réel
+prix1  Réel
+diamètre2 Réel
+prix2  Réel
+R1 Réel
+R2 Réel
+
+début:
+Ecrire(entrez le numéro,le diamètre et le prix de la pizza :)
+Lire(numéro1,diamètre1,prix1)
+Ecrire(entrez le numéro,le diamètre et le prix de la pizza :)
+Lire(numéro2,diamètre2,prix2)
+
+Afficher R1=(diamètre1*diamètre1)/prix1
+Afficher R2=(diamètre2*diamètre2)/prix2
+
+Lire(R1,R2)
+
+Si R1>R2
+Ecrire(le meilleur rapport taille/prix est: +numéro1)
+Sinon si R1<R2
+Ecrire(le meilleur rapport taille/prix est: +numéro2)
+Sinon
+Ecrire(le rapport taille/prix est le même: +numéro1, +=, +numéro2)
+
+Fin

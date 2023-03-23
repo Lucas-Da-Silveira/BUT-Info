@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>ajouter un article</title>
+{% endblock %}
+
+{% block body %}
+  <h2>ajout d'un article</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+
+    <form method="post" action="/article/add" >
+      <fieldset>
+        <legend> Créer un article</legend>
+        <label for="nom">nom</label><br>
+        <input id="nom" type="text" name="nom" size="18" value="" placeholder="Saisir le nom de l'article"><br>
+          <label for="type_article_id">type_article_id</label><br>
+        <select name="type_article_id" required>
+            <option value="">Sélectionner un type d'article</option>
+            {% for type in types_articles %}
+            <option value="{{ type.id }}"> {{ type.libelle }} </option>
+            {% endfor %}
+        </select><br>
+          <label for="prix">prix</label><br>
+        <input id="prix" type="text" name="prix" size="18" value="" placeholder="Saisir le prix"><br>
+          <label for="stock">stock</label><br>
+        <input id="stock" type="text" name="stock" size="18" value="" placeholder="Saisir le stock"><br>
+          <label for="description">description</label><br>
+        <input id="description" type="text" name="description" size="18" value="" placeholder="Saisir la description"><br>
+          <label for="image">image</label><br>
+        <input id="image" type="file" name="image" size="18" value="" placeholder="Choisir l'image"><br>
+        <input type="submit" value="Creer" name="Valider" >
+      </fieldset>
+
+
+  </form>
+
+{% endblock %}

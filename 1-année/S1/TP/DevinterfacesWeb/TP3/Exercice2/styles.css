@@ -1,0 +1,60 @@
+body {
+    background-color: cyan;
+}
+
+nav.navigation{
+    width:100%;
+    height: 70px;
+    background-color : white;
+}
+
+a {
+    
+    color: azure;
+    width:150px;
+    height: 30px;
+    background-color:grey;
+    border: 1px black ;
+    text-align:center;
+    vertical-align: middle;
+    padding: 10px;
+    margin : 10px;
+    border-radius: 15px 50px 30px 5px;
+    display:block ;
+    float:left;
+}
+
+a:hover {
+    background-color:pink;
+}
+
+table.tableau2{
+    color: grey;
+    width:40%;
+    border:solid  5px;
+    border-color: gray;
+    border-collapse:collapse;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+table.tableau2 td {
+    border:solid white 2px;
+}
+
+table.tableau2 caption{
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:5px;
+    color:grey;
+}
+
+table.tableau2 thead{
+    color:white;
+    background-color:grey; /*#ADD8E6*/
+}
+
+table.tableau2 thead th{
+    border:solid whitesmoke 2px;
+}

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier un article</title>
+{% endblock %}
+
+{% block body %}
+  <h2>modifier un article</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  <form method="post" action="/article/edit">
+    <fieldset>
+        <legend> Modifier un article</legend>
+        <input type="hidden" name="id" size="18" value="{{ article.id }}" id="id">
+        <label for="nom">nom</label><br>
+        <input type="text" name="nom" size="18" value="{{ article.nom}}" id="nom"><br>
+        <label for="type_article_id">type_article_id</label><br>
+        <select name="type_article_id" required>
+            {% for type in types_articles %}
+                <option value="{{ type.id }}"
+                {% if article.type_article_id is defined and type.id ==  article.type_article_id %}selected{% endif %}
+                > {{ type.libelle }} </option>
+            {% endfor %}
+        </select><br>
+        <label for="prix">prix</label><br>
+        <input type="text" name="prix" size="18" value="{{ article.prix }}" id="prix"><br>
+        <label for="stock">stock</label><br>
+        <input type="text" name="stock" size="18" value="{{ article.stock }}" id="stock"><br>
+        <label for="description">description</label><br>
+        <input type="text" name="description" size="18" value="{{ article.description }}" id="description"><br>
+        <label for="image">image</label><br>
+        <input type="file" name="image" size="18" value="{{ article.image }}" id="image"><br>
+
+        <input type="submit" value="Modifier" name="Modifier" >
+    </fieldset>
+  </form>
+{% endblock %}

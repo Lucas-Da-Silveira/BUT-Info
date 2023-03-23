@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/css/product.css">
+    <link rel="stylesheet" href="./src/css/navbar-black.css">
+    <link rel="stylesheet" href="./src/css/responsive-navbar.css">
+    <link rel="stylesheet" href="./src/css/footer.css">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- ICON -->
+    <link rel="icon" href="./src/img/favicon-32x32.png">
+
+    <title>Product</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navbar-links">
+                <li class="navbar-item nav-title"><a href="index.html">Army Shop</a></li>
+                <li class="navbar-item item"><a href="market.html">Shop</a></li>
+                <li class="navbar-item item"><a href="#">Stories</a></li>
+                <li class="navbar-item item"><a href="#">About</a></li>
+                <li class="navbar-item item"><a href="#"><iconify-icon id="search-icon" inline icon="bi:search"></iconify-icon></a><input type="text" placeholder="Search"></li>
+            </ul>
+
+            <ul class="navbar-links">
+                <li class="navbar-item"><a href="cart.html"><iconify-icon id="shopping-bag-icon" inline icon="akar-icons:shopping-bag"></iconify-icon>2</a></li>
+                <li class="navbar-item"><a href="#" onclick="document.getElementById('player').play()">Login</a></li>
+            </ul>
+        </nav>
+        <div class="res-nav-container">
+            <div class="responsive-navbar">
+                <a class="nav-title res-nav-title" href="index.html">Army Shop</a>
+                <div class="nav-icon">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar last-bar"></div>
+                </div>
+            </div>
+            <div class="res-navbar-links-container">
+                <ul class="res-navbar-links ul-left">
+                    <li class="navbar-item item"><a href="market.html">Shop</a></li>
+                    <li class="navbar-item item"><a href="#">Stories</a></li>
+                    <li class="navbar-item item"><a href="#">About</a></li>
+                </ul>
+                <ul class="res-navbar-links ul-right">
+                    <li class="navbar-item"><a href="cart.html"><iconify-icon id="shopping-bag-icon" inline icon="akar-icons:shopping-bag"></iconify-icon>2</a></li>
+                    <li class="navbar-item"><a href="#" onclick="document.getElementById('player').play()">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="slider">
+            <div id="slides">
+                <img class="slide" id="slide-1" src="./src/img/tank.jpg" alt="Tank image">
+                <img class="slide" id="slide-2" src="./src/img/fighter.jpg" alt="Fighter image">
+                <img class="slide" id="slide-3" src="./src/img/armoured-vehicule.jpg" alt="Armoured vehicule image">
+                <img class="slide" id="slide-4" src="./src/img/jeep.jpg" alt="Jeep image">
+            </div>
+
+            <div id="slider-buttons">
+                <a href="#" id="slider-btn-left"><</a>
+                <a href="#" id="slider-btn-right">></a>
+            </div>
+        </div>
+
+        <div id="infos">
+            <h3>Military stuff pack</h3>
+
+            <p id="price">$20,000</p>
+
+            <p id="description">
+                This pack contains 4 vehicules : a tank, a fighter, an armored vehicle and a Jeep.
+                Guaranteed 2 years, and if you find it cheaper elsewhere, we will refund you twice the difference!
+            </p>
+
+            <p id="price-responsive">$20,000</p>
+
+            <form id="customization-buttons">
+                <div id="quantity-button">
+                    <button id="quantity-remove">-</button>
+                    <span id="quantity-output">1</span>
+                    <button id="quantity-add">+</button>
+                </div>
+
+                <select id="color-button">
+                    <option>GREEN</option>
+                    <option>BLUE</option>
+                    <option>PURPLE</option>
+                    <option>YELLOW</option>
+                    <option>RED</option>
+                </select>
+            </form>
+
+            <p id="extra-info">Product material: carbon fiber and stainless steel.</p>
+
+            <div id="purchase-buttons">
+                <a id="add-cart-button" href="#">Add to Cart - $20,000</a>
+                <a id="buy-now-button" href="./cart.html">Buy Now</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="newsletter">
+            <h3>Sign up for our newsletter</h3>
+            <p>Be the first to know about our special offers, new product launchers, and events.</p>
+            <div id="subscribe-newsletter">
+                <input type="text" placeholder="Email Address">
+                <button>Sign up</button>
+            </div>
+        </div>
+        <div id="footer-sections">
+            <div class="footer-section">
+                <h5 class="footer-section-title">Shop</h5>
+                <ul>
+                    <li>Tanks</li>
+                    <li>Fighters</li>
+                    <li>Armoured Vehicules</li>
+                    <li>Jeeps</li>
+                    <li>Equipment</li>
+                    <li>By Activity</li>
+                    <li>Gift Cards</li>
+                    <li>Sale</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5 class="footer-section-title">Help</h5>
+                <ul>
+                    <li>Help Center</li>
+                    <li>Order Status</li>
+                    <li>Size Chart</li>
+                    <li>Returns & Warranty</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5 class="footer-section-title">About</h5>
+                <ul>
+                    <li>About Us</li>
+                    <li>Responsibility</li>
+                    <li>Technology & Innovation</li>
+                    <li>Explore our stories</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="./src/js/slider.js"></script>
+    <script src="./src/js/quantity-button.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+</body>
+</html>

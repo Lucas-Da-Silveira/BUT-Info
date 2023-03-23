@@ -1,0 +1,31 @@
+
+@media screen and (max-whith: 1024px) {
+    .paragraphe{
+        font-family: Arial;
+        color: red;
+}    
+    .titre{
+    font-family: Arial;
+    color: green;
+}
+}
+
+.titre{
+    color: green;
+}
+
+.paragraphe{
+    
+    color: blue;
+}
+
+@media all and (orientation: portrait) {
+        .paragraphe{
+            order: 0;
+        }
+
+        .titre{
+            order: 1;
+        }
+
+}

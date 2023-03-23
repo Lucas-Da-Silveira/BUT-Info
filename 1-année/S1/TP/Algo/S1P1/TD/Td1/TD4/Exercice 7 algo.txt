@@ -1,0 +1,35 @@
+Variable:
+a réel
+b réel
+c réel
+x0 réel
+x1 réel
+x2 réel
+delta réel
+
+
+Début
+
+Afficher("Entrez une valeur de a")
+Lire (a)
+Afficher("Entrez une valeur de b")
+Lire (b)
+Afficher("Entrez une valeur de c")
+Lire (c)
+
+delta= b*b - 4*a*c
+
+si delta<0 
+Ecrire("l'équation n'a pas de solution réelle")
+
+sinon si delta=0
+	x0 = -b /(2*a)
+Afficher("l'équation a une unique solution :" x0)
+
+sinon 
+	x1 = -b - sqrt(delta)/(2*a)
+	x2 = -b + sqrt(delta)/(2*a)
+Afficher("l'équation a deux solutions :" x1 x2)
+fin si
+	
+Fin

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul Imc</title>
+
+    <style>
+        .dropbtn {
+          background-color: #04AA6D;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #ddd;}
+        
+        .dropdown:hover .dropdown-content {display: block;}
+        
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
+        </style>
+
+</head>
+<body>    
+    <div class="dropdown">
+        <button class="dropbtn">Action</button>
+        <div class="dropdown-content">
+            <a  <input type="button" value="Calculer" onclick="calculerIMC()">Calculer</input></a>
+            <a  <input type="button" value="Effacer" onclick="reset()">Effacer</input></a>
+            <a  <input type="button" value="Imprimer" onclick="imprimer()">Imprimer</input></a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Mode</button>
+        <div class="dropdown-content">
+          <a href="Imc.html">Calcule IMC</a>
+          <a href="CalculFactorielle.html">Calcule Factoriel</a>
+          <a href="CalculFibonacci.html">Calcul Fibonacci</a>
+          <a href="Conversion.html">Convertir</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Help</button>
+        <div class="dropdown-content">
+          <a href="#">Description de site</a>
+          <a href="#">Nous contacter</a>
+        </div>
+      </div>
+
+    <h1>Calculateur d'IMC</h1>
+    <form>
+        <label>Sexe :</label>
+        <input type="radio" id="Homme" name="sexe" value="Homme">Homme</input>
+        <input type="radio" id="Femme" name="sexe" value="Femme">Femme</input>
+        <br>
+        <br>
+        <label>Masse (kg) :</label>
+        <input type="text" id="masse" onblur="validateMasse()">
+        <br>
+        <label>Taille (m) :</label>
+        <input type="text" id="taille" onblur="validateTaille()">
+        <br>
+    </form>
+    <p id="resultat"></p>
+
+    <script>
+        function afficherMessage() {
+            document.getElementById("message").innerHTML = "Appuyer sur le bouton pour calculer l'IMC";
+        }
+
+        function cacherMessage() {
+            document.getElementById("message").innerHTML = "";
+        }
+        
+        function validateMasse() {
+            var masse = document.getElementById("masse").value;
+            var masseError = document.getElementById("masseError");
+            
+            if (masse === "" || isNaN(masse) || masse <= 0) {
+                document.getElementById("masse").style.backgroundColor = "red";
+                masseError.innerHTML = "Entrez une valeur numérique positive";
+            } else {
+                document.getElementById("masse").style.backgroundColor = "white";
+                masseError.innerHTML = "";
+            }
+        }
+
+        function validateTaille() {
+            var taille = document.getElementById("taille").value;
+            var tailleError = document.getElementById("tailleError");
+            
+            if (taille === "" || isNaN(taille) || taille <= 0) {
+                document.getElementById("taille").style.backgroundColor = "red";
+                tailleError.innerHTML = "Entrez une valeur numérique positive";
+            } else {
+                document.getElementById("taille").style.backgroundColor = "white";
+                tailleError.innerHTML = "";
+            }
+        }
+
+        function reset(){
+            document.getElementById("masse").value = "";
+            document.getElementById("taille").value = "";
+            document.getElementById("resultat").innerHTML = "";
+            document.getElementById("masse").style.backgroundColor = "white";
+            document.getElementById("taille").style.backgroundColor = "white";
+            document.getElementById("masseError").innerHTML = "";
+            document.getElementById("tailleError").innerHTML = "";
+        }
+
+        function imprimer(){
+            window.print();
+        }
+
+        function calculerIMC() {
+            var masse = document.getElementById("masse").value;
+            var taille = document.getElementById("taille").value;
+            var imc = masse / (taille * taille);
+            var sexe ="";
+
+
+
+            var isCtrl = false; 
+            document.onkeyup=function(e){  
+                if(e.key === 'Control')  
+                    isCtrl=false;  
+            } 
+            document.onkeydown=function(e){ 
+                if(e.key === 'Control') isCtrl=true; 
+                if(e.key === 'c' && isCtrl == true) { 
+                    calculer(); 
+                }
+            }
+            
+            if(document.getElementById("Homme").checked){
+                sexe = "Homme";
+            } else if(document.getElementById("Femme").checked){
+                sexe = "Femme";
+            }
+
+            if(sexe === "Homme"){
+                if(imc < 20.7){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - Maigreur";
+                } else if(imc >= 20.7 && imc < 26.4){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - poid idéal";
+                } else if(imc >= 26.4 && imc < 27.8){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - à la limite du surpoids";
+                } else if(imc >= 27.8 && imc < 31.1){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - Surpoids";
+                } else if(imc >= 31.1){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - Obésité ";
+                }
+            }
+
+            if(sexe === "Femme"){
+                if(imc < 19.1){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - Maigreur";
+                } else if(imc >= 19.1 && imc < 25.8){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - poid idéal";
+                } else if(imc >= 25.8 && imc < 27.3){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - à la limite du surpoids";
+                } else if(imc >= 27.3 && imc < 32.3){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - Surpoids";
+                } else if(imc >= 32.3){
+                    document.getElementById("resultat").innerHTML = "IMC : " + imc + " - Obésité ";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

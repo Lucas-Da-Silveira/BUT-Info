@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="cours.css">
+    <title></title>
+    <!-- La bible : https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flexbox-properties -->
+  </head>
+  <body>
+    <h1>Properties for the Parent (flex container)</h1>
+
+    <h2>Display block</h2>
+    <div class="container">
+      <div class="item">
+        Item 1
+      </div>
+      <div class="item">
+        Item 2
+      </div>
+      <div class="item">
+        Item 3
+      </div>
+    </div>
+
+
+    <h2>Display flex (row (default), row-reverse, column, column-reverse)</h2>
+    <div class="container container-flex">
+      <div class="item">
+        Item 1
+      </div>
+      <div class="item">
+        Item 2
+      </div>
+      <div class="item">
+        Item 3
+      </div>
+    </div>
+
+    <h2>Flex wrap (nowrap (default), wrap, wrap-reverse)</h2>
+    <div class="container container-flex">
+      <div class="item item-width">
+        Item 1
+      </div>
+      <div class="item item-width">
+        Item 2
+      </div>
+      <div class="item item-width">
+        Item 3
+      </div>
+    </div>
+
+    <h2>Justify content (flex-start, flex-end, center, space-between, space-around, space-evenly)</h2>
+    <div class="container container-flex flex-wrap justify-content-space-evenly" >
+      <div class="item">
+        Item 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      </div>
+      <div class="item">
+        Item 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      </div>
+      <div class="item">
+        Item 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+      </div>
+    </div>
+
+    <h2>Align items (stretch (default), flex-end,flex-start, center, baseline)</h2>
+    <div class="container container-flex align-items-center">
+      <div class="item item-height-small">
+        Item 1
+      </div>
+      <div class="item item-height-big">
+        Item 2
+      </div>
+      <div class="item item-height-small">
+        Item 3
+      </div>
+    </div>
+
+    <h2>Align content (normal (default), flex-start, flex-end, center, space-between, space-around, space-evenly, stretch)</h2>
+    <div class="container container-flex flex-wrap align-content-center" style="height: 500px">
+      <div class="item item-width item-height-small">
+        Item 1
+      </div>
+      <div class="item item-width item-height-small">
+        Item 2
+      </div>
+      <div class="item item-width item-height-small">
+        Item 3
+      </div>
+      <div class="item item-width item-height-small">
+        Item 4
+      </div>
+    </div>
+
+
+    <h1>Properties for the Children (flex items)</h1>
+
+    <h2>Order</h2>
+    <div class="container container-flex flex-wrap align-content-flex-start" style="height: 500px">
+      <div class="item item-width item-height-small order-2">
+        Item 1
+      </div>
+      <div class="item item-width item-height-small order-0">
+        Item 2
+      </div>
+      <div class="item item-width item-height-small order-1">
+        Item 3
+      </div>
+    </div>
+
+    <h2>Flex grow</h2>
+    <div class="container container-flex flex-wrap" >
+      <div class="item flex-grow-1">
+        Item 1
+      </div>
+      <div class="item flex-grow-2">
+        Item 2
+      </div>
+      <div class="item flex-grow-1">
+        Item 3
+      </div>
+
+    </div>
+
+  </body>
+</html>

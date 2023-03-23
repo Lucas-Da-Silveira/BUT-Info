@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TP2 cdin Web (ex2)</title>
+    <link rel="icon" type="image/x-icon" href="iconeweb.ico" >
+
+    <style>
+   form{ 
+        width: 800px;
+        margin :auto;
+
+    }
+    input,select {
+        display: block;
+    } 
+    input[type=checkbox] ,input[type=radio]  {
+        display: inline;
+    }
+    input::placeholder {
+        color: rgb(21, 255, 0);
+    }
+
+    input:optional {background-color: silver;}
+    input:required {background-color: yellow;}
+    input:invalid  {background-color: red;} 
+    </style>
+</head>
+<body>
+
+    <form action="form_etudiant.html" method="post">
+        <fieldset>
+            <legend>Informations Personnelles</legend>
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" id="nom" required placeholder="Votre Nom">
+            <label for="prenom">Prénom</label>
+            <input type="text" name="prenom" id="prenom" placeholder="Votre Prenom">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required placeholder="Votre email">
+            <label for="telephone">Telephone</label>
+            <input type="text" id="telephone" name="telephone" title="N° à 10 chiffres sans espace" pattern="^0[0-9]{9}$" placeholder="votre telephone sur 9 chiffres" required >
+            <label for="date_naissance">Date de naissance</label>
+            <input type="date" id="date_naissance" name="date_naissance" title="date de naissance" pattern="^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$"  placeholder="jj/mm/aaaa" >
+
+            <label for="bac_id">Type de bac  :</label>
+            <select name="bac_id" required  id="bac_id">
+                <option value="">Saisir une valeur</option>            
+                <option value="1">bac S</option>
+                <option value="2">bac STI</option>
+                <option value="3">bac STT</option>
+                <option value="4">autre</option>
+            </select>
+        </fieldset>
+
+         <fieldset>
+         <legend> Informations sur ce semestre </legend>
+         <label for="groupe_id">    Dans quel groupe êtes vous ?</label>
+         <select id="groupe_id" name="groupe_id">
+             <option value="">Saisir une valeur</option>   
+             <option value="1">1A1</option>
+             <option value="2">1A2</option>
+             <option value="3">1B1</option>
+             <option value="4">1B2</option>
+             <option value="5">2A1</option>
+             <option value="6">2A2</option>
+             <option value="7" selected>2B1</option>
+             <option value="8">2B2</option>
+             <option value="9">3A1</option>
+             <option value="10">3A2</option>
+             <option value="11">3B1</option>
+             <option value="12">3B2</option>
+         </select>
+         <br>
+
+         <label for="numero">votre numéro ?</label>
+         <input type="text" id="numero" name="numero" disabled="disabled" value="champ non actif" >
+         <br>
+         <label>votre choix d'option :</label><br>
+         <input type="checkbox" name="allemand" > <label>allemand</label>
+         <input type="checkbox" name="sport" checked="checked" > <label>sport</label>
+         <br>
+         <label>Adhérent ABII :</label><br>
+         <input type="radio" name="adh_abii" value="oui" > <label>oui</label>
+         <input type="radio" name="adh_abii" value="non" > <label>non</label><br>
+
+     </fieldset>
+     <button type="submit" name="valider">Valider <img src="valider.jpeg" alt="bouton  valider"></button>
+     <button type="reset" name="reset" >Effacer <img src="annuler.jpeg" alt="bouton annuler"></button>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+1 1 SO
+2 1 NS
+3 1 NS
+4 1 NS
+5 1 NS
+6 1 NS
+7 1 NS
+8 1 NS
+9 1 SE
+1 2 EO
+9 2 EO
+1 3 EO
+9 3 EO
+1 4 EO
+9 4 EO
+1 5 EO
+9 5 EO
+1 6 EO
+9 6 EO
+1 7 EO
+9 7 EO
+1 8 EO
+9 8 EO
+1 9 ON
+2 9 NS
+3 9 NS
+4 9 NS
+5 9 NS
+6 9 NS
+7 9 NS
+8 9 NS
+9 9 NE
+
+
+
+
+

@@ -1,0 +1,9 @@
+variables
+car = entier
+val = charactere
+
+Début
+
+Ecrire(Entrez une lettre" car)
+lire(car)
+

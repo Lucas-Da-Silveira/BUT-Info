@@ -1,0 +1,33 @@
+body{
+    font-family: sans-serif;
+    text-align: right;
+}
+
+.titre1 {
+    color: blue;
+    text-align: center;
+}
+
+.titre2 {
+    color: green;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.titre3 {
+    color: greenyellow;
+    font-size: small;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.paragraphe1 {
+    color: white;
+    background-color: black;
+    
+}
+
+.image {
+    text-align: left;
+    box-shadow: 5px 2px 2px black;
+}

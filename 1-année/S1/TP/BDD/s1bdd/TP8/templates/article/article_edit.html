@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier un article</title>
+{% endblock %}
+
+{% block body %}
+  <h2>modifier d'un article</h2>
+
+  <form method="post" action="/edit/article">
+    <fieldset>
+        <legend> Modifier un article</legend>
+        <input type="hidden" name="id" size="18" value="{{ article.id }}" id="id">
+        <input type="hidden" name="id2" size="18" value="{{ article.nom }}" id="id2">
+
+
+        <label for="nom">nom</label><br>
+        <input id="nom" type="text" name="nom" size="18" value="{{ article.nom }}" placeholder="Saisir le nom de l'article"><br>
+<!-- à modifier -->
+        prix <br><input type="hidden" name="prix" value="{{ article.prix }}"><br>
+        stock <br><input  type="hidden" name="stock" value="{{ article.stock }}"><br>
+        description <br><input type="hidden" name="prix" value="{{ article.description }}"><br>
+        image <br><input type="hidden" name="prix" value="{{ article.image }}"><br>
+<!-- fin à modifier -->
+        <input type="submit" value="Modifier" name="Valider" >
+    </fieldset>
+  </form>
+{% endblock %}

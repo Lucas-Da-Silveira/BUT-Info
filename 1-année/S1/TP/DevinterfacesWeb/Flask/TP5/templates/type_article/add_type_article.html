@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>ajouter un type d'article</title>
+{% endblock %}
+
+{% block body %}
+  <h2>ajout d'un type d'article</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  <form method="post" action="/type-article/add" >
+    <fieldset>
+        <legend> Créer un type d'article</legend>
+        <label for="libelle">libelle</label><br>
+        <input id="libelle" type="text" name="libelle" size="18" value="" placeholder="Saisir le libelle du type de l'article"><br>
+        <input type="submit" value="Creer" name="Valider" >
+    </fieldset>
+  </form>
+{% endblock %}

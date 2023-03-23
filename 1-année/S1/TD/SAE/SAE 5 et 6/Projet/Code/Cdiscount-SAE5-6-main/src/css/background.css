@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #0d1321;
+}
+
+.background-container {
+    height: 1px;
+}
+
+.all {
+    position: relative;
+    overflow: hidden;
+}
+
+.bubbles {
+    position: relative;
+    display: flex;
+}
+
+.bubbles span {
+    position: relatives;
+    width: 30px;
+    height:30px;
+    background: #748CAB;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #3E5C76,
+    0 0 50px #748CAB,
+    0 0 100px #748CAB;
+    animation: animateBubbles 15s linear infinite;
+    animation-duration: calc(125s / var(--i));
+}
+
+.bubbles span:nth-child(even)
+{
+    background: #F0EBD8;
+    box-shadow: 0 0 0 10px #c2bdaa,
+    0 0 50px #F0EBD8,
+    0 0 100px #F0EBD8;
+}
+
+@keyframes animateBubbles
+{
+    0%
+    {
+        transform: translateY(100vh) scale(0.2);
+    }
+    100%
+    {
+        transform: translateY(-10vh) scale(1);
+    }
+}
+
+@media screen and (max-width: 2000px) {
+
+    .displayable5 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+
+    .displayable4 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+
+    .displayable3 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .displayable2 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .displayable1 {
+        display: none;
+    }
+}

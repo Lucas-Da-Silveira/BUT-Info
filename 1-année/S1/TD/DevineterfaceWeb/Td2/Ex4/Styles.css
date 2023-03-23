@@ -1,0 +1,35 @@
+body{
+    background-color: wheat;
+}
+.container{border: 1px solid wheat}
+.container-flex{display: flex;}
+
+.titre{
+        font-size: large;
+        font-family: Helvetica, sans-serif;
+        text-decoration: underline black;
+}
+.item{
+        background-color: white;
+        font-family: Arial, sans-serif ;
+        color: black;
+        border: 1px solid white;
+        width: 300px;
+        height: auto;
+        box-shadow: 7px 7px 7px whitesmoke;
+        margin: 10px;
+ }
+
+
+.flex-wrap{flex-wrap: wrap;}
+.justify-content-space-evenly{justify-content: space-evenly;}
+.align-content-space-between{align-content: space-between;}
+
+
+@media screen and (max-whith: 1280px) {
+        
+}
+
+@media all and (orientation: portrait) {
+        
+}

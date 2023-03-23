@@ -1,0 +1,30 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "BDD_ldasilve",
+            "database": "Bdd_ldasilve",
+            "username": "ldasilve",
+            "askForPassword": true
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "BDD_ldasilve",
+            "database": "BDD_ldasilve",
+            "username": "ldasilve",
+            "askForPassword": true
+        }
+    ]
+}

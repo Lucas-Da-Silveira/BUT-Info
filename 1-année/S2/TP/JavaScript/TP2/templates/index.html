@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+<label for="code_client">Votre code client : </label>
+<input type="number" min="1" step="1" name="code_client" id="code_client">
+
+<p id="client_info"></p>
+
+<select id="articles">
+</select>
+<table id="article_spec">
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prix (€)</th>
+    </tr>
+    <tr>
+        <td id="article_spec_id"></td>
+        <td id="article_spec_nom"></td>
+        <td id="article_spec_prix"></td>
+    </tr>
+</table>
+
+<button id="add_row">Ajouter une ligne</button>
+<table id="facture">
+    <tr>
+        <th>Code prestation</th>
+        <th>Désignation</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Montant</th>
+    </tr>
+</table>
+<span>Prix total : <span id="somme">0</span></p>
+</body>
+</html>

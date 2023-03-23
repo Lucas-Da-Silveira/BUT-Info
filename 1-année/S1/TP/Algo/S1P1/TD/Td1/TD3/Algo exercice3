@@ -1,0 +1,24 @@
+Algo date
+
+Variable
+mois Entier
+
+début
+Ecrire(entrez un numéro:)
+lire(mois)
+	Selon mois
+		Cas 1 : Ecrire ("Janvier",+"31") 
+		Cas 2 : Ecrire ("Févirier",+"28") 
+		Cas 3 : Ecrire ("Mars",+"31") 
+		Cas 4 : Ecrire ("Avril",+"30") 
+		Cas 5 : Ecrire ("Mai",+"31") 
+		Cas 6 : Ecrire ("Juin",+"30") 
+		Cas 7 : Ecrire ("Juillet",+"31") 
+		Cas 8 : Ecrire ("Août",+"31") 
+		Cas 9 : Ecrire ("Septembre",+"30") 
+		Cas 10 : Ecrire ("Octobre",+"31") 
+		Cas 11 : Ecrire ("Novembre",+"30") 
+		Cas 12 : Ecrire ("Décembre",+"31") 
+		défaut : Ecrire("nombre invalide")
+	Fin_Selon
+Fin

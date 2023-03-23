@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block title %}
+            <title>Accueil</title>
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" >
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='mes_styles.css') }}" >
+            <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" >
+        {% endblock %}
+    </head>
+    <body>
+        {% include('_nav.html') %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for categorie, message in messages %}
+                <div role="alert" class="alert {{ categorie }}">
+                    Information : <strong>{{ message }}</strong>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block body %}
+            <div class="container w-75">
+                <h1 class="text-center m-auto" style="color: rgb(86, 89, 255);">Accueil</h1>
+
+                <h3 style="color: rgb(86, 89, 255); padding-top: 15px;">Introduction</h3>
+                <p>
+                    Ce projet a été mené par Mathys, Tom, Lucas et Ewan.
+                </p>
+
+                <h3 style="color: rgb(86, 89, 255); padding-top: 15px;">Tables</h3>
+                <p>
+                    Il y a en tout 7 tables SQL affichées sous la forme de tableaux, elles ont toutes un lien direct ou indirect.<br>
+                    Il est possible d'ajouter, de modifier et de supprimer des valeurs sur toutes les tables.
+                </p>
+
+                <h3 style="color: rgb(86, 89, 255); padding-top: 15px;">Etats</h3>
+                <p>
+                    Les 4 requêtes d'état sont contenues dans la table "Bus" et la table "Réservoir". Il y en a 4 mais sur seulement 2 tables.
+                </p>
+
+            </div>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

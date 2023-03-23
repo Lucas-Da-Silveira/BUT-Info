@@ -1,0 +1,1 @@
+mysql --user=ldasilve --password=1603 --host=localhost  --database=BDD_ldasilve

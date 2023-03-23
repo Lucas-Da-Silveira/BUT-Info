@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul Fibonacci</title>
+
+    <style>
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="dropdown">
+        <button class="dropbtn">Action</button>
+        <div class="dropdown-content">
+            <a <input type="button" value="Calculer" onclick="calculerFibonacci()">Calculer</input></a>
+            <a <input type="button" value="Effacer" onclick="reset()">Effacer</input></a>
+            <a <input type="button" value="Imprimer" onclick="imprimer()">Imprimer</input></a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Mode</button>
+        <div class="dropdown-content">
+            <a href="Imc.html">Calcule IMC</a>
+            <a href="CalculFactorielle.html">Calcule Factoriel</a>
+            <a href="CalculFibonacci.html">Calcul Fibonacci</a>
+            <a href="Conversion.html">Convertir</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Help</button>
+        <div class="dropdown-content">
+            <a href="#">Description de site</a>
+            <a href="#">Nous contacter</a>
+        </div>
+    </div>
+
+    <h1>Calcul Fibonacci</h1>
+
+    <form>
+        <label for="nombre">Entrez un nombre:</label>
+        <input type="number" id="nombre" name="nombre" min="0" max="1475" required>
+        <br>
+        <label for="resultat">Résultat:</label>
+        <input type="text" id="resultat" name="resultat" readonly>
+    </form>
+
+    <script>
+        function calculerFibonacci() {
+            var nombre = document.getElementById("nombre").value;
+            var resultat = 0;
+            var a = 0;
+            var b = 1;
+            for (var i = 0; i < nombre; i++) {
+                resultat = a + b;
+                a = b;
+                b = resultat;
+            }
+            document.getElementById("resultat").value = resultat;
+        }
+
+        function reset() {
+            document.getElementById("nombre").value = "";
+            document.getElementById("resultat").value = "";
+        }
+
+        function imprimer() {
+            window.print();
+        }
+    </script>
+
+
+</body>
+
+</html>

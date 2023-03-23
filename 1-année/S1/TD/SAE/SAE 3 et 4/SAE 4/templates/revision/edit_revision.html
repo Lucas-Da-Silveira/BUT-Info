@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une révision</title>
+{% endblock %}
+
+{% block body %}
+  <h2 class="text-align-center">Modifier une révision</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+  <form method="post" action="/revision/edit">
+    <fieldset>
+        <div class="container formulaire w-75 margin-top-40">
+            <div class="border rounded w-50">
+                <legend>Révision</legend>
+                <input type="hidden" name="id" value="{{ revision.id_revision }}">
+                <div class="form-group row margin-bot">
+                    <label for="descriptif-revision" class="col-sm-3 col-form-label margin-left">Descriptif</label>
+                    <div class="col-sm-6">
+                        <input id="descriptif-revision" class="form-control" type="text" name="descriptif-revision" size="18" value="{{ revision.descriptif_revision }}">
+                    </div>
+                </div>
+
+                <div class="form-group row margin-bot">
+                    <label for="date-revision" class="col-sm-3 col-form-label margin-left">Date</label>
+                    <div class="col-sm-6">
+                        <input id="date-revision" class="form-control" type="date" name="date-revision" size="18" value="{{ revision.date_revision }}">
+                    </div>
+                </div>
+
+                <div class="form-group row margin-bot">
+                    <label for="id-reservoir" class="col-sm-3 col-form-label margin-left">ID Réservoir</label>
+                    <div class="col-sm-6">
+                        <select id="id-reservoir" class="form-control" name="id-reservoir" required>
+                            <option value="{{ revision.id_reservoir }}">{{ revision.id_reservoir }}</option>
+                            {% for r in reservoir %}
+                                <option value="{{ r.id_reservoir }}"> {{ r.id_reservoir }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="col text-center margin-bot">
+                    <input class="btn btn-primary" type="submit" value="Editer" name="Editer">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+  </form>
+{% endblock %}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertion</title>
+
+    <style>
+        .dropbtn {
+          background-color: #04AA6D;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #ddd;}
+        
+        .dropdown:hover .dropdown-content {display: block;}
+        
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
+        </style>
+
+</head>
+<body>
+
+    <div class="dropdown">
+        <button class="dropbtn">Action</button>
+        <div class="dropdown-content">
+            <a  <input type="button" value="Calculer" onclick="calculerIMC()">Calculer</input></a>
+            <a  <input type="button" value="Effacer" onclick="reset()">Effacer</input></a>
+            <a  <input type="button" value="Imprimer" onclick="imprimer()">Imprimer</input></a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Mode</button>
+        <div class="dropdown-content">
+          <a href="Imc.html">Calcule IMC</a>
+          <a href="CalculFactorielle.html">Calcule Factoriel</a>
+          <a href="CalculFibonacci.html">Calcul Fibonacci</a>
+          <a href="Conversion.html">Convertir</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Help</button>
+        <div class="dropdown-content">
+          <a href="#">Description de site</a>
+          <a href="#">Nous contacter</a>
+        </div>
+      </div>
+
+    <h1>Convertion</h1>
+
+    <form>
+        <label for="valeur">Valeur</label>
+        <input type="text" id="valeur" name="valeur" placeholder="Valeur" required>
+        <br>
+        <label for="unite">Unite</label>
+        <select name="unite" id="unite">
+            <option value="cm">Centimètre</option>
+            <option value="inch">inch</option>
+            <option value="kg">kilogramme</option>
+            <option value="pound">Pound</option>
+            <option value="km">Kilomètre</option>
+            <option value="mile">mile</option>
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+        </select>
+        <br>
+        <label for="unite">Vers</label>
+        <select name="unite" id="unite">
+            <option value="cm">Centimètre</option>
+            <option value="inch">inch</option>
+            <option value="kg">kilogramme</option>
+            <option value="pound">Pound</option>
+            <option value="km">Kilomètre</option>
+            <option value="mile">mile</option>
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+        </select>
+        <br>
+        <label for="resultat">Resultat</label>
+        <input type="text" id="resultat" name="resultat" placeholder="Resultat" required>
+        <br>
+    </form>
+    
+
+</body>
+</html>
