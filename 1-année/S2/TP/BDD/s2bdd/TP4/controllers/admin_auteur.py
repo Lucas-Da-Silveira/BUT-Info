@@ -12,7 +12,13 @@ admin_auteur = Blueprint('admin_auteur', __name__,
 @admin_auteur.route('/admin/auteur/show')
 def show_auteur():
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete1_1' FROM DUAL '''
+    sql = '''
+    SELECT id_auteur, nom, prenom
+    FROM auteur
+    WHERE (SELECT COUNT(*) FROM oeuvre WHERE oeuvre.auteur_id = auteur.id_auteur)
+    ORDER BY nom
+    ;
+    '''
     mycursor.execute(sql)
     auteurs = mycursor.fetchall()
     return render_template('admin/auteur/show_auteurs.html', auteurs=auteurs)
@@ -28,12 +34,13 @@ def valid_add_auteur():
     nom = request.form.get('nom', '')
     prenom = request.form.get('prenom', '')
     dto_data={'nom': nom, 'prenom':prenom}
-    valid, errors = validator_auteur(dto_data)
+    valid, errors = validator_auteur(dto_data)  # validator_auteur is in models/dao_auteur.py
     if valid:
         tuple_insert = (nom,prenom)
         mycursor = get_db().cursor()
-        sql = ''' SELECT 'requete1_2' FROM DUAL '''
-        sql = '''INSERT INTO auteur(nom,prenom) VALUES (%s,%s);'''
+        sql = '''
+        INSERT INTO auteur (id_auteur,nom, prenom) VALUE (%s, %s, %s)
+        '''
         mycursor.execute(sql, tuple_insert)
         get_db().commit()
         message = u'auteur ajouté , nom :'+nom
@@ -49,13 +56,16 @@ def delete_auteur():
         abort("404","erreur id auteur")
     tuple_delete=(id_auteur)
     nb_oeuvres = 0
-    sql = ''' SELECT 'requete1_6' FROM DUAL '''
+    sql = ''' DELETE FROM auteur WHERE id_auteur = %s
+    
+     '''
     #mycursor.execute(sql, tuple_delete)              ###
     #res_nb_oeuvres = mycursor.fetchone()             ###
     #if 'nb_oeuvres' in res_nb_oeuvres.keys():        ###
     #    nb_oeuvres=res_nb_oeuvres['nb_oeuvres']      ###
     if nb_oeuvres == 0 :
-        sql = ''' SELECT 'requete1_3' FROM DUAL '''
+        sql = '''
+        '''
         mycursor.execute(sql,tuple_delete)
         get_db().commit()
         message=u'auteur supprimé, id: ' + id_auteur
@@ -69,7 +79,11 @@ def delete_auteur():
 def edit_auteur():
     id = request.args.get('id', '')
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete1_4' FROM DUAL '''
+    sql = '''
+SELECT id_auteur, nom, prenom
+FROM auteur
+WHERE id_auteur = %s
+    '''
     mycursor.execute(sql, (id,))
     auteur = mycursor.fetchone()
     print(id,sql)
@@ -86,7 +100,11 @@ def valid_edit_auteur():
     if valid:
         tuple_update = (nom, prenom, id_auteur)
         mycursor = get_db().cursor()
-        sql = ''' SELECT 'requete1_5' FROM DUAL '''
+        sql = '''
+        UPDATE auteur
+        SET nom = %s, prenom = %s
+        WHERE id_auteur = %s
+        '''
         print(sql)
         mycursor.execute(sql, tuple_update)
         get_db().commit()
