@@ -13,7 +13,7 @@ CREATE TABLE adherent(
 );
 
 CREATE TABLE auteur(
-   id_auteur INT AUTO_INCREMENT NOT NULL ,
+   id_auteur INT NOT NULL AUTO_INCREMENT,
    nom VARCHAR(50),
    prenom VARCHAR(50),
    PRIMARY KEY(id_auteur)

@@ -13,10 +13,10 @@ admin_auteur = Blueprint('admin_auteur', __name__,
 def show_auteur():
     mycursor = get_db().cursor()
     sql = '''
-    SELECT id_auteur, nom, prenom
+    SELECT count(*) as nbrOeuvre, id_auteur, nom, prenom
     FROM auteur
-    WHERE (SELECT COUNT(*) FROM oeuvre WHERE oeuvre.auteur_id = auteur.id_auteur)
-    ORDER BY nom
+    LEFT JOIN oeuvre ON auteur.id_auteur = oeuvre.auteur_id
+    GROUP BY id_auteur
     ;
     '''
     mycursor.execute(sql)
@@ -39,7 +39,7 @@ def valid_add_auteur():
         tuple_insert = (nom,prenom)
         mycursor = get_db().cursor()
         sql = '''
-        INSERT INTO auteur (id_auteur,nom, prenom) VALUE (%s, %s, %s)
+        INSERT INTO auteur (nom, prenom) VALUES (%s,%s)
         '''
         mycursor.execute(sql, tuple_insert)
         get_db().commit()
@@ -56,8 +56,10 @@ def delete_auteur():
         abort("404","erreur id auteur")
     tuple_delete=(id_auteur)
     nb_oeuvres = 0
-    sql = ''' DELETE FROM auteur WHERE id_auteur = %s
-    
+    sql = ''' 
+    SELECT count(*) as nb_oeuvres
+    FROM oeuvre
+    WHERE auteur_id = %s
      '''
     #mycursor.execute(sql, tuple_delete)              ###
     #res_nb_oeuvres = mycursor.fetchone()             ###
@@ -65,6 +67,8 @@ def delete_auteur():
     #    nb_oeuvres=res_nb_oeuvres['nb_oeuvres']      ###
     if nb_oeuvres == 0 :
         sql = '''
+        DELETE FROM auteur
+        WHERE id_auteur = %s
         '''
         mycursor.execute(sql,tuple_delete)
         get_db().commit()
