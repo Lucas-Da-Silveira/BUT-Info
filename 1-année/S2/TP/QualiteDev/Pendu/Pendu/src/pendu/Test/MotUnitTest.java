@@ -1,7 +1,8 @@
-package pendu;
+package pendu.Test;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import pendu.Mot;
 import org.mockito.Mockito;
 
 import java.util.*;
@@ -49,6 +50,20 @@ public class MotUnitTest {
 
     @Test
     public void testContient(){
-        
+        Dictionnary dico = mock(Dictionnary.class);
+        when(dico.unMotAuHazard(any(Random.class))).thenReturn("bienvenue");
+        Mot mot = Mot.createMot(dico);
+        Assertions.assertTrue(mot.contient("i"));
+        Assertions.assertFalse(mot.contient("a");
+    }
+
+    @Test
+    public void testAffiche(){
+        Dictionnary dico = mock(Dictionnary.class);
+        when(dico.unMotAuHazard(any(Random.class))).thenReturn("bienvenue");
+        Mot mot = Mot.createMot(dico);
+        assertEquals("-------", mot.construitMotAffiche().toString();
+        mot.decouvre("e");
+        assertEquals("--e---e--e", mot.contruitMotAffiche().toString();
     }
 }

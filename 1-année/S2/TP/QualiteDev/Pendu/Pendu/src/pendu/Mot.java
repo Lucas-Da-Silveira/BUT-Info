@@ -27,14 +27,14 @@ public class Mot {
     }
 
     public void affiche() {
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < motCache.length(); i++) {
               if (lettresDecouvertes.contains(motCache.charAt(i)) )
-                  System.out.print(motCache.charAt(i));
+                 builder.append(motCache.charAt(i));
             else
-                  System.out.print("-");            
+                  builder.append('-');
         }
-        System.out.println();
-        
+        System.out.println(builder);
     }
 
     public boolean contient(char lettre) {
