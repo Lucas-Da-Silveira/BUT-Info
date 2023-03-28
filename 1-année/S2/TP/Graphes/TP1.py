@@ -13,15 +13,15 @@ G.add_edge(1,5)
 # nx.draw(G, with_labels=True, node_color='yellow')
 # plt.show()  
 
-print(G.nodes())
+# print(G.nodes())
 
-print(G.number_of_nodes())
+# print(G.number_of_nodes())
 
-print(G.degree(1))
+# print(G.degree(1))
 
 degrees = G.degree()
 
-print(sum(dict(degrees).values())/ G.number_of_nodes())
+# print(sum(dict(degrees).values())/ G.number_of_nodes())
 
 
 A = nx.random_regular_graph(2, 10)
@@ -49,16 +49,16 @@ def regulier(B):
     return True
 
 
-print(regulier(G))
-print(regulier(A))
+# print(regulier(G))
+# print(regulier(A))
 
-print(A)
+# print(A)
 
-print(A.edges())
+# print(A.edges())
 
-print(A.number_of_edges())
+# print(A.number_of_edges())
 
-print(nx.diameter(A))
+# print(nx.diameter(A))
 
 
 B = nx.Graph()
@@ -74,11 +74,31 @@ def stats():
     print("Diamètre : ", nx.diameter(B))
     print("Graph régulier : ",regulier(B))
 
-stats()
+# stats()
 
-print("=====G======")
-print(nx.adjacency_matrix(G).toarray())
-print("=====A======")
-print(nx.adjacency_matrix(A).toarray())
-print("=====B======")
-print(nx.adjacency_matrix(B).toarray())
+# print("=====G======")
+# print(nx.adjacency_matrix(G).toarray())
+# print("=====A======")
+# print(nx.adjacency_matrix(A).toarray())
+# print("=====B======")
+# print(nx.adjacency_matrix(B).toarray())
+
+
+
+def from_matrice(M):
+    C = nx.Graph()
+    for i in range(len(M)-1):
+        for j in range(i,len(M)):
+            if M[i][j] == 1:
+                C.add_edge(i,j)
+    return C
+
+def from_dict(dico):
+    C = nx.Graph()
+    for i in dico:
+        for j in dico[i]:
+            C.add_edge(i,j)
+    return C
+
+print(from_matrice())
+print(from_dict())
