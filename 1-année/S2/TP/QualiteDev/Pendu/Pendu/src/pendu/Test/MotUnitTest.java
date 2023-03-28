@@ -46,4 +46,9 @@ public class MotUnitTest {
         mot.decouvre('u');
         Assertions.assertTrue(mot.estTrouve());
     }
+
+    @Test
+    public void testContient(){
+        
+    }
 }

@@ -1,12 +1,13 @@
 package pendu;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Mot {
-    private String motCache;
-    private List<Character> lettresDecouvertes;
-    private List<Character> lettresDuMot;
+    private final String motCache;
+    private final List<Character> lettresDecouvertes;
+    private final List<Character> lettresDuMot;
 
     private Mot(String motCache, List<Character> lettresDuMot) {
         this.motCache = motCache;
@@ -32,7 +33,7 @@ public class Mot {
             else
                   System.out.print("-");            
         }
-        System.out.println("");
+        System.out.println();
         
     }
 
@@ -45,7 +46,7 @@ public class Mot {
     }
 
     public boolean estTrouve() {
-        return lettresDecouvertes.containsAll(lettresDuMot);
+        return new HashSet<>(lettresDecouvertes).containsAll(lettresDuMot);
     }
 
     public String getMotCache() {

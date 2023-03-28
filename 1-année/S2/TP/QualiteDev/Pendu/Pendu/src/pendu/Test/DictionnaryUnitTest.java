@@ -1,4 +1,4 @@
-package Test;
+package pendu.Test;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class DictionnaryUnitTest {
 
-    /*@Test
+    /*@pendu.Test
     public void testDictionnaryConstruct() {
         Dictionnary dictionnary = new Dictionnary(new StringReader("rouge\nvert\njaune"));
         Assertions.assertEquals(3, dictionnary.lesMots.size());

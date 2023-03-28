@@ -1,10 +1,8 @@
-package Test;
+package pendu.Test;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import pendu.Joueur;
-
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,7 +40,7 @@ public class JoueurUnitTest {
 
     }
 
-    /*@Test
+    /*@pendu.Test
     public void testProposeLettre(){
         Joueur joueur = new Joueur();
         char lettre = joueur.proposeLettre((new Scanner("o")));
