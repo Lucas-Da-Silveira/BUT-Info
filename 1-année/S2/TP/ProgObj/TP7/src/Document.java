@@ -1,7 +1,10 @@
 public class Document {
     
-    private int numEnregistrement = 0 ;
+    private static int numEnregistrement = 0 ;
     private String titre;
+
+    public Document() {
+    }
 
     public Document(int numEnregistrement, String titre) {
         this.numEnregistrement = numEnregistrement ++;
