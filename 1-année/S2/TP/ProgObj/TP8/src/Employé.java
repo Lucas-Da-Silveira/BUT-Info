@@ -44,7 +44,7 @@ public class Employé {
         this.salaire = salaire;
     }
 
-    public void calculeSalaire(){
+    public void calculeSalaire(double indiceSalaire){
         this.salaire = indiceSalaire * salaire;
     }
 
