@@ -3,7 +3,7 @@ public class Employé {
     private String nom;
     private String matricule;
     private double indiceSalaire;
-    private double salaire;
+    protected double salaire;
     
 
     public Employé(String nom, String matricule, double indiceSalaire) {
