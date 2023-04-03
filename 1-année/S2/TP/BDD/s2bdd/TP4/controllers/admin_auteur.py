@@ -13,10 +13,11 @@ admin_auteur = Blueprint('admin_auteur', __name__,
 def show_auteur():
     mycursor = get_db().cursor()
     sql = '''
-    SELECT count(*) as nbrOeuvre, id_auteur, nom, prenom
+    SELECT count(oeuvre.id_oeuvre) as nbrOeuvre, id_auteur, nom, prenom
     FROM auteur
     LEFT JOIN oeuvre ON auteur.id_auteur = oeuvre.auteur_id
     GROUP BY id_auteur
+    ORDER BY nom
     ;
     '''
     mycursor.execute(sql)

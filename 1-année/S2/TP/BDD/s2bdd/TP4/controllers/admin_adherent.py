@@ -13,8 +13,13 @@ admin_adherent = Blueprint('admin_adherent', __name__,
 @admin_adherent.route('/admin/adherent/show')
 def show_adherent():
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete2_1' FROM DUAL '''
-
+    sql = ''' SELECT adherent.id_adherent, adherent.nom, adherent.adresse, adherent.date_paiement, COUNT(emprunt.adherent_id) AS nbr_emprunt
+    FROM adherent
+    LEFT JOIN emprunt ON adherent.id_adherent = emprunt.adherent_id
+    GROUP BY adherent.id_adherent
+    ORDER BY adherent.nom
+    '''
+    
     mycursor.execute(sql)
     adherents = mycursor.fetchall()
     return render_template('admin/adherent/show_adherents.html', adherents=adherents)
