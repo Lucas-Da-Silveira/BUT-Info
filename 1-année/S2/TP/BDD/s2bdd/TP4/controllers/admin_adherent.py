@@ -13,11 +13,11 @@ admin_adherent = Blueprint('admin_adherent', __name__,
 @admin_adherent.route('/admin/adherent/show')
 def show_adherent():
     mycursor = get_db().cursor()
-    sql = ''' SELECT adherent.id_adherent, adherent.nom, adherent.adresse, adherent.date_paiement, COUNT(emprunt.adherent_id) AS nbr_emprunt
-    FROM adherent
-    LEFT JOIN emprunt ON adherent.id_adherent = emprunt.adherent_id
-    GROUP BY adherent.id_adherent
-    ORDER BY adherent.nom
+    sql = ''' SELECT adherent.id_adherent, adherent.nom, adherent.adresse, adherent.date_paiement,date_emprunt,date_retour, count(emprunt.exemplaire_id) as nbr_emprunt
+    FROM adherent , emprunt
+    WHERE date_retour - date_emprunt > 0
+    GROUP BY adherent.id_adherent 
+    ORDER BY adherent.nom   
     '''
     
     mycursor.execute(sql)
@@ -42,7 +42,7 @@ def valid_add_adherent():
         date_paiement=dto_data['date_paiement_us']
         tuple_insert = (nom,adresse,date_paiement)
         mycursor = get_db().cursor()
-        sql = ''' SELECT 'requete2_2' FROM DUAL '''
+        sql = ''' INSERT INTO adherent (nom, adresse, date_paiement) VALUES (%s,%s,%s)'''
         mycursor.execute(sql, tuple_insert)
         get_db().commit()
         message=u'adherent ajouté , libellé :'+nom
