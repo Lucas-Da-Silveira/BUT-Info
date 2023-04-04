@@ -1,5 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from numpy import *
+import numpy as np
 
 G = nx.Graph()
 
@@ -85,11 +87,39 @@ def stats():
 
 
 
-def from_matrice(M):
+# print(from_matrice())
+# print(from_dict())
+
+#Exemple commande SET
+
+# s=set([1,2,3])
+# s.remove(3)
+
+# if 1 in s:
+#     print(True);
+# else:
+#     print(False);
+
+# s.add(5)
+# print(s)
+
+# for k in set([1, 2]):
+#      print(k)
+
+# s1 = {1, 2, 3}
+# s2 = {2, 3, 4}
+
+# print(s1.intersection(s2))
+# print(s1.union(s2))
+
+
+#Matrice d'adjacence, liste d'adjacence
+
+def from_matrix(M):
     C = nx.Graph()
     for i in range(len(M)-1):
         for j in range(i,len(M)):
-            if M[i][j] == 1:
+            if M[i,j]:
                 C.add_edge(i,j)
     return C
 
@@ -100,5 +130,21 @@ def from_dict(dico):
             C.add_edge(i,j)
     return C
 
-print(from_matrice())
-print(from_dict())
+adj_matrix_np = np.array([[0, 1, 1, 0],
+                          [1, 0, 1, 1],
+                          [1, 1, 0, 1],
+                          [0, 1, 1, 0]])
+
+C = nx.DiGraph(adj_matrix_np)
+nx.draw(C, with_labels=True, node_color='yellow')
+plt.show()
+
+adj_list = {0: [1, 2],
+            1: [0, 2, 3],
+            2: [0, 1, 3],
+            3: [1, 2]}
+C = nx.from_dict_of_lists(adj_list)
+
+nx.draw(C, with_labels=True, node_color='yellow')
+plt.show()
+
