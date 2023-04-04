@@ -135,9 +135,9 @@ adj_matrix_np = np.array([[0, 1, 1, 0],
                           [1, 1, 0, 1],
                           [0, 1, 1, 0]])
 
-C = nx.DiGraph(adj_matrix_np)
-nx.draw(C, with_labels=True, node_color='yellow')
-plt.show()
+C = nx.Graph(adj_matrix_np)
+# nx.draw(C, with_labels=True, node_color='yellow')
+# plt.show()
 
 adj_list = {0: [1, 2],
             1: [0, 2, 3],
@@ -145,6 +145,15 @@ adj_list = {0: [1, 2],
             3: [1, 2]}
 C = nx.from_dict_of_lists(adj_list)
 
-nx.draw(C, with_labels=True, node_color='yellow')
-plt.show()
+# nx.draw(C, with_labels=True, node_color='yellow')
+# plt.show()
 
+G = nx.DiGraph(np.array([[0, 1, 0, 1], [1, 0, 0, 1], [1, 1, 
+0, 0], [1, 1, 0, 0]]))
+# nx.draw(G, with_labels=True, node_color='yellow')
+# plt.show()
+
+G = nx.Graph({0: [1, 2], 1: [0, 2, 3], 2: [0, 1, 3], 3: [1, 
+2]})
+# nx.draw(G, with_labels=True, node_color='yellow')
+# plt.show()
