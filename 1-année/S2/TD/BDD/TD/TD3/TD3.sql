@@ -65,3 +65,7 @@ INSERT INTO TD_marque_tel VALUES (NULL, 'SOCIETE APPLE','USA');
 SHOW FULL COLUMNS FROM TD_telephone;
 
 SELECT CONCAT(type_id,' - ',couleur)FROM TD_telephone;
+
+SELECT idTelephone,TD_marque_tel.libelle , TD_type_tel.libelle, prix, date_achat, date_achat, date_add(date_achat, date_achat+ INTERVAL 1 YEAR ) AS date_fin_garentie
+FROM TD_telephone, TD_type_tel, TD_marque_tel
+WHERE TD_telephone.type_id = TD_type_tel.idType
