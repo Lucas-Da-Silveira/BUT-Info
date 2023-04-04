@@ -1,4 +1,5 @@
 package pendu.Test;
+import org.junit.jupiter.api.BeforeEach;
 import pendu.Game;
 import pendu.Joueur;
 import pendu.Mot;
@@ -13,11 +14,19 @@ import static org.mockito.Mockito.*;
 
 public class GameUnitTest {
 
+    private Joueur joueur;
+    private Mot mot;
+    private Game game;
+
+    @BeforeEach
+    public void setUp(){
+        joueur = Mockito.mock(Joueur.class);
+        mot = Mockito.mock(Mot.class);
+        game = new Game(joueur, mot);
+    }
+
     @Test
-    public void testPlayCheminIntérieurABIJL(){
-        Joueur joueur = Mockito.mock(Joueur.class);
-        Mot mot = Mockito.mock(Mot.class) ;
-        Game game = new Game(joueur, mot);
+    public void testPlayCheminLimiteABIJL(){
 
         when(mot.estTrouve()).thenReturn(true);
         when(joueur.estMort()).thenReturn(true);
@@ -30,10 +39,7 @@ public class GameUnitTest {
     }
 
     @Test
-    public void testPlayCheminIntérieurABIKL(){
-        Joueur joueur = Mockito.mock(Joueur.class);
-        Mot mot = Mockito.mock(Mot.class) ;
-        Game game = new Game(joueur, mot);
+    public void testPlayCheminLimiteABIKL(){
 
         when(mot.estTrouve()).thenReturn(true);
         //when(joueur.estMort()).thenReturn(false);
@@ -46,10 +52,7 @@ public class GameUnitTest {
     }
 
     @Test
-    public void testPlayCheminIntérieurABCIJL(){
-        Joueur joueur = Mockito.mock(Joueur.class);
-        Mot mot = Mockito.mock(Mot.class) ;
-        Game game = new Game(joueur, mot);
+    public void testPlayCheminLimiteABCIJL(){
 
         when(mot.estTrouve()).thenReturn(false);
         when(joueur.estMort()).thenReturn(true);
@@ -62,10 +65,7 @@ public class GameUnitTest {
     }
 
     @Test
-    public void testPlayCheminIntérieurNonExecutableABCIKL(){
-        Joueur joueur = Mockito.mock(Joueur.class);
-        Mot mot = Mockito.mock(Mot.class) ;
-        Game game = new Game(joueur, mot);
+    public void testPlayCheminLimiteNonExecutableABCIKL(){
 
         when(mot.estTrouve()).thenReturn(false);
         when(joueur.estMort()).thenReturn(true, false);
@@ -75,5 +75,47 @@ public class GameUnitTest {
         verify(mot).getMotCache();
         verify(joueur, never()).proposeLettre(any(Scanner.class));
         verify(joueur, times(2)).estMort();
+    }
+
+    @Test
+    public void testPlayCheminIntérieurABCDEFHBIJL(){
+
+        when(mot.estTrouve()).thenReturn(true);
+        when(joueur.estMort()).thenReturn(false);
+        when(mot.contient(anyChar())).thenReturn(true);
+
+        game.play();
+
+        verify(mot).getMotCache();
+        verify(joueur).proposeLettre(any(Scanner.class));
+        verify(joueur, times(2)).estMort();
+    }
+
+    @Test
+    public void testPlayCheminIntérieurABCDEFHBIKL(){
+    }
+
+    @Test
+    public void testPlayCheminIntérieurABCDEFHBCIJL(){
+    }
+
+    @Test
+    public void testPlayCheminIntérieurNonExecutableABCDEFHBCIKL(){
+    }
+
+    @Test
+    public void testPlayCheminIntérieurABCDEGBIJL(){
+    }
+
+    @Test
+    public void testPlayCheminIntérieurABCDEGBIKL(){
+    }
+
+    @Test
+    public void testPlayCheminIntérieurABCDEGBCIJL(){
+    }
+
+    @Test
+    public void testPlayCheminIntérieurNonExecutableABCDEGBCIKL(){
     }
 }
