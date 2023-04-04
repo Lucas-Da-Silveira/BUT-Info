@@ -157,3 +157,42 @@ G = nx.Graph({0: [1, 2], 1: [0, 2, 3], 2: [0, 1, 3], 3: [1,
 2]})
 # nx.draw(G, with_labels=True, node_color='yellow')
 # plt.show()
+
+
+#Verifier le lem
+
+# print(len([i for i in G.nodes() if G.degree(i)%2 == 1])%2 == 0)
+
+# print(sum([B.degree(i) for i in B.nodes()]) == 2*B.number_of_edges())
+
+
+node_color = ['red', 'blue', 'blue', 'blue']
+# pos = nx.circular_layout(G)
+pos = nx.kamada_kawai_layout(G)
+# pos = nx.planar_layout(G)
+# pos = nx.random_layout(G)
+# pos = nx.spectral_layout(G)
+# pos = nx.spring_layout(G)
+# pos = nx.shell_layout(G)
+
+# nx.draw(G, pos,node_color=node_color, with_labels=True)
+# nx.draw_networkx_edge_labels(G,pos,edge_labels={(1,2):'1',(1,3):'2'})
+# plt.show()
+
+
+E = nx.DiGraph()
+color = ['Yellow','Green','Blue','Red','Orange']
+options = {
+    'node_color': color,
+    'node_size': 7000,
+    'width': 2
+}
+E.add_nodes_from(["Tokyo","San Francisco","Singapour","Copenhague","Riga"])
+E.add_edges_from([("Riga","San Francisco"),("Riga","Copenhague"),("Copenhague","Singapour"),("Singapour","San Francisco"),("Singapour","Tokyo"),("San Francisco","Tokyo"),("San Francisco","Singapour")])
+pos = nx.circular_layout(E)
+nx.draw(E,pos, with_labels=True, **options)
+plt.show()
+
+B = nx.Graph()
+B.add_nodes_from([0,1,2,3,4,5,6,7,8,9,10,11])
+B.add_edges_from([(0,1),(0,2),(1,4),(1,3),(2,5),(2,6)])
