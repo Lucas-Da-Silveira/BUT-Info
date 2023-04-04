@@ -78,10 +78,10 @@ public class GameUnitTest {
     }
 
     @Test
-    public void testPlayCheminIntérieurABCDEFHBIJL(){
+    public void testPlayCheminIntérieurNonExecutableABCDEFHBIJL(){
 
-        when(mot.estTrouve()).thenReturn(true);
-        when(joueur.estMort()).thenReturn(false);
+        when(mot.estTrouve()).thenReturn(false, true);
+        when(joueur.estMort()).thenReturn(false, true);
         when(mot.contient(anyChar())).thenReturn(true);
 
         game.play();
