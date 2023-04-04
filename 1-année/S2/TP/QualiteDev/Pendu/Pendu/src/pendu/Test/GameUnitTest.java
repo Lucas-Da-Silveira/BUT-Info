@@ -92,11 +92,40 @@ public class GameUnitTest {
     }
 
     @Test
+    public void testPlayJoueurDecouvreVERTen6coups(){
+        when(mot.estTrouve()).thenReturn(false, false, false, false, false, false, true);
+        when(joueur.estMort()).thenReturn(false);
+        when(joueur.proposeLettre(any(Scanner.class))).thenReturn('V','O','E','R','I','T');
+        when(mot.contient('V')).thenReturn(true);
+        when(mot.contient('E')).thenReturn(true);
+        when(mot.contient('R')).thenReturn(true);
+        when(mot.contient('T')).thenReturn(true);
+
+
+        game.play();
+
+        verify(mot,never()).getMotCache();
+        verify(joueur, times(6)).proposeLettre(any(Scanner.class));
+        verify(joueur,times(2)).perdVie();
+        verify(mot, times(4)).decouvre(anyChar());
+    }
+
+    @Test
     public void testPlayCheminIntérieurABCDEFHBIKL(){
     }
 
     @Test
     public void testPlayCheminIntérieurABCDEFHBCIJL(){
+        when(mot.estTrouve()).thenReturn(false, true);
+        when(joueur.estMort()).thenReturn(false, true);
+        when(mot.contient(anyChar())).thenReturn(true);
+
+        game.play();
+
+        verify(mot).getMotCache();
+        verify(joueur).proposeLettre(any(Scanner.class));
+        verify(joueur, times(2)).estMort();
+
     }
 
     @Test
