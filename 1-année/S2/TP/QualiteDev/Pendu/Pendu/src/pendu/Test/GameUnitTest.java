@@ -16,9 +16,12 @@ public class GameUnitTest {
         Mot mot = Mockito.mock(Mot.class) ;
         Game game = new Game(joueur, mot);
 
+        Mockito.when(mot.estTrouve()).thenReturn(true);
+        Mockito.when(joueur.estMort()).thenReturn(true);
+
         game.play();
 
-
+        Mockito.verify(mot).getMotCache();
     }
 
 }
