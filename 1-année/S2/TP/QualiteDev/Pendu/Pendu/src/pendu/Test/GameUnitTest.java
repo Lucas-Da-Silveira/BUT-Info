@@ -61,4 +61,19 @@ public class GameUnitTest {
         verify(joueur, times(2)).estMort();
     }
 
+    @Test
+    public void testPlayCheminIntérieurNonExecutableABCIKL(){
+        Joueur joueur = Mockito.mock(Joueur.class);
+        Mot mot = Mockito.mock(Mot.class) ;
+        Game game = new Game(joueur, mot);
+
+        when(mot.estTrouve()).thenReturn(false);
+        when(joueur.estMort()).thenReturn(true, false);
+
+        game.play();
+
+        verify(mot).getMotCache();
+        verify(joueur, never()).proposeLettre(any(Scanner.class));
+        verify(joueur, times(2)).estMort();
+    }
 }
