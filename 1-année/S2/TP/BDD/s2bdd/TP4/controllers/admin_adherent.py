@@ -13,11 +13,11 @@ admin_adherent = Blueprint('admin_adherent', __name__,
 @admin_adherent.route('/admin/adherent/show')
 def show_adherent():
     mycursor = get_db().cursor()
-    sql = ''' SELECT adherent.id_adherent, adherent.nom, adherent.adresse, adherent.date_paiement,date_emprunt,date_retour, count(emprunt.exemplaire_id) as nbr_emprunt
-    FROM adherent , emprunt
-    WHERE date_retour - date_emprunt > 0
-    GROUP BY adherent.id_adherent 
-    ORDER BY adherent.nom   
+    sql = ''' SELECT adherent.id_adherent,adherent.nom,oeuvre.titre,emprunt.date_emprunt,emprunt.date_retour,adherent.date_paiement
+                    CASE
+                    WHEN DATE_ADD(adherent.date_paiement, INTERVAL 1 YEAR) < NOW() THEN 'red', DATE_FORMAT(adherent.date_paiement, '%d/%m/%Y')
+                    WHEN DATE_ADD
+            
     '''
     
     mycursor.execute(sql)

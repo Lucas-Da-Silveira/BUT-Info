@@ -2,9 +2,11 @@ package pendu.Test;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import pendu.Dictionnary;
 import pendu.Mot;
 import org.mockito.Mockito;
 
+import java.io.StringReader;
 import java.util.*;
 
 
