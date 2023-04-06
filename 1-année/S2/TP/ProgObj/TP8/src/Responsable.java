@@ -16,7 +16,7 @@ public class Responsable extends Employé{
         employés.add(employé);
     }
 
-    public void calculeSalaire(double indiceSalaire){
+    public void calculeSalaire(double    indiceSalaire){
         super.calculeSalaire(indiceSalaire);
         for (Employé employé : employés){
             employé.calculeSalaire(indiceSalaire);
