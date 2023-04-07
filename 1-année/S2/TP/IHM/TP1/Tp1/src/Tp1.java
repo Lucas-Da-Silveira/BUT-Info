@@ -2,10 +2,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -25,10 +22,12 @@ public class Tp1 extends Application {
     private ComboBox<String> combo;
     private CheckBox checkBox;
     private Button button;
+    private GridPane gridPane;
 
     @Override
     public void start(Stage primaryStage){
-        addWidgetsToSceneV1();
+        //addWidgetsToSceneV1();
+        addWidgetsToSceneV2();
         primaryStage.setTitle("Calcul de moyenne");
         primaryStage.setScene(new Scene(vBox));
         primaryStage.show();
@@ -44,6 +43,7 @@ public class Tp1 extends Application {
         hBox6 = new HBox();
         hBox7 = new HBox();
         vBox = new VBox();
+        gridPane = new GridPane();
         anglais = new Label("Anglais");
         Mathématiques = new Label("Mathématiques");
         Informatique = new Label("Informatique");
@@ -53,6 +53,10 @@ public class Tp1 extends Application {
         textFieldInformatique = new TextField();
         textFieldGéographie = new TextField();
         textFieldOptionnel = new TextField();
+        ToggleGroup group1 = new ToggleGroup();
+        ToggleGroup group2 = new ToggleGroup();
+        ToggleGroup group3 = new ToggleGroup();
+        ToggleGroup group4 = new ToggleGroup();
         radioButton1Anglais = new RadioButton("1");
         radioButton2Anglais = new RadioButton("2");
         radioButton3Anglais = new RadioButton("3");
@@ -71,6 +75,19 @@ public class Tp1 extends Application {
         button = new Button("Moyenne");
         Optionnel = new Label("Optionnel");
         Valider = new Label("Valider");
+
+        radioButton1Anglais.setToggleGroup(group1);
+        radioButton2Anglais.setToggleGroup(group1);
+        radioButton3Anglais.setToggleGroup(group1);
+        radioButton1Mathématiques.setToggleGroup(group2);
+        radioButton2Mathématiques.setToggleGroup(group2);
+        radioButton3Mathématiques.setToggleGroup(group2);
+        radioButton1Informatique.setToggleGroup(group3);
+        radioButton2Informatique.setToggleGroup(group3);
+        radioButton3Informatique.setToggleGroup(group3);
+        radioButton1Géographie.setToggleGroup(group4);
+        radioButton2Géographie.setToggleGroup(group4);
+        radioButton3Géographie.setToggleGroup(group4);
     }
 
     public void addWidgetsToSceneV1(){
@@ -79,11 +96,24 @@ public class Tp1 extends Application {
         hBox2.getChildren().addAll(Mathématiques, textFieldMathématiques,radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques );
         hBox3.getChildren().addAll(Informatique, textFieldInformatique,radioButton1Informatique, radioButton2Informatique, radioButton3Informatique );
         hBox4.getChildren().addAll(Géographie, textFieldGéographie,radioButton1Géographie, radioButton2Géographie, radioButton3Géographie );
-        hBox5.getChildren().addAll(combo);
-        hBox6.getChildren().addAll(checkBox,textFieldOptionnel, Optionnel);
+        hBox5.getChildren().addAll(combo,textFieldOptionnel, Optionnel);
+        hBox6.getChildren().addAll(checkBox);
         hBox7.getChildren().addAll(button, Valider);
+        hBox1.setAlignment(javafx.geometry.Pos.CENTER);
+        hBox2.setAlignment(javafx.geometry.Pos.CENTER);
+        hBox3.setAlignment(javafx.geometry.Pos.CENTER);
+        hBox4.setAlignment(javafx.geometry.Pos.CENTER);
+        hBox5.setAlignment(javafx.geometry.Pos.CENTER);
+        hBox6.setAlignment(javafx.geometry.Pos.CENTER);
+        hBox7.setAlignment(javafx.geometry.Pos.CENTER);
         vBox.setAlignment(javafx.geometry.Pos.CENTER);
         vBox.getChildren().addAll(hBox1, hBox2, hBox3, hBox4, hBox5, hBox6, hBox7);
+
+    }
+
+    public void addWidgetsToSceneV2(){
+        initWidget();
+        hBox1.getChildren().addAll(anglais, textFieldAnglais);
 
     }
 
