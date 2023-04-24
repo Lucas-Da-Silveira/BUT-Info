@@ -1,43 +1,39 @@
-DROP TABLE IF EXISTS emprunt;
-DROP TABLE IF EXISTS exemplaire;
-DROP TABLE IF EXISTS oeuvre;
-DROP TABLE IF EXISTS auteur;
-DROP TABLE IF EXISTS adherent;
+DROP TABLE IF EXISTS emprunt, exemplaire, oeuvre, auteur, adherent;
 
 CREATE TABLE adherent(
-   id_adherent INT,
-   nom VARCHAR(50),
-   adresse VARCHAR(50),
+   id_adherent INT NOT NULL AUTO_INCREMENT,
+   nom VARCHAR(255),
+   adresse VARCHAR(255),
    date_paiement DATE,
    PRIMARY KEY(id_adherent)
-);
+) CHARACTER SET utf8mb4;
 
 CREATE TABLE auteur(
    id_auteur INT NOT NULL AUTO_INCREMENT,
-   nom VARCHAR(50),
-   prenom VARCHAR(50),
+   nom VARCHAR(255),
+   prenom VARCHAR(255),
    PRIMARY KEY(id_auteur)
-);
+) CHARACTER SET utf8mb4;
 
 CREATE TABLE oeuvre(
-   id_oeuvre INT,
-   titre VARCHAR(50),
+   id_oeuvre INT NOT NULL AUTO_INCREMENT,
+   titre VARCHAR(255),
    date_parution DATE,
-   photo VARCHAR(50),
+   photo VARCHAR(255),
    auteur_id INT,
    PRIMARY KEY(id_oeuvre),
-   FOREIGN KEY(auteur_id) REFERENCES auteur(id_auteur)
-);
+   CONSTRAINT FK_oeuvre_auteur FOREIGN KEY(auteur_id) REFERENCES auteur(id_auteur)
+) CHARACTER SET utf8mb4;
 
 CREATE TABLE exemplaire(
-   id_exemplaire INT,
+   id_exemplaire INT NOT NULL AUTO_INCREMENT,
    etat VARCHAR(50),
    date_achat DATE,
-   prix DECIMAL(5,2),
-   oeuvre_id INT NOT NULL,
+   prix DECIMAL(7,2),
+   oeuvre_id INT,
    PRIMARY KEY(id_exemplaire),
-   FOREIGN KEY(oeuvre_id) REFERENCES oeuvre(id_oeuvre)
-);
+   CONSTRAINT FK_exemplaire_oeuvre FOREIGN KEY(oeuvre_id) REFERENCES oeuvre(id_oeuvre)
+) CHARACTER SET utf8mb4;
 
 CREATE TABLE emprunt(
    adherent_id INT,
@@ -45,10 +41,9 @@ CREATE TABLE emprunt(
    date_emprunt DATE,
    date_retour DATE,
    PRIMARY KEY(adherent_id, exemplaire_id, date_emprunt),
-   FOREIGN KEY(adherent_id) REFERENCES adherent(id_adherent),
-   FOREIGN KEY(exemplaire_id) REFERENCES exemplaire(id_exemplaire)
-);
-
+   CONSTRAINT FK_emprunt_adherent FOREIGN KEY(adherent_id) REFERENCES adherent(id_adherent),
+   CONSTRAINT FK_emprunt_exemplaire FOREIGN KEY(exemplaire_id) REFERENCES exemplaire(id_exemplaire)
+) CHARACTER SET utf8mb4;
 
 INSERT INTO auteur (id_auteur, nom, prenom) VALUES
 (1, 'Christie', 'Agatha'),
@@ -92,12 +87,12 @@ INSERT INTO oeuvre (id_oeuvre, titre, date_parution, photo, auteur_id) VALUES
 (16, 'spectacles', '1948-05-12', '', 4),
 (17, 'Les fables', '1694-01-01', '', 5);
 INSERT INTO oeuvre (id_oeuvre, titre, date_parution, photo, auteur_id) VALUES
-(18, 'Le triomphe de l\'amour', '1980-05-06', '', 5),
+(18, "Le triomphe de l\'amour", '1980-05-06', '', 5),
 (19, 'le livre de la jungle', '1968-12-11', '', 13),
 (20, 'kim', '1901-07-01', '', 13),
 (21, 'le marin de Gibraltar', '1952-07-12', '', 9),
 (22, 'l’assommoir', '1976-01-01', '', 11),
-(23, 'j\'accuse', '1898-01-13', '', 11),
+(23, "j\'accuse", '1898-01-13', '', 11),
 (24, 'la terre', '1887-01-01', '', 11);
 
 
@@ -191,4 +186,3 @@ INSERT INTO emprunt (adherent_id, exemplaire_id, date_emprunt, date_retour) VALU
 (5, 40, '2022-07-25', '2022-09-22'),
 (9, 15, '2023-02-22', NULL),
 (9, 18, '2023-01-30', NULL);
-
