@@ -74,7 +74,7 @@ INSERT INTO oeuvre (id_oeuvre, titre, date_parution, photo, auteur_id) VALUES
 (3, 'dix brèves rencontres', '1982-10-01', 'dixBrevesRencontres.jpg', 1),
 (4, 'le miroir de la mort', '1961-01-01', 'leMiroirDuMort.jpeg', 1),
 (6, 'une créature de rêve', '1992-02-01', '', 12),
-(7, "mémoire d\'outre-tombe", '1949-01-01', '', 2),
+(7, 'mémoire d\'outre-tombe', '1949-01-01', '', 2),
 (8, 'Madame de Bovary', '1956-12-15', '', 3);
 INSERT INTO oeuvre (id_oeuvre, titre, date_parution, photo, auteur_id) VALUES
 (9, 'un amour de swam', '2004-06-01', 'unAmourDeSwann.jpeg', 9),
@@ -87,12 +87,12 @@ INSERT INTO oeuvre (id_oeuvre, titre, date_parution, photo, auteur_id) VALUES
 (16, 'spectacles', '1948-05-12', '', 4),
 (17, 'Les fables', '1694-01-01', '', 5);
 INSERT INTO oeuvre (id_oeuvre, titre, date_parution, photo, auteur_id) VALUES
-(18, "Le triomphe de l\'amour", '1980-05-06', '', 5),
+(18, 'Le triomphe de l\'amour', '1980-05-06', '', 5),
 (19, 'le livre de la jungle', '1968-12-11', '', 13),
 (20, 'kim', '1901-07-01', '', 13),
 (21, 'le marin de Gibraltar', '1952-07-12', '', 9),
 (22, 'l’assommoir', '1976-01-01', '', 11),
-(23, "j\'accuse", '1898-01-13', '', 11),
+(23, 'j\'accuse', '1898-01-13', '', 11),
 (24, 'la terre', '1887-01-01', '', 11);
 
 

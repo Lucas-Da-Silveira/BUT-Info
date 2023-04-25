@@ -14,7 +14,20 @@ admin_oeuvre = Blueprint('admin_oeuvre', __name__,
 @admin_oeuvre.route('/admin/oeuvre/show')
 def show_oeuvre():
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete3_1' FROM DUAL '''
+    sql = ''' SELECT auteur.nom, oeuvre.titre, oeuvre.id_oeuvre, oeuvre.date_parution AS date_parution, COALESCE(oeuvre.photo, '') AS photo,
+    COUNT(E1.id_exemplaire) AS nb_exemplaire,
+    COUNT(E2.id_exemplaire) AS nb_exemp_dispo,
+    CONCAT(LPAD(CAST(DAY(oeuvre.date_parution) AS CHAR(2)),2,0),'/',LPAD(CAST(MONTH(oeuvre.date_parution) AS CHAR(2)),2,0),'/',YEAR(oeuvre.date_parution)) AS date_parution
+    FROM oeuvre
+    JOIN auteur on oeuvre.auteur_id = auteur.id_auteur
+    LEFT JOIN exemplaire E1 ON E1.oeuvre_id = oeuvre.id_oeuvre
+    LEFT JOIN exemplaire E2 ON E2.id_exemplaire =E1.id_exemplaire
+        AND E2.id_exemplaire
+            NOT IN (SELECT emprunt.exemplaire_id FROM emprunt WHERE emprunt.date_retour IS NULL)
+    GROUP BY oeuvre.id_oeuvre, auteur.nom, oeuvre.titre
+    ORDER BY auteur.nom ASC , oeuvre.titre ASC;
+     '''
+
     mycursor.execute(sql)
     oeuvres = mycursor.fetchall()
     # print(articles)
@@ -23,7 +36,7 @@ def show_oeuvre():
 @admin_oeuvre.route('/admin/oeuvre/add', methods=['GET'])
 def add_oeuvre():
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete3_6' FROM DUAL '''
+    sql = '''   '''
     mycursor.execute(sql)
     auteurs = mycursor.fetchall()
     return render_template('admin/oeuvre/add_oeuvre.html', auteurs=auteurs, donnees=[], erreurs=[])

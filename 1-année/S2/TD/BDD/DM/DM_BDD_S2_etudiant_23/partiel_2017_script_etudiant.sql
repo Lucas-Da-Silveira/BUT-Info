@@ -1,0 +1,63 @@
+
+DROP TABLE IF EXISTS ESTAFFECTE, PANNE, LIGNE,CHAUFFEUR, BUS, MARQUE, TYPEPANNE;
+
+-- tables sans les contraintes
+
+CREATE TABLE MARQUE(
+        idMarque Int AUTO_INCREMENT
+        , intitule Varchar (255)
+        , PRIMARY KEY (idMarque )
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+CREATE TABLE BUS(
+        idBus    Int AUTO_INCREMENT
+        , modele   Varchar (255)
+        , idMarque Int
+        , PRIMARY KEY (idBus )
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+
+CREATE TABLE CHAUFFEUR(
+        idChauffeur Int AUTO_INCREMENT
+        , nom         Varchar (255)
+        , prenom      Varchar (255)
+        , adresse     Varchar (255)
+        , PRIMARY KEY (idChauffeur )
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+
+CREATE TABLE LIGNE(
+        idLigne Int AUTO_INCREMENT 
+        , libelle Varchar (255) 
+        , PRIMARY KEY (idLigne )
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+
+
+CREATE TABLE TYPEPANNE(
+        idTypePanne int (11)  AUTO_INCREMENT 
+        , libelle     Varchar (255) 
+        , PRIMARY KEY (idTypePanne )
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+
+CREATE TABLE PANNE(
+        idBus       Int 
+        , idTypePanne Int 
+        , datePanne   Date 
+        , PRIMARY KEY (idBus ,idTypePanne, datePanne )
+)ENGINE=InnoDB DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+
+
+LOAD DATA LOCAL INFILE 'MARQUE.csv' INTO TABLE MARQUE CHARACTER SET utf8 FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'BUS.csv' INTO TABLE BUS CHARACTER SET utf8  FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'CHAUFFEUR.csv' INTO TABLE CHAUFFEUR CHARACTER SET utf8 FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'LIGNE.csv' INTO TABLE LIGNE CHARACTER SET utf8 FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'TYPEPANNE.csv' INTO TABLE TYPEPANNE CHARACTER SET utf8 FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'PANNE.csv' INTO TABLE PANNE CHARACTER SET utf8 FIELDS TERMINATED BY ',';
+LOAD DATA LOCAL INFILE 'ESTAFFECTE.csv' INTO TABLE ESTAFFECTE CHARACTER SET utf8 FIELDS TERMINATED BY ',';
+
+
+
+
