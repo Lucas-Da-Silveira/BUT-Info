@@ -37,4 +37,8 @@ public abstract class Volaille {
         return poids * prixParKilo;
     }
 
+    public void modifierPoids(double poids){
+        this.poids = poids;
+    }
+    
 }

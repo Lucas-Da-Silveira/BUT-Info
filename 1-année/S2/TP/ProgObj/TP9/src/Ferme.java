@@ -71,4 +71,26 @@ public class Ferme{
         return prixTotal;
     }
 
+    public Volaille recherVolaille(int id){
+        for (Volaille v : volailles){
+            if (v.getId() == id){
+                return v;
+            }
+        }
+        return null;
+    }   
+
+    public void afficherVolailles(){
+        System.out.println("Liste des volailles à la ferme :");
+        for (Volaille v : volailles){
+            System.out.println(v);
+        }
+    }
+
+    public void afficherVolaillesAAbatre(){
+        System.out.println("Liste des voilailles à abattre :");
+        for (Volaille v : trierVolailleAAbattre()){
+            System.out.println(v);
+        }
+    }
 }
