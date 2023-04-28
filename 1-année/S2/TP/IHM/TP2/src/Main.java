@@ -1,5 +1,7 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,21 +18,38 @@ public class Main extends Application {
     private VBox vBox;
     private StackPane root;
     private Label anglais, Mathématiques, Informatique, Géographie,Optionnel, Valider;
-    private TextField textFieldAnglais, textFieldMathématiques, textFieldInformatique, textFieldGéographie, textFieldOptionnel;
+    TextField textFieldAnglais;
+    TextField textFieldMathématiques;
+    TextField textFieldInformatique;
+    TextField textFieldGéographie;
+    TextField textFieldOptionnel;
+
+    TextField textFieldMoyenne;
     private RadioButton radioButton1Anglais, radioButton2Anglais, radioButton3Anglais, radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques, radioButton1Informatique, radioButton2Informatique, radioButton3Informatique, radioButton1Géographie, radioButton2Géographie, radioButton3Géographie;
     private ComboBox<String> combo;
     private CheckBox checkBox;
-    private Button button;
+    Button button;
     private GridPane gridPane1 , gridPane2, gridPane3, gridPane4, gridPane5, gridPane6, gridPane7, gridPane8, gridPane9, gridPane10, gridPane11;
 
     @Override
     public void start(Stage primaryStage){
         //addWidgetsToSceneV1();
         addWidgetsToSceneV2();
+        addListeners();
         primaryStage.setTitle("Calcul de moyenne");
         //primaryStage.setScene(new Scene(vBox));
         primaryStage.setScene(new Scene(vBox, 500, 200));
         primaryStage.show();
+    }
+
+    private void addListeners(){
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                button.setText("Calculer");
+            }
+        });
+
     }
 
     public void initWidget(){
@@ -74,6 +93,7 @@ public class Main extends Application {
         textFieldInformatique = new TextField();
         textFieldGéographie = new TextField();
         textFieldOptionnel = new TextField();
+        textFieldMoyenne = new TextField();
         ToggleGroup group1 = new ToggleGroup();
         ToggleGroup group2 = new ToggleGroup();
         ToggleGroup group3 = new ToggleGroup();
@@ -144,7 +164,7 @@ public class Main extends Application {
         hBox8.getChildren().addAll(radioButton1Géographie, radioButton2Géographie, radioButton3Géographie );
         hBox9.getChildren().addAll(combo,textFieldOptionnel, Optionnel);
         hBox10.getChildren().addAll(checkBox);
-        hBox11.getChildren().addAll(button, Valider);
+        hBox11.getChildren().addAll(button, Valider ,textFieldMoyenne);
         gridPane1.getChildren().addAll(hBox1);
         gridPane2.getChildren().addAll(hBox2);
         gridPane3.getChildren().addAll(hBox3);
