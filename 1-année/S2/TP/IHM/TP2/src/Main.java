@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class Tp1 extends Application {
+public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
