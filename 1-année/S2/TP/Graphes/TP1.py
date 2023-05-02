@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from numpy import *
 import numpy as np
+import graphviz 
 
 G = nx.Graph()
 
@@ -190,9 +191,14 @@ options = {
 E.add_nodes_from(["Tokyo","San Francisco","Singapour","Copenhague","Riga"])
 E.add_edges_from([("Riga","San Francisco"),("Riga","Copenhague"),("Copenhague","Singapour"),("Singapour","San Francisco"),("Singapour","Tokyo"),("San Francisco","Tokyo"),("San Francisco","Singapour")])
 pos = nx.circular_layout(E)
-nx.draw(E,pos, with_labels=True, **options)
-plt.show()
+# nx.draw(E,pos, with_labels=True, **options)
+# plt.show()
 
 B = nx.Graph()
 B.add_nodes_from([0,1,2,3,4,5,6,7,8,9,10,11])
 B.add_edges_from([(0,1),(0,2),(1,4),(1,3),(2,5),(2,6)])
+
+
+
+# ====== Affichage des graphes "GraphViz"
+

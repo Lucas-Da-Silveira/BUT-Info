@@ -1,0 +1,12 @@
+digraph G {
+    A [shape=ellipse];
+    B [shape=ellipse];
+    C [shape=ellipse];
+    D [shape=ellipse];
+    E [shape=doublecircle];
+    A -> A;
+    A -> B;
+    B -> A;
+    C -> E;
+    D -> E;
+}

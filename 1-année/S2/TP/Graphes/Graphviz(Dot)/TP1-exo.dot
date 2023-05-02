@@ -1,0 +1,11 @@
+graph G {
+    x1 [shape=ellipse];
+    x2 [shape=ellipse];
+    x3 [shape=ellipse];
+    x4 [shape=ellipse];
+    // Création des arêtes
+    x1 -- x2 [label="e1"];
+    x1 -- x3 [label="e3"];
+    x2 -- x3 [label="e2"];
+    x3 -- x4 [label="e4"];
+}

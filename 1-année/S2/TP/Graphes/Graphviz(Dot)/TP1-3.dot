@@ -1,0 +1,12 @@
+graph G {
+    A [shape=ellipse];
+    B [shape=ellipse];
+    C [shape=doublecircle];
+    D [shape=ellipse];
+    E [shape=ellipse];
+    A -- C;
+    B -- C;
+    C -- D;
+    C -- E;
+    D -- E;
+}
