@@ -161,6 +161,15 @@ public class BallModel {
 
          */
 
+        if (racketSpeed > 0) {
+            if (newAngle > 180) {
+                newAngle = 360 - newAngle + angle*speed;
+            }
+            else {
+                newAngle = 180 - newAngle + angle*speed;
+            }
+        }
+
         push(newAngle);
     }
 }

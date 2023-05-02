@@ -126,5 +126,19 @@ public class Model {
            - choisir aléatoirement 10% des briques et leur mettre un type bonus taille
          */
 
+        int brickWidth = (width - 100) / brickCols;
+        int brickHeight = 20;
+        double brickX = 50;
+        double brickY = 50;
+        int type = 0;
+
+        for (int i = 0; i < brickRows; i++) {
+            for (int j = 0; j < brickCols; j++) {
+                bricks[i][j] = new BrickModel(0,brickX, brickY);
+                brickX += brickWidth;
+        }
+            brickY += brickHeight;
+            brickX = 50;
+        }
     }
 }

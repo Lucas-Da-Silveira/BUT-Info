@@ -47,6 +47,34 @@ public class View {
           - créer le texte de fin de partie, pour l'instant vide.
           - créer les murs au bord de la fenêtre.
          */
+        ballLook = new BallLook(model.getBallModel(),2.0);
+        racketLook = new RacketLook(model.getRacketModel(),2.0);
+        result = new Text();
+        result.setFont(new Font(20));
+        result.setFill(Color.RED);
+        result.setTranslateX(width/2);
+        result.setTranslateY(height/2);
+        result.setText("");
+
+        northWall = new Rectangle(width, wallThickness);
+        northWall.setFill(Color.BLACK);
+        northWall.setTranslateX(0);
+        northWall.setTranslateY(0);
+
+        southWall = new Rectangle(width, wallThickness);
+        southWall.setFill(Color.BLACK);
+        southWall.setTranslateX(0);
+        southWall.setTranslateY(height - wallThickness);
+
+        eastWall = new Rectangle(wallThickness, height);
+        eastWall.setFill(Color.BLACK);
+        eastWall.setTranslateX(width - wallThickness);
+        eastWall.setTranslateY(0);
+
+        westWall = new Rectangle(wallThickness, height);
+        westWall.setFill(Color.BLACK);
+        westWall.setTranslateX(0);
+        westWall.setTranslateY(0);
 
         rootPane = new Pane();
         rootPane.setPrefSize(width,height);
@@ -122,7 +150,21 @@ public class View {
            - ajouter le "body"  des briques au panneau racine de la scène.
 
          */
-
+        if(bricks != null) {
+            for(int i=0;i<nbRows;i++) {
+                for (int j = 0; j < nbCols; j++) {
+                    rootPane.getChildren().remove(bricks[i][j].getBody());
+                }
+            }
+        }
+        bricks = new BrickLook[nbRows][nbCols];
+        for(int i=0;i<nbRows;i++) {
+            for (int j = 0; j < nbCols; j++) {
+                BrickModel brickModel = model.getBrickModel(i,j);
+                bricks[i][j] = new BrickLook(brickModel,2.0);
+                rootPane.getChildren().add(bricks[i][j].getBody());
+            }
+        }
     }
 
     public void showWinMessage() {
