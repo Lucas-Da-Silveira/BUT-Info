@@ -236,9 +236,12 @@ def inverse(G):
 # print(inverse(A))
 
 def is_simple(G):
-    for i in G.nodes():
-        if G.degree(i) > 1:
-            return False
-    return True
+    return all(len(set(edge))==2 for edge in G.edges)
 
 # print(is_simple(A))
+
+def is_complet(G):
+    n = G.order()
+    return is_simple(G) and (n*(n-1)//2 == G.size())
+
+# print(is_complet(A))
