@@ -245,3 +245,26 @@ def is_complet(G):
     return is_simple(G) and (n*(n-1)//2 == G.size())
 
 # print(is_complet(A))
+
+
+# Divers type de sous graphe
+
+def is_partiel(G, H):
+    nodes_equal = G.nodes == H.nodes
+    edges_present = all(edge in G.edges for edge in H.edges)
+    return nodes_equal and edges_present
+
+# print(is_partiel(A, B))
+
+def is_subgraph(G, H):
+    nodes_equal = all(node in G.nodes for node in H.nodes)
+    edges_present = all(edge in G.edges for edge in H.edges)
+    last_cond = all(edge in H.edges for edge in G.edges if set(edge).issubset(set(H.nodes)))
+    return nodes_equal and edges_present and last_cond
+
+# print(is_subgraph(A,B))
+
+def induced_subgraph(G, vertices):
+    return G.subgraph(vertices).copy()
+
+print(induced_subgraph(A,B))
