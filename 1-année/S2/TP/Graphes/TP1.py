@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from numpy import *
 import numpy as np
 import graphviz 
+from itertools import product
 
 G = nx.Graph()
 
@@ -202,3 +203,42 @@ B.add_edges_from([(0,1),(0,2),(1,4),(1,3),(2,5),(2,6)])
 
 # ====== Affichage des graphes "GraphViz"
 
+def est_symetrique(G):
+    for i,j in G.edges():
+        if(j,i) in G.edges():
+            return False
+    return True
+
+def est_anti_symetrique(G):
+    for i,j in G.edges():
+        if (j,i) not in G.edges():
+            return False
+    return True
+
+def complementaire(G):
+    comp = nx.DiGraph()
+    comp.add_nodes_from(G.nodes())
+    for i,j in product(G.nodes(), G.nodes()):
+        if i != j and (i,j) not in list(G.edges()):
+            comp.add_edge(i,j)
+    return comp
+
+def inverse(G):
+    comp = nx.DiGraph()
+    comp.add_nodes_from(G.nodes)
+    for i,j in G.edges():
+        comp.add_edge(j,i)
+    return comp
+
+# print(est_symetrique(A))
+# print(est_anti_symetrique(A))
+# print(complementaire(A))
+# print(inverse(A))
+
+def is_simple(G):
+    for i in G.nodes():
+        if G.degree(i) > 1:
+            return False
+    return True
+
+# print(is_simple(A))
