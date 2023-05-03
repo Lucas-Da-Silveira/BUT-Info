@@ -1,7 +1,7 @@
 public class Cartes extends Paquet{
 
-    String[] Valeur;
-    String[] Couleur;
+    protected String[] Valeur;
+    protected String[] Couleur;
 
     public Cartes(){
         Valeur = new String[]{"As","Roi","Dame","Valet","10","9","7","8"};

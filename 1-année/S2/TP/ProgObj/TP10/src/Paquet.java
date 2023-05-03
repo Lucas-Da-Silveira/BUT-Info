@@ -2,8 +2,8 @@ import java.util.ArrayList;;
 
 public class Paquet {
 
-    ArrayList<String> paquet;
-    int nbCartes = 32;
+    protected ArrayList<String> paquet;
+    protected int nbCartes = 32;
 
     public Paquet() {
         paquet = new ArrayList<String>();
