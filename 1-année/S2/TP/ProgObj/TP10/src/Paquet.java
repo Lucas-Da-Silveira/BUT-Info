@@ -41,6 +41,5 @@ public class Paquet {
             str += paquet.get(i) + "\n";
         }
         return str;
-    }
-    
+    }  
 }
