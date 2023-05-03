@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+
 public class Joueur extends Cartes{
 
     protected String nom;
+    ArrayList<String> joueur1 = new ArrayList<String>(paquet.subList(0, 16));
+    ArrayList<String> joueur2 = new ArrayList<String>(paquet.subList(16, 32));
 
     public Joueur(String nom){
         this.nom = nom;
