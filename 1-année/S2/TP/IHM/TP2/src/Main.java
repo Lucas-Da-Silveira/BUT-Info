@@ -25,7 +25,7 @@ public class Main extends Application {
     TextField textFieldOptionnel;
 
     TextField textFieldMoyenne;
-    private RadioButton radioButton1Anglais, radioButton2Anglais, radioButton3Anglais, radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques, radioButton1Informatique, radioButton2Informatique, radioButton3Informatique, radioButton1Géographie, radioButton2Géographie, radioButton3Géographie;
+    protected RadioButton radioButton1Anglais, radioButton2Anglais, radioButton3Anglais, radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques, radioButton1Informatique, radioButton2Informatique, radioButton3Informatique, radioButton1Géographie, radioButton2Géographie, radioButton3Géographie;
     private ComboBox<String> combo;
     private CheckBox checkBox;
     Button button;
@@ -43,13 +43,7 @@ public class Main extends Application {
     }
 
     private void addListeners(){
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                button.setText("Calculer");
-            }
-        });
-
+        button.setOnAction(new ControlButton(this));
     }
 
     public void initWidget(){
@@ -110,7 +104,7 @@ public class Main extends Application {
         radioButton1Géographie = new RadioButton("1");
         radioButton2Géographie = new RadioButton("2");
         radioButton3Géographie = new RadioButton("3");
-        combo = new ComboBox<String>(FXCollections.observableArrayList("Latin", "Grec", "Sport"));
+        combo = new ComboBox<>(FXCollections.observableArrayList("Latin", "Grec", "Sport"));
         combo.getSelectionModel().select(0);
         checkBox = new CheckBox( " Prendre en considération les coefficients");
         button = new Button("Moyenne");
@@ -164,7 +158,7 @@ public class Main extends Application {
         hBox8.getChildren().addAll(radioButton1Géographie, radioButton2Géographie, radioButton3Géographie );
         hBox9.getChildren().addAll(combo,textFieldOptionnel, Optionnel);
         hBox10.getChildren().addAll(checkBox);
-        hBox11.getChildren().addAll(button, Valider ,textFieldMoyenne);
+        hBox11.getChildren().addAll(button, Valider);
         gridPane1.getChildren().addAll(hBox1);
         gridPane2.getChildren().addAll(hBox2);
         gridPane3.getChildren().addAll(hBox3);
