@@ -158,7 +158,7 @@ public class Main extends Application {
         hBox8.getChildren().addAll(radioButton1Géographie, radioButton2Géographie, radioButton3Géographie );
         hBox9.getChildren().addAll(combo,textFieldOptionnel, Optionnel);
         hBox10.getChildren().addAll(checkBox);
-        hBox11.getChildren().addAll(button, Valider);
+        hBox11.getChildren().addAll(button, Valider, textFieldMoyenne);
         gridPane1.getChildren().addAll(hBox1);
         gridPane2.getChildren().addAll(hBox2);
         gridPane3.getChildren().addAll(hBox3);
