@@ -267,4 +267,30 @@ def is_subgraph(G, H):
 def induced_subgraph(G, vertices):
     return G.subgraph(vertices).copy()
 
-print(induced_subgraph(A,B))
+# print(induced_subgraph(A,B))
+
+
+# =======Conexité==============
+
+def is_articulation_point(G, node):
+    G_copy = G.copy()
+    G_copy.remove_node(node)
+    return nx.number_connected_components(G_copy) > nx.number_connected_components(G)
+
+def is_isthme(G, edge):
+    G_copy = G.copy()
+    G_copy.remove_edge(*edge)
+    return nx.number_connected_components(G_copy) > nx.number_connected_components(G)
+
+def has_eulerian_path(G):
+    odd_degree_nodes = [v for v, d in G.degree() if d%2 == 1]
+    return len(odd_degree_nodes) == 0 or len(odd_degree_nodes) == 2
+
+def is_eulerian_cycle(G, path):
+    return sorted([sorted(u) for u in path]) == sorted([sorted(u)] for u in G.edges())
+
+def is_hamiltonian_path(G, path):
+    sommets_visites = [k[0] for k in path]
+    une_fois = len(sommets_visites) == len(set(sommets_visites))
+    tous = set(sommets_visites) == set(G.nodes())
+    return une_fois and tous
