@@ -294,3 +294,18 @@ def is_hamiltonian_path(G, path):
     une_fois = len(sommets_visites) == len(set(sommets_visites))
     tous = set(sommets_visites) == set(G.nodes())
     return une_fois and tous
+
+
+#  ==========Clique de G============
+
+
+def is_clique(H, G):
+    return is_complete(H) and is_subgraph(H, G)
+
+
+G = nx.Graph()
+G.add_edges_from([('A', 'D'), ('A', 'E'), ('B', 'D'), ('B', 
+'E'), ('B', 'F'), ('B', 'G'), ('C', 'E'), ('C', 'G'), ('D', 
+'E'), ('E', 'F'), ('E', 'G'), ('F', 'G')])
+nx.draw(G, with_labels=True)
+plt.show()
