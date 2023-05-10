@@ -29,10 +29,16 @@ plt.bar(Fréquence,Note,  width = 0.05, color='red')
 
 #Exercice 13
 
-with open('parc-informatique-2020.csv',"r",encoding="utf8") as csv_file:
+with open("parc-informatique-2020.csv","r",encoding="utf8") as csv_file:
     contenu = csv_file.readlines()
     contenu = [ligne.strip().split(";") for ligne in contenu]
 
-M = moyenne([int(elt[7]) for elt in contenu[1:] if elt[3] == "Photocopieur"])
+# M = moyenne([2023 - int(elt[7]) for elt in contenu[1:] if elt[3] == "Photocopieur"])
 
-plt.pie(date_d_installation, explode=explode, shadow=true)
+materiels = {}
+for materiel in contenu[1:]:
+    if materiel[3] not in materiels:
+        materiels[materiel[3]] = 1
+    else:
+        materiels[materiel[3]] += 1
+plt.pie(materiels.values)

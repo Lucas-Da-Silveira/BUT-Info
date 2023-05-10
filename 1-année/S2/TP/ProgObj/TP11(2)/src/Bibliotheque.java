@@ -29,6 +29,8 @@ public class Bibliotheque {
         if (prochainNumero >= CAPACITE){
             throw new Exception("La bibliothèque est pleine. Impossible d'ajouter un nouveau documents");
         }
+    
+        
         listeDocs[prochainNumero] = d;
         prochainNumero++;
     }
