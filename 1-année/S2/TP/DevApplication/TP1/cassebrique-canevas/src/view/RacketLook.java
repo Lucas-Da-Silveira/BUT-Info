@@ -3,6 +3,7 @@ package view;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import model.RacketModel;
 
 public class RacketLook {
@@ -41,7 +42,7 @@ public class RacketLook {
         hitBox.getChildren().addAll(hitRectangle);
     }
 
-    public Group getBody() {
+    public Shape getBody() {
         return body;
     }
 

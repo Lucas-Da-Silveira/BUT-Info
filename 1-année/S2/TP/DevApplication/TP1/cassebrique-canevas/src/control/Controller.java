@@ -49,6 +49,24 @@ public class Controller {
            - créer le modèle des briques
            - créer la vue des briques
          */
+        // positionner la raquette
+        double racketX = (view.getWidth() - view.getRacketLook().getWidth()) / 2;
+        double racketY = (view.getHeight() - view.getRacketLook().getHeight() - 10);
+        model.getRacketModel().getNextPosition()[0] = racketX;
+        model.getRacketModel().getNextPosition()[1] = racketY;
+
+        // positionner la balle
+
+        double ballX = (view.getWidth() - view.getBallLook().getRadius()) / 2;
+        double ballY = (view.getHeight() - view.getBallLook().getRadius() - 10);
+        model.getBallModel().getNextPosition()[0] = ballX;
+        model.getBallModel().getNextPosition()[1] = ballY;
+
+        // créer le modèle des briques
+        model.createBricks();
+        // créer la vue des briques
+        view.createBricks();
+
         view.hideResultMessage();
         view.update();
     }
@@ -129,6 +147,22 @@ public class Controller {
           - si collision avec la raquette, inverser la vitesse en Y, en passant la vitesse de la raquette en paramètre.
          */
 
+        if (checkCollisionGroupWithShape(look.getHitBox(), view.getSouthWall())) {
+            model.setState(Model.STATE_LOST);
+        }
+        if (checkCollisionGroupWithShape(look.getHitBox(), view.getNorthWall())) {
+            model.getBallModel().reverseXSpeed();
+        }
+        if (checkCollisionGroupWithShape(look.getHitBox(), view.getEastWall())) {
+            model.getBallModel().reverseYSpeed();
+        }
+        if (checkCollisionGroupWithShape(look.getHitBox(), view.getWestWall())) {
+            model.getBallModel().reverseYSpeed();
+        }
+        if (checkCollisionGroupWithShape(look.getHitBox(), view.getRacketLook().getBody())){
+            model.getBallModel().reverseYSpeed();
+        }
+
         BrickLook[][] bricks = view.getBricks();
         for(int i=0;i<model.getBrickRows();i++) {
             for(int j=0;j<model.getBrickCols();j++) {
@@ -152,6 +186,7 @@ public class Controller {
                        - si brique avec bonus vitesse :
                           - augmenter vitesse raquette
                  */
+
             }
         }
     }

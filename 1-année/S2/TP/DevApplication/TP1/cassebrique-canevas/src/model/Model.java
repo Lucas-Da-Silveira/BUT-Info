@@ -141,4 +141,8 @@ public class Model {
             brickX = 50;
         }
     }
+
+    public BrickModel getBrickModel(int i, int j) {
+        return bricks[i][j];
+    }
 }

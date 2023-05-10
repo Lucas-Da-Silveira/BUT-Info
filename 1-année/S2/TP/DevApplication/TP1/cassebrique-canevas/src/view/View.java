@@ -158,10 +158,10 @@ public class View {
             }
         }
         bricks = new BrickLook[nbRows][nbCols];
-        for(int i=0;i<nbRows;i++) {
+        for (int i = 0; i < nbRows; i++) {
             for (int j = 0; j < nbCols; j++) {
                 BrickModel brickModel = model.getBrickModel(i,j);
-                bricks[i][j] = new BrickLook(brickModel,2.0);
+                bricks[i][j] = new BrickLook(brickModel, 2.0,3.0);
                 rootPane.getChildren().add(bricks[i][j].getBody());
             }
         }
