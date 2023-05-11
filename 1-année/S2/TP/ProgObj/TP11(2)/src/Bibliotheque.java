@@ -25,12 +25,17 @@ public class Bibliotheque {
         throw new Exception("Le document numéro " +num+ " n'est pas dans la bibliothèque");
     }
 
-    public void ajouterDocument(Document d) throws Exception{
-        if (prochainNumero >= CAPACITE){
-            throw new Exception("La bibliothèque est pleine. Impossible d'ajouter un nouveau documents");
+    public void ajouterDocument(Document d) throws DocumentDejaPresent, Exception {
+        for (Document doc : listeDocs) {
+            if (doc != null && doc.equals(d)) {
+                throw new DocumentDejaPresent(doc);
+            }
         }
-    
-        
+
+        if (prochainNumero >= CAPACITE) {
+            throw new Exception("La bibliothèque est déjà remplie. Impossible d'ajouter un nouveau document.");
+        }
+
         listeDocs[prochainNumero] = d;
         prochainNumero++;
     }
@@ -58,9 +63,28 @@ public class Bibliotheque {
         //     System.out.println(e.getMessage());
         // }
 
+        // try {
+        //     Document document = new Document(); 
+        //     bibli.ajouterDocument(document);
+        // } 
+        // catch (DocumentDejaPresent e) {
+        //     Document documentexistant = e.getDocument();
+        //     System.out.println(e.toString());
+        // } 
+        // catch (Exception e) {
+        //     System.out.println(e.getMessage());
+        // }
+
         try {
-            Document document = new Document();
-            bibli.ajouterDocument(document);
+            while (true) {
+                Document document = new Document();
+                bibli.ajouterDocument(document);
+            }
+        } 
+        catch (DocumentDejaPresent e) {
+            Document documentexistant = e.getDocument();
+            System.out.println(e.toString());
+
         } 
         catch (Exception e) {
             System.out.println(e.getMessage());

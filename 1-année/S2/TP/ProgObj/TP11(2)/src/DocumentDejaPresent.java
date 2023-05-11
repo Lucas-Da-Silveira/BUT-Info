@@ -1,13 +1,18 @@
 public class DocumentDejaPresent extends Exception {
 
-    private Document doc;
+    private Document document;
 
-    public Document getDocument(){
-        return doc;
+    public DocumentDejaPresent(Document document) {
+        this.document = document;
     }
 
-    public String toString(){
-        return "Le document " + doc.getNumEnregistrement() + " est déjà présent dans la bibliothèque.";
+    public Document getDocument() {
+        return document;
+    }
+
+    @Override
+    public String toString() {
+        return "Le document " + document.toString() + " est déjà présent dans la médiathèque.";
     }
     
 }
