@@ -1,6 +1,6 @@
 import javafx.beans.property.*;
 
-import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Model {
@@ -41,6 +41,10 @@ public class Model {
 
     public int getTotalImages(){
         return totalImages.get();
+    }
+
+    public void setTotalImages(int totalImages){
+        this.totalImages.set(totalImages);
     }
 
     public IntegerProperty totalImagesProperty(){
