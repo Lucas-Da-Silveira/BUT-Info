@@ -50,4 +50,8 @@ public class Model {
     public boolean isSlideShowRunning(){
         return slideShowRunning.get();
     }
+
+    public void setSlideShowRunning(boolean slideShowRunning){
+        this.slideShowRunning.set(slideShowRunning);
+    }
 }
