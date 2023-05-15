@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 public class ControlButton implements EventHandler<ActionEvent> {
     Main main;
 
-    public ControlButton(Main main){
+    public ControlButton(Main main) {
         this.main = main;
     }
     @Override
@@ -27,4 +27,3 @@ public class ControlButton implements EventHandler<ActionEvent> {
         main.textFieldMoyenne.setText(String.valueOf(moyenne));
     }
 }
-

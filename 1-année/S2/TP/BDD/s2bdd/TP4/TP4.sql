@@ -186,3 +186,14 @@ INSERT INTO emprunt (adherent_id, exemplaire_id, date_emprunt, date_retour) VALU
 (5, 40, '2022-07-25', '2022-09-22'),
 (9, 15, '2023-02-22', NULL),
 (9, 18, '2023-01-30', NULL);
+
+SELECT auteur.nom, oeuvre.titre, oeuvre.id_oeuvre, oeuvre.date_parution, COUNT(e.id_exemplaire) AS nb_exemplaire,COUNT(e2.id_exemplaire) AS nb_exemp_dispo
+FROM oeuvre
+INNER JOIN exemplaire e ON oeuvre.id_oeuvre = e.oeuvre_id
+INNER JOIN exemplaire e2 ON oeuvre.id_oeuvre = e2.oeuvre_id
+INNER JOIN auteur ON oeuvre.auteur_id = auteur.id_auteur
+INNER JOIN emprunt ON e.id_exemplaire = emprunt.exemplaire_id
+WHERE e.date_emprunt IS NOT NULL
+AND e2.date_emprunt IS NULL
+GROUP BY oeuvre.id_oeuvre
+ORDER BY oeuvre.titre ASC;

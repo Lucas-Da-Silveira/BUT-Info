@@ -14,68 +14,68 @@ admin_exemplaire = Blueprint('admin_exemplaire', __name__,
 
 @admin_exemplaire.route('/admin/exemplaire/show')
 def show_exemplaire():
-    noOeuvre=request.args.get('noOeuvre', '')
+    id_oeuvre = request.args.get('id_oeuvre', '')
     mycursor = get_db().cursor()
     sql = ''' SELECT 'requete4_1' FROM DUAL '''
-    mycursor.execute(sql,(noOeuvre))
+    mycursor.execute(sql,(id_oeuvre))
     oeuvre = mycursor.fetchone()
     sql = ''' SELECT 'requete4_2' FROM DUAL '''
-    mycursor.execute(sql,(noOeuvre))
+    mycursor.execute(sql,(id_oeuvre))
     exemplaires = mycursor.fetchall()
     return render_template('admin/exemplaire/show_exemplaires.html', exemplaires=exemplaires, oeuvre=oeuvre)
 
 @admin_exemplaire.route('/admin/exemplaire/add', methods=['GET'])
 def add_exemplaire():
-    noOeuvre = request.args.get('noOeuvre', '')
+    id_oeuvre = request.args.get('id_oeuvre', '')
     mycursor = get_db().cursor()
     sql = ''' SELECT 'requete4_3' FROM DUAL '''
-    mycursor.execute(sql, (noOeuvre))
+    mycursor.execute(sql, (id_oeuvre))
     oeuvre = mycursor.fetchone()
     date_achat = datetime.datetime.now().strftime("%d/%m/%Y")
-    return render_template('admin/exemplaire/add_exemplaire.html', donnees2=oeuvre, donnees={'dateAchat': date_achat, 'noOeuvre': noOeuvre}, erreurs=[])
-
+    return render_template('admin/exemplaire/add_exemplaire.html', oeuvre=oeuvre, exemplaire={'date_achat': date_achat, 'id_oeuvre': id_oeuvre}, erreurs=[])
 @admin_exemplaire.route('/admin/exemplaire/add', methods=['POST'])
 def valid_add_exemplaire():
     mycursor = get_db().cursor()
-    noOeuvre = request.form.get('noOeuvre', '')
-    noOeuvre=int(float(noOeuvre))
-    dateAchat = request.form.get('dateAchat', '')
+    id_oeuvre = request.form.get('id_oeuvre', '')
+    id_oeuvre=int(float(id_oeuvre))
+    date_achat = request.form.get('date_achat', '')
     etat = request.form.get('etat', '')
     prix = request.form.get('prix', '')
 
-    dto_data={'noOeuvre': noOeuvre, 'etat': etat, 'dateAchat': dateAchat, 'prix': prix}
+    dto_data={'id_oeuvre': id_oeuvre, 'etat': etat, 'date_achat': date_achat, 'prix': prix}
     valid, errors, dto_data = validator_exemplaire(dto_data)
     if valid:
-        dateAchat = dto_data['dateAchat_us']
-        tuple_insert = (noOeuvre,etat,dateAchat,prix)
+        date_achat = dto_data['date_achat_iso']
+        tuple_insert = (id_oeuvre,etat,date_achat,prix)
         print(tuple_insert)
         sql = ''' SELECT 'requete4_5' FROM DUAL '''
         mycursor.execute(sql, tuple_insert)
         get_db().commit()
-        message = u'exemplaire ajouté , oeuvre_id :'+str(noOeuvre)
-        flash(message)
-        return redirect('/admin/exemplaire/show?noOeuvre='+str(noOeuvre))
+        message = u'exemplaire ajouté , oeuvre_id :'+str(id_oeuvre)
+        flash(message, 'success radius')
+        return redirect('/admin/exemplaire/show?id_oeuvre='+str(id_oeuvre))
 
     sql = ''' SELECT 'requete4_3' FROM DUAL '''
-    mycursor.execute(sql, (noOeuvre))
+    mycursor.execute(sql, (id_oeuvre))
     oeuvre = mycursor.fetchone()
-    return render_template('admin/exemplaire/add_exemplaire.html', donnees2=oeuvre,
-                           donnees=dto_data, erreurs=errors)
+    return render_template('admin/exemplaire/add_exemplaire.html', oeuvre=oeuvre,
+                           exemplaire=dto_data, erreurs=errors)
 
 @admin_exemplaire.route('/admin/exemplaire/delete', methods=['GET'])
 def delete_exemplaire():
     mycursor = get_db().cursor()
-    id = request.args.get('id', '') #id de l'exemplaire
-    tuple_delete = (id,)
+    id_exemplaire = request.args.get('id_exemplaire', '')
+    tuple_delete = (id_exemplaire,)
     sql = ''' SELECT 'requete4_9' FROM DUAL '''
+    sql = '''
+    SELECT oeuvre_id FROM exemplaire WHERE id_exemplaire =%s
+    '''
     mycursor.execute(sql, tuple_delete)
     oeuvre = mycursor.fetchone()
     oeuvre_id=str(oeuvre['oeuvre_id'])
     print(oeuvre,oeuvre_id)
-    #noOeuvre = request.form.get('noOeuvre', '')
-    if not(id and id.isnumeric()):
-        abort("404","erreur id oeuvre")
-
+    if not(oeuvre_id and oeuvre_id.isnumeric()):
+        abort("404","erreur id_oeuvre")
     nb_emprunts = 0
     sql = ''' SELECT 'requete4_7' FROM DUAL '''
     mycursor.execute(sql, tuple_delete)
@@ -86,83 +86,75 @@ def delete_exemplaire():
         sql = ''' SELECT 'requete4_8' FROM DUAL '''
         mycursor.execute(sql, tuple_delete)
         get_db().commit()
-        flash(u'oeuvre supprimée, id: ' + id)
+        message=u'exemplaire supprimé, id: ' + id_exemplaire
+        flash(message, 'success radius')
     else :
-        flash(u'suppression impossible, il faut supprimer  : ' + str(nb_emprunts) + u' emprunt(s) de cet exemplaire')
-    return redirect('/admin/exemplaire/show?noOeuvre='+oeuvre_id)
+        message=u'suppression impossible, il faut supprimer  : ' + str(nb_emprunts) + u' emprunt(s) de cet exemplaire'
+        flash(message, 'warning')
+    return redirect('/admin/exemplaire/show?id_oeuvre='+oeuvre_id)
 
 @admin_exemplaire.route('/admin/exemplaire/edit', methods=['GET'])
 def edit_exemplaire():
     mycursor = get_db().cursor()
-    id = request.args.get('id', '')
+    id_exemplaire = request.args.get('id_exemplaire', '')
     sql = ''' SELECT 'requete4_10' FROM DUAL '''
-    mycursor.execute(sql, (id))
+    mycursor.execute(sql, (id_exemplaire))
     oeuvre = mycursor.fetchone()
-
-
-    id_exemplaire = request.args.get('id', '')
     sql = ''' SELECT 'requete4_11' FROM DUAL '''
     mycursor.execute(sql, (id_exemplaire,))
     exemplaire = mycursor.fetchone()
-    if exemplaire['dateAchat']:
-        exemplaire['dateAchat']=exemplaire['dateAchat'].strftime("%d/%m/%Y")
-    return render_template('admin/exemplaire/edit_exemplaire.html', donnees=exemplaire, donnees2=oeuvre, erreurs=[])
+    if exemplaire['date_achat']:
+        exemplaire['date_achat']=exemplaire['date_achat'].strftime("%d/%m/%Y")
+    return render_template('admin/exemplaire/edit_exemplaire.html', exemplaire=exemplaire, oeuvre=oeuvre, erreurs=[])
 
 @admin_exemplaire.route('/admin/exemplaire/edit', methods=['POST'])
 def valid_edit_exemplaire():
     mycursor = get_db().cursor()
-    id_exemplaire = request.form.get('noExemplaire', '')
-    noOeuvre = request.form.get('noOeuvre', '')
-    dateAchat = request.form.get('dateAchat', '')
+    id_exemplaire = request.form.get('id_exemplaire', '')
+    oeuvre_id = request.form.get('oeuvre_id', '')
+    date_achat = request.form.get('date_achat', '')
     etat = request.form.get('etat', '')
     prix = request.form.get('prix', '')
 
-    dto_data={'noOeuvre': noOeuvre, 'etat': etat, 'dateAchat': dateAchat, 'prix': prix, 'id_exemplaire':id_exemplaire}
+    dto_data={'oeuvre_id': oeuvre_id, 'etat': etat, 'date_achat': date_achat, 'prix': prix, 'id_exemplaire':id_exemplaire}
     valid, errors, dto_data = validator_exemplaire(dto_data)
+    print(valid, errors, dto_data)
     if valid:
-        dateAchat = dto_data['dateAchat_us']
-        tuple_update = (noOeuvre, etat, dateAchat, prix, id_exemplaire)
+        date_achat = dto_data['date_achat_iso']
+        tuple_update = (oeuvre_id, etat, date_achat, prix, id_exemplaire)
         print(tuple_update)
         sql = ''' SELECT 'requete4_12' FROM DUAL '''
         mycursor.execute(sql, tuple_update)
         get_db().commit()
-        flash(u' exemplaire modifié, noOeuvre: ' + noOeuvre )
-        return redirect('/admin/exemplaire/show?noOeuvre='+noOeuvre)
+        message=u' exemplaire modifié, id_exemplaire: ' + id_exemplaire
+        flash(message, 'success radius')
+        return redirect('/admin/exemplaire/show?id_oeuvre='+oeuvre_id)
     sql = ''' SELECT 'requete4_10' FROM DUAL '''
-    mycursor.execute(sql, (noOeuvre))
+    mycursor.execute(sql, (oeuvre_id))
     oeuvre = mycursor.fetchone()
-    return render_template('admin/exemplaire/edit_exemplaire.html', donnees=dto_data, donnees2=oeuvre, erreurs=errors)
+    return render_template('admin/exemplaire/edit_exemplaire.html', exemplaire=dto_data, oeuvre=oeuvre, erreurs=errors)
+
 
 def validator_exemplaire(data):
-    mycursor = get_db().cursor()
-    # id,etat,date_achat,prix,oeuvre_id
     valid = True
     errors = dict()
-
-    if 'id' in data.keys():
-        if not data['id'].isdecimal():
-            errors['id'] = 'type id incorrect'
+    if 'id_exemplaire' in data.keys():
+        if not data['id_exemplaire'].isnumeric():
+            errors['id_exemplaire'] = 'type id incorrect(numeric)'
             valid = False
-
     if not re.match(r'\w{2,}', data['etat']):
-        flash('Titre doit avoir au moins deux caractères')
         errors['etat'] = "Le titre doit avoir au moins deux caractères"
         valid = False
-
     try:
-        datetime.datetime.strptime(data['dateAchat'], '%d/%m/%Y')
+        datetime.datetime.strptime(data['date_achat'], '%d/%m/%Y')
     except ValueError:
-        flash("la Date n'est pas valide")
-        errors['dateAchat'] = "la Date n'est pas valide format:%d/%m/%Y"
+        errors['date_achat'] = "la Date n'est pas valide format:%d/%m/%Y"
         valid = False
     else:
-        data['dateAchat_us'] = datetime.datetime.strptime(data['dateAchat'], "%d/%m/%Y").strftime("%Y-%m-%d")
-
+        data['date_achat_iso'] = datetime.datetime.strptime(data['date_achat'], "%d/%m/%Y").strftime("%Y-%m-%d")
     try:
         float(data['prix'])
     except ValueError:
-        flash("Prix n'est pas valide")
         errors['prix'] = "le Prix n'est pas valide"
         valid = False
-
     return (valid, errors, data)
