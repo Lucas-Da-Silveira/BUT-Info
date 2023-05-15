@@ -33,8 +33,8 @@ public class View {
         BorderPane borderPane = new BorderPane();
         SplitPane splitPane = new SplitPane();
         splitPane.setOrientation(Orientation.HORIZONTAL);
+        splitPane.setDividerPositions(0,0.5);
         splitPane.getItems().addAll(listView, imageView);
-        splitPane.setDividerPositions(0.3);
 
         VBox controlBox = new VBox();
         HBox buttonBox = new HBox();
