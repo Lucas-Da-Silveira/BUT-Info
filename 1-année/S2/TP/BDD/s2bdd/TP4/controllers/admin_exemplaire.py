@@ -16,10 +16,18 @@ admin_exemplaire = Blueprint('admin_exemplaire', __name__,
 def show_exemplaire():
     id_oeuvre = request.args.get('id_oeuvre', '')
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete4_1' FROM DUAL '''
+    sql = ''' SELECT  oeuvre.id_oeuvre, oeuvre.titre, oeuvre.auteur_id, oeuvre.date_parution, COUNT(e.id_exemplaire) AS nb_exemplaire, COUNT(e2.id_exemplaire) AS nb_exemp_dispo
+        FROM oeuvre
+        LEFT JOIN exemplaire e ON e.oeuvre_id = oeuvre.id_oeuvre
+        LEFT JOIN exemplaire e2 ON e2.oeuvre_id = oeuvre.id_oeuvre AND e2.etat = 'disponible'
+        WHERE oeuvre.id_oeuvre = %s
+     '''
     mycursor.execute(sql,(id_oeuvre))
     oeuvre = mycursor.fetchone()
-    sql = ''' SELECT 'requete4_2' FROM DUAL '''
+    sql = ''' SELECT  exemplaire.id_exemplaire, exemplaire.etat, exemplaire.date_achat, exemplaire.prix, exemplaire.oeuvre_id
+     FROM exemplaire
+     WHERE exemplaire.oeuvre_id = %s
+    '''
     mycursor.execute(sql,(id_oeuvre))
     exemplaires = mycursor.fetchall()
     return render_template('admin/exemplaire/show_exemplaires.html', exemplaires=exemplaires, oeuvre=oeuvre)
@@ -28,7 +36,10 @@ def show_exemplaire():
 def add_exemplaire():
     id_oeuvre = request.args.get('id_oeuvre', '')
     mycursor = get_db().cursor()
-    sql = ''' SELECT 'requete4_3' FROM DUAL '''
+    sql = ''' SELECT oeuvre.id_oeuvre, oeuvre.titre, oeuvre.auteur_id, oeuvre.date_parution
+    FROM oeuvre
+    WHERE oeuvre.id_oeuvre = %s
+     '''
     mycursor.execute(sql, (id_oeuvre))
     oeuvre = mycursor.fetchone()
     date_achat = datetime.datetime.now().strftime("%d/%m/%Y")
@@ -48,7 +59,7 @@ def valid_add_exemplaire():
         date_achat = dto_data['date_achat_iso']
         tuple_insert = (id_oeuvre,etat,date_achat,prix)
         print(tuple_insert)
-        sql = ''' SELECT 'requete4_5' FROM DUAL '''
+        sql = ''' UPDATE exemplaire SET etat = %s, date_achat = %s, prix = %s WHERE oeuvre_id = %s   '''
         mycursor.execute(sql, tuple_insert)
         get_db().commit()
         message = u'exemplaire ajouté , oeuvre_id :'+str(id_oeuvre)
