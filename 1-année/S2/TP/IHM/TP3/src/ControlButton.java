@@ -7,9 +7,13 @@ import javafx.scene.control.ToggleGroup;
 
 public class ControlButton implements EventHandler<ActionEvent> {
     private Main main;
+    private Model model;
+    private View view;
 
-    public ControlButton(Main main) {
+    public ControlButton(Main main,Model model, View view) {
         this.main = main;
+        this.model = model;
+        this.view = view;
     }
 
     @Override

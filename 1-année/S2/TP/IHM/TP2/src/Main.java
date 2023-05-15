@@ -1,193 +1,158 @@
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
+import javax.swing.*;
 public class Main extends Application {
+
+    public ToggleGroup rbInfo;
+    public ToggleGroup rbGeo;
+    public ToggleGroup rbMath;
+    public ToggleGroup rbAng;
+    protected TextField tfAnglais;
+    protected TextField tfMathematiques;
+    protected TextField tfInformatique;
+    protected TextField tfGeographie;
+    protected TextField tfOption;
+    protected RadioButton rbAng1;
+    protected RadioButton rbAng2;
+    protected RadioButton rbAng3;
+    protected RadioButton rbMat1;
+    protected RadioButton rbMat2;
+    protected RadioButton rbMat3;
+    protected RadioButton rbInfo1;
+    protected RadioButton rbInfo2;
+    protected RadioButton rbInfo3;
+    protected RadioButton rbGeo1;
+    protected RadioButton rbGeo2;
+    protected RadioButton rbGeo3;
+    protected ComboBox<String> listOption;
+    protected Label lMoy;
+    protected CheckBox cbCoeff;
+    private Button btnMoyenne;
+
+
     public static void main(String[] args) {
         launch(args);
     }
 
-    private FlowPane flow;
-    private HBox hBox,hBox1, hBox2, hBox3, hBox4, hBox5, hBox6, hBox7, hBox8, hBox9, hBox10, hBox11, hBox12, hBox13, hBox14, hBox15, hBox16, hBox17;
-    private VBox vBox;
-    private StackPane root;
-    private Label anglais, Mathématiques, Informatique, Géographie,Optionnel, Valider;
-    TextField textFieldAnglais;
-    TextField textFieldMathématiques;
-    TextField textFieldInformatique;
-    TextField textFieldGéographie;
-    TextField textFieldOptionnel;
-
-    TextField textFieldMoyenne;
-    protected RadioButton radioButton1Anglais, radioButton2Anglais, radioButton3Anglais, radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques, radioButton1Informatique, radioButton2Informatique, radioButton3Informatique, radioButton1Géographie, radioButton2Géographie, radioButton3Géographie;
-    private ComboBox<String> combo;
-    private CheckBox checkBox;
-    Button button;
-    private GridPane gridPane1 , gridPane2, gridPane3, gridPane4, gridPane5, gridPane6, gridPane7, gridPane8, gridPane9, gridPane10, gridPane11;
-
     @Override
-    public void start(Stage primaryStage){
-        //addWidgetsToSceneV1();
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Application");
+        initWidgets();
         addWidgetsToSceneV2();
         addListeners();
-        primaryStage.setTitle("Calcul de moyenne");
-        //primaryStage.setScene(new Scene(vBox));
-        primaryStage.setScene(new Scene(vBox, 500, 200));
+
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(2));
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(addWidgetsToSceneV2(), lMoy);
+
+        primaryStage.setResizable(false);
+
+        Scene scene = new Scene(vbox, 400, 400);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void addListeners(){
-
-        button.setOnAction(new ControlButton(this));
+    private void addListeners() {
+        btnMoyenne.setOnAction(new ControlButton(this));
     }
 
-    public void initWidget(){
-        flow = new FlowPane();
-        hBox = new HBox();
-        hBox1 = new HBox();
-        hBox2 = new HBox();
-        hBox3 = new HBox();
-        hBox4 = new HBox();
-        hBox5 = new HBox();
-        hBox6 = new HBox();
-        hBox7 = new HBox();
-        hBox8 = new HBox();
-        hBox9 = new HBox();
-        hBox10 = new HBox();
-        hBox11 = new HBox();
-        hBox12 = new HBox();
-        hBox13 = new HBox();
-        hBox14 = new HBox();
-        hBox15 = new HBox();
-        hBox16 = new HBox();
-        hBox17 = new HBox();
-        vBox = new VBox();
-        gridPane1 = new GridPane();
-        gridPane2 = new GridPane();
-        gridPane3 = new GridPane();
-        gridPane4 = new GridPane();
-        gridPane5 = new GridPane();
-        gridPane6 = new GridPane();
-        gridPane7 = new GridPane();
-        gridPane8 = new GridPane();
-        gridPane9 = new GridPane();
-        gridPane10 = new GridPane();
-        gridPane11 = new GridPane();
-        anglais = new Label("Anglais");
-        Mathématiques = new Label("Mathématiques");
-        Informatique = new Label("Informatique");
-        Géographie = new Label("Géographie");
-        textFieldAnglais = new TextField();
-        textFieldMathématiques = new TextField();
-        textFieldInformatique = new TextField();
-        textFieldGéographie = new TextField();
-        textFieldOptionnel = new TextField();
-        textFieldMoyenne = new TextField();
-        ToggleGroup group1 = new ToggleGroup();
-        ToggleGroup group2 = new ToggleGroup();
-        ToggleGroup group3 = new ToggleGroup();
-        ToggleGroup group4 = new ToggleGroup();
-        radioButton1Anglais = new RadioButton("1");
-        radioButton2Anglais = new RadioButton("2");
-        radioButton3Anglais = new RadioButton("3");
-        radioButton1Mathématiques = new RadioButton("1");
-        radioButton2Mathématiques = new RadioButton("2");
-        radioButton3Mathématiques = new RadioButton("3");
-        radioButton1Informatique = new RadioButton("1");
-        radioButton2Informatique = new RadioButton("2");
-        radioButton3Informatique = new RadioButton("3");
-        radioButton1Géographie = new RadioButton("1");
-        radioButton2Géographie = new RadioButton("2");
-        radioButton3Géographie = new RadioButton("3");
-        combo = new ComboBox<>(FXCollections.observableArrayList("Latin", "Grec", "Sport"));
-        combo.getSelectionModel().select(0);
-        checkBox = new CheckBox( " Prendre en considération les coefficients");
-        button = new Button("Moyenne");
-        Optionnel = new Label("Optionnel");
-        Valider = new Label("Valider");
 
-        radioButton1Anglais.setToggleGroup(group1);
-        radioButton2Anglais.setToggleGroup(group1);
-        radioButton3Anglais.setToggleGroup(group1);
-        radioButton1Mathématiques.setToggleGroup(group2);
-        radioButton2Mathématiques.setToggleGroup(group2);
-        radioButton3Mathématiques.setToggleGroup(group2);
-        radioButton1Informatique.setToggleGroup(group3);
-        radioButton2Informatique.setToggleGroup(group3);
-        radioButton3Informatique.setToggleGroup(group3);
-        radioButton1Géographie.setToggleGroup(group4);
-        radioButton2Géographie.setToggleGroup(group4);
-        radioButton3Géographie.setToggleGroup(group4);
+    private void initWidgets() {
+        tfAnglais = new TextField();
+        tfMathematiques = new TextField();
+        tfInformatique = new TextField();
+        tfGeographie = new TextField();
+        tfOption = new TextField();
+        rbAng1 = new RadioButton("1");
+        rbAng2 = new RadioButton("2");
+        rbAng3 = new RadioButton("3");
+        rbMat1 = new RadioButton("1");
+        rbMat2 = new RadioButton("2");
+        rbMat3 = new RadioButton("3");
+        rbInfo1 = new RadioButton("1");
+        rbInfo2 = new RadioButton("2");
+        rbInfo3 = new RadioButton("3");
+        rbGeo1 = new RadioButton("1");
+        rbGeo2 = new RadioButton("2");
+        rbGeo3 = new RadioButton("3");
+        listOption = new ComboBox<>();
+        lMoy = new Label("Valeur");
+        btnMoyenne = new Button("Moyenne");
     }
 
-    public void addWidgetsToSceneV1(){
-        initWidget();
-        hBox1.getChildren().addAll(anglais, textFieldAnglais,radioButton1Anglais, radioButton2Anglais, radioButton3Anglais);
-        hBox2.getChildren().addAll(Mathématiques, textFieldMathématiques,radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques );
-        hBox3.getChildren().addAll(Informatique, textFieldInformatique,radioButton1Informatique, radioButton2Informatique, radioButton3Informatique );
-        hBox4.getChildren().addAll(Géographie, textFieldGéographie,radioButton1Géographie, radioButton2Géographie, radioButton3Géographie );
-        hBox5.getChildren().addAll(combo,textFieldOptionnel, Optionnel);
-        hBox6.getChildren().addAll(checkBox);
-        hBox7.getChildren().addAll(button, Valider);
-        hBox1.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox2.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox3.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox4.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox5.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox6.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox7.setAlignment(javafx.geometry.Pos.CENTER);
-        vBox.setAlignment(javafx.geometry.Pos.CENTER);
-        vBox.getChildren().addAll(hBox1, hBox2, hBox3, hBox4, hBox5, hBox6, hBox7);
+    private VBox addWidgetsToSceneV2() {
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(2));
+        vbox.setAlignment(Pos.CENTER);
 
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+
+        Label lAnglais = new Label("Anglais :");
+        Label lMathematiques = new Label("Mathématiques :");
+        Label lInformatique = new Label("Informatique :");
+        Label lGeographie = new Label("Géographie :");
+        Label lOption = new Label("Option :");
+
+        HBox hboxAnglais = createRadioButtonsHBox(rbAng1, rbAng2, rbAng3);
+        HBox hboxMathematiques = createRadioButtonsHBox(rbMat1, rbMat2, rbMat3);
+        HBox hboxInformatique = createRadioButtonsHBox(rbInfo1, rbInfo2, rbInfo3);
+        HBox hboxGeographie = createRadioButtonsHBox(rbGeo1, rbGeo2, rbGeo3);
+
+        gridPane.add(lAnglais, 0, 0);
+        gridPane.add(tfAnglais, 1, 0);
+        gridPane.add(hboxAnglais, 2, 0);
+
+        gridPane.add(lMathematiques, 0, 1);
+        gridPane.add(tfMathematiques, 1, 1);
+        gridPane.add(hboxMathematiques, 2, 1);
+
+        gridPane.add(lInformatique, 0, 2);
+        gridPane.add(tfInformatique, 1, 2);
+        gridPane.add(hboxInformatique, 2, 2);
+
+        gridPane.add(lGeographie, 0, 3);
+        gridPane.add(tfGeographie, 1, 3);
+        gridPane.add(hboxGeographie, 2, 3);
+
+        gridPane.add(lOption , 0, 4);
+        gridPane.add(tfOption, 1, 4);
+        gridPane.add(listOption, 2, 4);;
+
+        listOption.getItems().addAll("Latin", "Grec", "Sport");
+        listOption.getSelectionModel().selectFirst();
+
+        HBox hboxMoyenne = new HBox(10);
+        hboxMoyenne.getChildren().addAll(btnMoyenne,lMoy);
+        hboxMoyenne.setAlignment(Pos.CENTER);
+
+        cbCoeff = new CheckBox("Prendre en compte les coefficients");
+        HBox hboxCb = new HBox(10);
+        hboxCb.getChildren().add(cbCoeff);
+        hboxCb.setAlignment(Pos.CENTER);
+
+        vbox.getChildren().addAll(gridPane,hboxCb, hboxMoyenne);
+        gridPane.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-padding: 10px;");
+        return vbox;
     }
 
-    public void addWidgetsToSceneV2(){
-        initWidget();
-        hBox1.getChildren().addAll(anglais, textFieldAnglais);
-        hBox2.getChildren().addAll(radioButton1Anglais, radioButton2Anglais, radioButton3Anglais);
-        hBox3.getChildren().addAll(Mathématiques, textFieldMathématiques);
-        hBox4.getChildren().addAll(radioButton1Mathématiques, radioButton2Mathématiques, radioButton3Mathématiques );
-        hBox5.getChildren().addAll(Informatique, textFieldInformatique);
-        hBox6.getChildren().addAll(radioButton1Informatique, radioButton2Informatique, radioButton3Informatique );
-        hBox7.getChildren().addAll(Géographie, textFieldGéographie);
-        hBox8.getChildren().addAll(radioButton1Géographie, radioButton2Géographie, radioButton3Géographie );
-        hBox9.getChildren().addAll(combo,textFieldOptionnel, Optionnel);
-        hBox10.getChildren().addAll(checkBox);
-        hBox11.getChildren().addAll(button, Valider, textFieldMoyenne);
-        gridPane1.getChildren().addAll(hBox1);
-        gridPane2.getChildren().addAll(hBox2);
-        gridPane3.getChildren().addAll(hBox3);
-        gridPane4.getChildren().addAll(hBox4);
-        gridPane5.getChildren().addAll(hBox5);
-        gridPane6.getChildren().addAll(hBox6);
-        gridPane7.getChildren().addAll(hBox7);
-        gridPane8.getChildren().addAll(hBox8);
-        gridPane9.getChildren().addAll(hBox9);
-        gridPane10.getChildren().addAll(hBox10);
-        gridPane11.getChildren().addAll(hBox11);
-        hBox.getChildren().addAll(gridPane1, gridPane2);
-        hBox12.getChildren().addAll(gridPane3, gridPane4);
-        hBox13.getChildren().addAll(gridPane5, gridPane6);
-        hBox14.getChildren().addAll(gridPane7, gridPane8);
-        hBox15.getChildren().addAll(gridPane9);
-        hBox16.getChildren().addAll(gridPane10);
-        hBox17.getChildren().addAll(gridPane11);
-        hBox.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox12.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox13.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox14.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox15.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox16.setAlignment(javafx.geometry.Pos.CENTER);
-        hBox17.setAlignment(javafx.geometry.Pos.CENTER);
-
-        vBox.getChildren().addAll(hBox, hBox12, hBox13, hBox14, hBox15, hBox16, hBox17);
-
+    private HBox createRadioButtonsHBox(RadioButton rb1, RadioButton rb2, RadioButton rb3) {
+        HBox hbox = new HBox(10);
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setPadding(new Insets(10));
+        ToggleGroup group = new ToggleGroup();
+        rb1.setToggleGroup(group);
+        rb2.setToggleGroup(group);
+        rb3.setToggleGroup(group);
+        hbox.getChildren().addAll(rb1, rb2, rb3);
+        return hbox;
     }
 
 }
