@@ -24,8 +24,9 @@ def show_exemplaire():
      '''
     mycursor.execute(sql,(id_oeuvre))
     oeuvre = mycursor.fetchone()
-    sql = ''' SELECT  exemplaire.id_exemplaire, exemplaire.etat, exemplaire.date_achat, exemplaire.prix, exemplaire.oeuvre_id
-     FROM exemplaire
+    sql = ''' SELECT  exemplaire.id_exemplaire, exemplaire.etat, exemplaire.date_achat, exemplaire.prix, exemplaire.oeuvre_id,
+    IF(emprunt.date_emprunt IS NOT NULL, 'disponible', 'indisponible') AS etat
+     FROM exemplaire, emprunt
      WHERE exemplaire.oeuvre_id = %s
     '''
     mycursor.execute(sql,(id_oeuvre))
