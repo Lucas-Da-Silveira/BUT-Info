@@ -48,9 +48,9 @@ public class View {
 
     public void setControlMenu() {
         ControlMenu controlMenu = new ControlMenu(model, this);
-        // Set the appropriate event handlers for the menu items
-        // ...
+        cbCoefficients.setOnAction(controlMenu);
     }
+}
 
 // Rest of the View class
 // ...

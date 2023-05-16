@@ -132,3 +132,18 @@ WHERE EXISTS (
    HAVING COUNT(*) > 4
 )
 GROUP BY CHAUFFEUR.idChauffeur, CHAUFFEUR.nom, CHAUFFEUR.prenom;
+
+CREATE USER 'Lucas1'@'%' IDENTIFIED BY 'secret';
+
+CREATE USER 'Lucas1_user2'@'172.20.178.%' IDENTIFIED BY 'secret';
+CREATE USER 'Lucas_user3'@'172.20%' IDENTIFIED BY 'secret';
+CREATE USER 'Lucas_user4'@'serveurmysql2' IDENTIFIED BY 'secret';
+CREATE USER Lucas_user5 IDENTIFIED BY 'secret';
+CREATE USER Lucas_user6;
+CREATE USER 'Lucas_user7'@'10.248%' IDENTIFIED BY 'secret';
+
+CREATE USER Lucas_admin IDENTIFIED BY 'secret';
+
+CREATE USER 'Lucas_user8'@'%912e007-0%' IDENTIFIED BY 'secret';
+CREATE USER 'Login_user9'@'912e007-03.iut-bm.univ-fcomte.fr' IDENTIFIED BY 'secret';
+                  -- remplacer 007-03 par le numéro de votre poste

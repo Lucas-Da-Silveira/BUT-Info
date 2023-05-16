@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class View {
 
     private TabPane tabPane;
@@ -17,6 +19,7 @@ public class View {
     private Button nextButton;
     private Button lastButton;
     private ProgressBar progressBar;
+    int cpt = 0;
 
     public View(Model model) {
         tabPane = new TabPane();
@@ -27,13 +30,27 @@ public class View {
         nextButton = new Button("Next");
         lastButton = new Button("Last");
         progressBar = new ProgressBar();
+        progressBar.setProgress(0);
+
+        File folder = new File("images");
+
+        for(final File fileEntry : folder.listFiles()){
+            if(fileEntry.isFile()){
+                model.getImageNames().add(fileEntry.getName());
+                listView.getItems().add(fileEntry.getPath());
+                cpt++;
+            }
+        }
+
+        imageView.setFitWidth(600);
+        imageView.setFitHeight(300);
     }
 
     public Scene initialiseView(){
         BorderPane borderPane = new BorderPane();
         SplitPane splitPane = new SplitPane();
         splitPane.setOrientation(Orientation.HORIZONTAL);
-        splitPane.setDividerPositions(0,0.5);
+        splitPane.setDividerPositions(0,10);
         splitPane.getItems().addAll(listView, imageView);
 
         VBox controlBox = new VBox();
@@ -53,7 +70,7 @@ public class View {
         BorderPane.setMargin(tabPane, new javafx.geometry.Insets(10));
         borderPane.setCenter(tabPane);
 
-        Scene scene = new Scene(borderPane, 800, 600);
+        Scene scene = new Scene(borderPane, 1000, 600);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
