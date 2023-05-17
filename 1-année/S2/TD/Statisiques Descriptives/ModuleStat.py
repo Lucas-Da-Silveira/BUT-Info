@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+
+
 def moyenne(li, eff=[]):
     if eff is None:
         eff = [1 for i in range (len(li))]
@@ -52,3 +55,8 @@ def coeff_correlation(X,Y):
 
 X = [1,3,4,5,6]
 Y = [468, 500, 497, 502, 526]
+
+def moindres_carres(X,Y):
+    plt.plot(X,Y,"xb")
+    plt.plot(moyenne(X),moyenne(Y),"xr")
+    plt.show()
