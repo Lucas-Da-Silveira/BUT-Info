@@ -32,6 +32,6 @@ class Footballeur {
     }
 
     public void afficher() {
-        System.out.println(nom + ", performance : " + performance + ", club employeur : " + clubEmployeur.getNom());
+        System.out.println(nom + ", performance : " + performance + ", club employeur : " + clubEmployeur.getNomClub());
     }
 }

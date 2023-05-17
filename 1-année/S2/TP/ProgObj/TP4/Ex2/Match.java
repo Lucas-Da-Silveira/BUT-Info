@@ -8,6 +8,6 @@ class Match {
     }
 
     public void afficher() {
-        System.out.println("Match entre " + club1.getNom() + " et " + club2.getNom());
+        System.out.println("Match entre " + club1.getNomClub() + " et " + club2.getNomClub());
     }
 }

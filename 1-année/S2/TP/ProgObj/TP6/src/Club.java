@@ -43,4 +43,7 @@ public class Club extends java.lang.Object{
         return "Nom du club : " + this.nomClub + " Adherents : " + this.adherents;
     }
 
+    public void faireEquipe() {
+    }
+
 }
