@@ -36,3 +36,19 @@ def variance(li, eff=None):
 
 def ecartType(li, eff=None):
     return variance(li,eff)**0.5
+
+def covariance(X,Y):
+    assert len(X) == len(Y)
+    mX = moyenne(X)
+    mY = moyenne(Y)
+    somme = 0
+    for i in range(len(X)):
+        somme += (X[i]-mX)*(Y[i]-mY)
+    return somme/len(X)
+
+def coeff_correlation(X,Y):
+    assert len(X) == len(Y)
+    return covariance(X,Y)/(ecartType(X)*ecartType(Y))
+
+X = [1,3,4,5,6]
+Y = [468, 500, 497, 502, 526]
