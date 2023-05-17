@@ -199,4 +199,11 @@ public class RacketModel {
             }
         }
     }
+
+    public void setX(double v) {
+        if (x != v) {
+            positionChanged = true;
+            x = v;
+        }
+    }
 }

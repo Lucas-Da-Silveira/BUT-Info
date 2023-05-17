@@ -27,7 +27,7 @@ public class BrickLook {
         this.height = height;
         // define the body
         body = new Group();
-        main = new Rectangle(1,1,width-2, height-2);
+        main = new Rectangle(1,1,50, 20);
         if (brickModel.getType() == BrickModel.BRICK_NORMAL) {
             main.setFill(Color.RED);
         }
@@ -49,7 +49,7 @@ public class BrickLook {
         body.getChildren().addAll(main);
         // define the hitbox : in the present case, a circle that matches outer boundaries.
         hitBox = new Group();
-        hitRectangle = new Rectangle(0,0,width, height);
+        hitRectangle = new Rectangle(0,0,50, 20);
         hitRectangle.setFill(Color.TRANSPARENT);
         hitBox.getChildren().addAll(hitRectangle);
     }

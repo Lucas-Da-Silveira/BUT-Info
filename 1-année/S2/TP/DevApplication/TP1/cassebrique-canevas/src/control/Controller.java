@@ -159,14 +159,12 @@ public class Controller {
         if (checkCollisionGroupWithShape(look.getHitBox(), view.getWestWall())) {
             model.getBallModel().reverseYSpeed();
         }
-        if (checkCollisionGroupWithShape(look.getHitBox(), view.getRacketLook().getBody())){
-            model.getBallModel().reverseYSpeed();
-        }
 
         BrickLook[][] bricks = view.getBricks();
         for(int i=0;i<model.getBrickRows();i++) {
             for(int j=0;j<model.getBrickCols();j++) {
                 BrickModel brickModel = model.getBricks()[i][j];
+                BrickLook brickLook = bricks[i][j];
                 /* A COMPLETER :
                 - si la brique est visible :
                    - vérifier la collision de la balle avec la brique (cf. checkCollisionBallWithBrick() )
@@ -186,7 +184,33 @@ public class Controller {
                        - si brique avec bonus vitesse :
                           - augmenter vitesse raquette
                  */
-
+                if (brickModel.isVisible()){
+                    int collision = checkCollisionBallWithBrick(brickLook);
+                    if (collision == 1 || collision == 2){
+                        model.getBallModel().reverseXSpeed();
+                        brickModel.setVisible(false);
+                        model.decNbBricks();
+                    }
+                    else if (collision == 3 || collision == 4){
+                        model.getBallModel().reverseYSpeed();
+                        brickModel.setVisible(false);
+                        model.decNbBricks();
+                    }
+                    else if (collision == 5){
+                        model.getBallModel().reverseYSpeed();
+                        brickModel.setVisible(false);
+                        model.decNbBricks();
+                        if (brickModel.isBonusWidth()){
+                            model.getRacketModel().setWidth(model.getRacketModel().getWidth() + 20);
+                            if (model.getRacketModel().getX() + model.getRacketModel().getWidth() > model.getWidth()){
+                                model.getRacketModel().setX(model.getWidth() - model.getRacketModel().getWidth());
+                            }
+                        }
+                        else if (brickModel.isBonusSpeed()){
+                            model.getRacketModel().setX(model.getRacketModel().getSpeedX() + 1);
+                        }
+                    }
+                }
             }
         }
     }

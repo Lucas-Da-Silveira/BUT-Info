@@ -28,7 +28,7 @@ public class RacketLook {
         this.height = height;
         // define the body
         body = new Group();
-        main = new Rectangle(0,0,width, height);
+        main = new Rectangle(450,0,50, 10);
         main.setFill(Color.RED);
         main.setArcWidth(10);
         main.setArcHeight(10);
@@ -42,7 +42,7 @@ public class RacketLook {
         hitBox.getChildren().addAll(hitRectangle);
     }
 
-    public Shape getBody() {
+    public Group getBody() {
         return body;
     }
 

@@ -94,4 +94,12 @@ public class BrickModel {
          */
 
     }
+
+    public boolean isBonusWidth() {
+        return type == BRICK_BONUS_WIDTH;
+    }
+
+    public boolean isBonusSpeed() {
+        return type == BRICK_BONUS_SPEED;
+    }
 }

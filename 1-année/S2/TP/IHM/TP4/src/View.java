@@ -42,8 +42,9 @@ public class View {
             }
         }
 
-        imageView.setFitWidth(600);
-        imageView.setFitHeight(300);
+        imageView.fitWidthProperty().bind(tabPane.widthProperty().subtract(200));
+        imageView.fitHeightProperty().bind(tabPane.heightProperty().subtract(200));
+        imageView.setPreserveRatio(true);
     }
 
     public Scene initialiseView(){
