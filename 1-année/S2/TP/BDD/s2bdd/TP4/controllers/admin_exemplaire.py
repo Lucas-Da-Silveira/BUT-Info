@@ -53,7 +53,7 @@ def add_exemplaire():
 def valid_add_exemplaire():
     mycursor = get_db().cursor()
     id_oeuvre = request.form.get('id_oeuvre', '')
-    id_oeuvre=int(float(id_oeuvre))
+    id_oeuvre = int(float(id_oeuvre))
     date_achat = request.form.get('date_achat', '')
     etat = request.form.get('etat', '')
     prix = request.form.get('prix', '')
@@ -86,9 +86,7 @@ def delete_exemplaire():
     mycursor = get_db().cursor()
     id_exemplaire = request.args.get('id_exemplaire', '')
     tuple_delete = (id_exemplaire,)
-    sql = '''
-    SELECT oeuvre_id FROM exemplaire WHERE id_exemplaire =%s
-    '''
+    sql = '''SELECT oeuvre_id FROM exemplaire WHERE id_exemplaire =%s'''
     mycursor.execute(sql, tuple_delete)
     oeuvre = mycursor.fetchone()
     oeuvre_id=str(oeuvre['oeuvre_id'])
