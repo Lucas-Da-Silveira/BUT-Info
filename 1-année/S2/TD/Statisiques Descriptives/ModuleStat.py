@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 def moyenne(li, eff=[]):
     if eff is None:
         eff = [1 for i in range (len(li))]
-    assert len(li) == len(eff)
     somme = 0
     sommeCoef = 0
     for i in range(len(li)):
@@ -41,7 +40,6 @@ def ecartType(li, eff=None):
     return variance(li,eff)**0.5
 
 def covariance(X,Y):
-    assert len(X) == len(Y)
     mX = moyenne(X)
     mY = moyenne(Y)
     somme = 0
@@ -50,7 +48,6 @@ def covariance(X,Y):
     return somme/len(X)
 
 def coeff_correlation(X,Y):
-    assert len(X) == len(Y)
     return covariance(X,Y)/(ecartType(X)*ecartType(Y))
 
 X = [1,3,4,5,6]
@@ -58,5 +55,10 @@ Y = [468, 500, 497, 502, 526]
 
 def moindres_carres(X,Y):
     plt.plot(X,Y,"xb")
+    a = covariance(X,Y)/variance(X)
+    b = moyenne(Y)-a*moyenne(X)
+    plt.plot(X,[a*x+b for x in X],"-r")
     plt.plot(moyenne(X),moyenne(Y),"xr")
     plt.show()
+
+moindres_carres(X,Y)
