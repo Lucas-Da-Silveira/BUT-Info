@@ -24,7 +24,7 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
 
     public void handle(KeyEvent arg0) {
 
-        //System.out.println("kecode = "+arg0.getCode());
+        System.out.println("kecode = "+arg0.getCode());
 
         if (arg0.getCode() == KeyCode.BACK_SPACE ) {
             control.stopAnimation();

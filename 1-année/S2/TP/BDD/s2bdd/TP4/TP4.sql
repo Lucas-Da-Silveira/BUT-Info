@@ -186,3 +186,11 @@ INSERT INTO emprunt (adherent_id, exemplaire_id, date_emprunt, date_retour) VALU
 (5, 40, '2022-07-25', '2022-09-22'),
 (9, 15, '2023-02-22', NULL),
 (9, 18, '2023-01-30', NULL);
+
+
+SELECT COUNT(*) AS nbre_emprunt_retard
+FROM emprunt
+JOIN exemplaire ON emprunt.exemplaire_id = exemplaire.id_exemplaire
+JOIN adherent ON emprunt.adherent_id = adherent.id_adherent
+WHERE adherent.id_adherent = {idAdherent}
+AND DATE_ADD(emprunt.date_emprunt, INTERVAL 90 DAY) <= CURDATE();

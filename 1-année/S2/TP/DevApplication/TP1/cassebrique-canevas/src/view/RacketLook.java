@@ -28,7 +28,7 @@ public class RacketLook {
         this.height = height;
         // define the body
         body = new Group();
-        main = new Rectangle(450,0,50, 10);
+        main = new Rectangle(450,600,50, 10);
         main.setFill(Color.RED);
         main.setArcWidth(10);
         main.setArcHeight(10);

@@ -27,7 +27,6 @@ public class Controller {
         this.view = view;
         keyboard = new ControllerKeyboard(model,view,this);
         animator = new ControllerAnimation(model, view, this);
-
     }
 
     public void startAnimation() {

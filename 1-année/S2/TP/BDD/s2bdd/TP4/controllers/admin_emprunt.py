@@ -15,12 +15,30 @@ def emprunt_select_adherent():
     mycursor = get_db().cursor()
     action = request.args.get('action', '')
     if action == 'emprunter':
-        sql = ''' SELECT 'requete5_1' FROM DUAL '''
+        sql = ''' SELECT *
+                    FROM adherent
+                    WHERE DATE_ADD(date_paiement, INTERVAL 1 YEAR) > CURDATE()
+                      AND (
+                        SELECT COUNT(*)
+                        FROM emprunt
+                        WHERE emprunt.adherent_id = adherent.id_adherent
+                      ) < 6
+                      AND (
+                        SELECT COUNT(*)
+                        FROM emprunt
+                        WHERE emprunt.adherent_id = adherent.id_adherent
+                          AND DATE_ADD(date_emprunt, INTERVAL 90 DAY) > CURDATE()
+                      ) = 0
+                    ORDER BY nom;'''
         mycursor.execute(sql)
         donnees_adherents = mycursor.fetchall()
         return render_template('admin/emprunt/select_adherent_emprunts.html', donnees_adherents=donnees_adherents, action=action, erreurs=[])
     if action == 'rendre':
-        sql = ''' SELECT 'requete5_2' FROM DUAL '''
+        sql = ''' SELECT DISTINCT adherent.id_adherent, adherent.nom
+                    FROM adherent
+                    JOIN emprunt ON adherent.id_adherent = emprunt.adherent_id
+                    WHERE DATE_ADD(emprunt.date_emprunt, INTERVAL 90 DAY) > CURDATE()
+                    ORDER BY adherent.nom; '''
         mycursor.execute(sql)
         donnees_adherents = mycursor.fetchall()
         return render_template('admin/emprunt/select_adherent_emprunts.html', donnees_adherents=donnees_adherents,
@@ -37,14 +55,32 @@ def emprunt_emprunter():
     id_adherent = request.form.get('id_adherent', '')
     print(id_adherent)
     if id_adherent == '':
-        sql = ''' SELECT 'requete5_1' FROM DUAL '''
+        sql = ''' SELECT *
+                    FROM adherent
+                    WHERE DATE_ADD(date_paiement, INTERVAL 1 YEAR) > CURDATE()
+                      AND (
+                        SELECT COUNT(*)
+                        FROM emprunt
+                        WHERE emprunt.adherent_id = adherent.id_adherent
+                      ) < 6
+                      AND (
+                        SELECT COUNT(*)
+                        FROM emprunt
+                        WHERE emprunt.adherent_id = adherent.id_adherent
+                          AND DATE_ADD(date_emprunt, INTERVAL 90 DAY) > CURDATE()
+                      ) = 0
+                    ORDER BY nom; '''
         mycursor.execute(sql)
         donnees_adherents = mycursor.fetchall()
         erreurs={'id_adherent': u'Selectionner un adhérent'}
         return render_template('admin/emprunt/select_adherent_emprunts.html', donnees_adherents=donnees_adherents,
                                    action='emprunter', erreurs=erreurs)
 
-    sql = ''' SELECT 'requete5_3' FROM DUAL '''
+    sql = ''' SELECT COUNT(*) AS nbre_emprunt_retard
+                FROM emprunt
+                JOIN exemplaire ON emprunt.exemplaire_id = exemplaire.id_exemplaire
+                JOIN adherent ON emprunt.adherent_id = adherent.id_adherent
+                WHERE DATE_ADD(emprunt.date_emprunt, INTERVAL 90 DAY) <= CURDATE();'''
     mycursor.execute(sql, (id_adherent))
     nbr_emprunt = mycursor.fetchone()
 
@@ -90,7 +126,11 @@ def emprunt_rendre():
     mycursor = get_db().cursor()
     id_adherent = request.form.get('id_adherent', '')
     if id_adherent == '':
-        sql = ''' SELECT 'requete5_2' FROM DUAL '''
+        sql = ''' SELECT DISTINCT adherent.id_adherent, adherent.nom
+                    FROM adherent
+                    JOIN emprunt ON adherent.id_adherent = emprunt.adherent_id
+                    WHERE DATE_ADD(emprunt.date_emprunt, INTERVAL 90 DAY) > CURDATE()
+                    ORDER BY adherent.nom;'''
         donnees_adherents = mycursor.fetchall()
         erreurs={'id_adherent': u'Selectionner un adhérent'}
         return render_template('admin/emprunt/select_adherent_emprunts.html', donnees_adherents=donnees_adherents,
