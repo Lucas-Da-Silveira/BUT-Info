@@ -7,8 +7,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
-
 public class View {
 
     private TabPane tabPane;
@@ -19,7 +17,7 @@ public class View {
     private Button nextButton;
     private Button lastButton;
     private ProgressBar progressBar;
-    int cpt = 0;
+    private String[] imageNames = new String[100];
 
     public View(Model model) {
         tabPane = new TabPane();
@@ -32,19 +30,9 @@ public class View {
         progressBar = new ProgressBar();
         progressBar.setProgress(0);
 
-        File folder = new File("images");
-
-        for(final File fileEntry : folder.listFiles()){
-            if(fileEntry.isFile()){
-                model.getImageNames().add(fileEntry.getName());
-                listView.getItems().add(fileEntry.getPath());
-                cpt++;
-            }
+        for(int i = 0; i < model.getImageNames().size(); i++){
+            imageNames[i] = model.getImageNames().get(i);
         }
-
-        imageView.fitWidthProperty().bind(tabPane.widthProperty().subtract(200));
-        imageView.fitHeightProperty().bind(tabPane.heightProperty().subtract(200));
-        imageView.setPreserveRatio(true);
     }
 
     public Scene initialiseView(){
@@ -70,6 +58,7 @@ public class View {
 
         BorderPane.setMargin(tabPane, new javafx.geometry.Insets(10));
         borderPane.setCenter(tabPane);
+
 
         Scene scene = new Scene(borderPane, 1000, 600);
         Stage stage = new Stage();
