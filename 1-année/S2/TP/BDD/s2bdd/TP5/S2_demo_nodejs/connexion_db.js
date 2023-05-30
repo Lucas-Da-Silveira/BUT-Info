@@ -1,9 +1,8 @@
-var param_db={
-  host     : 'localhost',  
-  user     : 'login',  
-  password : 'secret',
-  database : 'BDD_s2_tp',
-};
 var mysql = require('mysql');
-
-module.exports = param_db               //mysql.createConnection(param_db)
+var db    = mysql.createConnection({
+    
+  host     : 'localhost',  
+  user     : 'ldasilve',  
+  password : '1603',
+  database : 'BDD_ldasilve'
+});

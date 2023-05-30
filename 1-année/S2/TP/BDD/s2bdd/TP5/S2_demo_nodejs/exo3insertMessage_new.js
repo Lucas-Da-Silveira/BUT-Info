@@ -1,10 +1,11 @@
 
 var mysql = require('mysql');
 var db    = mysql.createConnection({
+    
   host     : 'localhost',  
-  user     : 'login',  
-  password : 'motdepasse',
-  database : 'BDD_s2_td'
+  user     : 'ldasilve',  
+  password : '1603',
+  database : 'BDD_ldasilve'
 });
 
 
