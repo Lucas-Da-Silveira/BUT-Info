@@ -1,0 +1,9 @@
+
+t
+java:S2293A"YReplace the type specification in this constructor call with the diamond operator ("<>").(µŽ»±ýÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+o
+java:S1450$"TRemove the "image" field and declare it as a local variable in the relevant methods.(“Æ²²ýÿÿÿÿ
+N
+java:S1172N"3Remove this unused method parameter "primaryStage".(˜½ò¶úÿÿÿÿ

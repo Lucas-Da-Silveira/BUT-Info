@@ -1,0 +1,10 @@
+
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÀšÀÏùÿÿÿÿ
+k	java:S1176"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñ±üûÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+\
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(âÁ¦½üÿÿÿÿ
+C
+java:S4274"(Replace this assert with a proper check.(‚€©áÿÿÿÿÿ
+b	java:S1164"MRename this field "ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÒŸ
