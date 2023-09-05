@@ -9,9 +9,7 @@ public class Humain {
     protected String nom;
     protected int esperanceVie;
 
-    Humain(){
 
-    }
 
     Humain(String nom) {
         this.nom = nom;

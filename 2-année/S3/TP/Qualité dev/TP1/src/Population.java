@@ -31,7 +31,7 @@ class Population {
     }
     public void print() {
         for (Humain h : this.pop){
-            System.out.println(h);
+            h.print();
         }
     }
 }
