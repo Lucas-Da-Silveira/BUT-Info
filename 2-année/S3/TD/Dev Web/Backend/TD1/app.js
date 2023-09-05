@@ -26,7 +26,9 @@ yargs.command({
         }
     },
     handler(argv) {
-        //TODO
+        console.log(argv.title);
+        console.log(argv.body);
+        notes.addNote (argv.title, argv.body);
     }
 });
 

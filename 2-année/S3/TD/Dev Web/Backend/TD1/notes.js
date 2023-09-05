@@ -32,3 +32,7 @@ const listNotes = () => {
 }
 
 // EXPORT MODULES
+module.exports = {
+    addNote: addNote,
+    listNotes: listNotes
+}
