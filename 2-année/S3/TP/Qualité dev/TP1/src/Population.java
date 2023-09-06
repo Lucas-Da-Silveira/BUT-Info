@@ -26,7 +26,7 @@ class Population {
     public void vieillir() {
         for (Humain h : this.pop){
             h.vieillir();
-            if(h.isDead()) this.pop.remove(h);
+            if(h.isDead()) this.removeHumain(h);
         }
     }
     public void print() {

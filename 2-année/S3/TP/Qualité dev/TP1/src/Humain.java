@@ -14,14 +14,15 @@ public class Humain {
     Humain(String nom) {
         this.nom = nom;
         this.age = 0;
-        this.poids = 0;
-        this.esperanceVie=110;
+        this.poids = 3;
+        this.setEsperanceVie();
     }
 
     Humain(int age, int poids, String nom) {
         this.age = age;
         this.poids = poids;
         this.nom = nom;
+        this.setEsperanceVie();
     }
 
     void setNom(String nom) {
@@ -65,8 +66,6 @@ public class Humain {
     }
 
     public void print() {
-        System.out.println("Nom : " + nom);
-        System.out.println("Age : " + age);
-        System.out.println("Poids : " + poids);
+        System.out.println("Nom : " + nom + " Age : " + age + " Poids : " + poids);
     }
 }
