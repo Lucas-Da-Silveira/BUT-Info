@@ -1,0 +1,16 @@
+{
+  "_id": "1",
+  "links": ["https://fr.wikipedia.org/wiki/Peste_noire"],
+  "name": "Peste noire",
+  "description": "Virus de chockbar disparu",
+  "stock": 4,
+  "wait": {
+    "$date": "04/01/2017"
+  },
+  "sold": false,
+  "price": 10000000,
+  "promotion": [],
+  "object": {
+    "code": "AEZE-43 53/ER ED"
+  }
+}

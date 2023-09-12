@@ -38,7 +38,7 @@ yargs.command({
     command: 'list',
     describe: 'List your notes',
     handler() {
-        //TODO
+        notes.listNotes();
     }
 })
 
