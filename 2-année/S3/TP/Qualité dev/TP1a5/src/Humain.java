@@ -9,8 +9,6 @@ public class Humain {
     protected String nom;
     protected int esperanceVie;
 
-
-
     Humain(String nom) {
         this.nom = nom;
         this.age = 0;
@@ -23,6 +21,14 @@ public class Humain {
         this.poids = poids;
         this.nom = nom;
         this.setEsperanceVie();
+    }
+
+    boolean isHomme(){
+        return this instanceof Homme;
+    }
+
+    boolean isFemme(){
+        return this instanceof Femme;
     }
 
     void setNom(String nom) {
