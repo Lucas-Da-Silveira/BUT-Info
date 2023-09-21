@@ -1,38 +1,24 @@
 import java.io.*;
 public class Homme extends Humain {
     private int batifolage;
+    private int salaire;
     Homme(String nom) {
         super(nom);
-    }
-    Homme(int age, int poids, String nom, int batifolage) {
-        super(age, poids,nom);
-        this.batifolage = batifolage;
+        this.batifolage = 0;
+        this.salaire = 0;
         this.setEsperanceVie();
     }
-    public Humain rencontre (Femme f) {
-        Humain enfant;
-        int b = loto.nextInt(0, 101);
-        if (b < this.batifolage) return null;
-
-        if (!(f.age > 15 && f.age < 50 && this.age > 15)) return null;
-        if (this.poids > 150 || f.poids > 150) return null;
-
-        int c = loto.nextInt(0, 101);
-        if(c > f.getFertilite()) return null;
-
-        int p = loto.nextInt(0, 101);
-        if(p < 50){
-            enfant = new Homme(f.nom + this.nom);
-        }else{
-            enfant = new Femme(f.nom + this.nom);
-        }
-        int g = loto.nextInt(-10, 10);
-        f.grossir(g);
-        this.grossir(10);
-
-        return enfant;
+    Homme(int age, int poids, String nom, int batifolage, int salaire) {
+        super(age, poids,nom);
+        this.batifolage = batifolage;
+        this.salaire = salaire;
+        this.setEsperanceVie();
     }
+    @Override
     public void vieillir() {
+        if(this.age == 18){
+            this.salaire = loto.nextInt(1000, 11001);
+        }
         super.vieillir();
 
         if (age > 15) this.batifolage = loto.nextInt(70, 100);
@@ -41,6 +27,23 @@ public class Homme extends Humain {
 
         if (age <= 20) poids = 3+(int)(3.6*age);
         else if (age >= 50) poids += (age % 2);
+    }
+
+    @Override
+    public int compareTo(Humain h) {
+        if(this.age < h.age) {
+            return -1;
+        }else if (this.age == h.age) {
+            if(h.isFemme()) {
+                return 0;
+            } else {
+                Homme ho = (Homme)h;
+                return this.salaire - ho.salaire;
+            }
+        }
+        else {
+            return -1;
+        }
     }
     protected void setEsperanceVie() {
         this.esperanceVie = loto.nextInt(50, 80);

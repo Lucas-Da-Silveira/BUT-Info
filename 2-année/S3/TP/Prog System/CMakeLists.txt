@@ -13,4 +13,5 @@ add_executable(Prog_System
 #        TP1/Ex3/Argument.c
 #        TP1/Ex3/Argument.c
 #        TP1/Ex4/Chaine.c
-        TP2/ex1/CopieFichier.c)
+        TP2/ex1/CopieFichier.c
+        TP3/TP3.c)

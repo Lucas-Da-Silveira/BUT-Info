@@ -29,6 +29,10 @@ class Population {
             if(this.getHumain(i).isDead()) this.removeHumain(i);
         }
     }
+    public void sortAge() {
+        Comparator<Humain> comparator = Comparator.comparing(Humain::getAge);
+        this.pop.sort(comparator);
+    }
     public void print() {
         for (Humain h : this.pop){
             h.print();

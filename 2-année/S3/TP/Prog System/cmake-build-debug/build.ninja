@@ -56,6 +56,13 @@ build CMakeFiles/Prog_System.dir/TP2/ex1/CopieFichier.c.o: C_COMPILER__Prog_Syst
   OBJECT_DIR = CMakeFiles/Prog_System.dir
   OBJECT_FILE_DIR = CMakeFiles/Prog_System.dir/TP2/ex1
 
+build CMakeFiles/Prog_System.dir/TP3/TP3.c.o: C_COMPILER__Prog_System_unscanned_Debug /home/lucas/BUT-Info/2-année/S3/TP/Prog$ System/TP3/TP3.c || cmake_object_order_depends_target_Prog_System
+  DEP_FILE = CMakeFiles/Prog_System.dir/TP3/TP3.c.o.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  INCLUDES = -I"/home/lucas/BUT-Info/2-année/S3/TP/Prog System/." -I"/home/lucas/BUT-Info/2-année/S3/TP/Prog System/TP1" -I"/home/lucas/BUT-Info/2-année/S3/TP/Prog System/TP2"
+  OBJECT_DIR = CMakeFiles/Prog_System.dir
+  OBJECT_FILE_DIR = CMakeFiles/Prog_System.dir/TP3
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Prog_System
@@ -64,7 +71,7 @@ build CMakeFiles/Prog_System.dir/TP2/ex1/CopieFichier.c.o: C_COMPILER__Prog_Syst
 #############################################
 # Link the executable Prog_System
 
-build Prog_System: C_EXECUTABLE_LINKER__Prog_System_Debug CMakeFiles/Prog_System.dir/TP2/ex1/CopieFichier.c.o
+build Prog_System: C_EXECUTABLE_LINKER__Prog_System_Debug CMakeFiles/Prog_System.dir/TP2/ex1/CopieFichier.c.o CMakeFiles/Prog_System.dir/TP3/TP3.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Prog_System.dir
   POST_BUILD = :

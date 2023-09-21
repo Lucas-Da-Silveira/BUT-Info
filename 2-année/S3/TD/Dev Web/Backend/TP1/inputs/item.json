@@ -1,16 +1,16 @@
 {
   "_id": "1",
   "links": ["https://fr.wikipedia.org/wiki/Peste_noire"],
-  "name": "Peste noire",
+  "name": "adeno virus",
   "description": "Virus de chockbar disparu",
-  "stock": 4,
+  "stock": 10,
   "wait": {
     "$date": "04/01/2017"
   },
-  "sold": false,
-  "price": 10000000,
-  "promotion": [],
+  "sold": true,
+  "price": 5000,
+  "promotion": [{"_id":"2","discount":5,"amount":2},{"_id":"3","discount":10,"amount":5}],
   "object": {
-    "code": "AEZE-43 53/ER ED"
+    "code": "ABADBADCCCBADCBABADBADCCCBADCB"
   }
 }
