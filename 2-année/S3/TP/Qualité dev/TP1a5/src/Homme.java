@@ -65,6 +65,7 @@ public class Homme extends Humain {
         } else if(h2.isFille() && h2.getAge() >= 15) {
             Fille fi = (Fille) h2;
             enfant = genEnfant(fi, this);
+            Main.pedoCount++;
         }
         return enfant;
     }

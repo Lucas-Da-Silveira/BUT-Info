@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Main {
+    static int pedoCount = 0;
     public static void main(String[] args) {
         Population population = new Population();
 
@@ -8,6 +9,7 @@ public class Main {
         int tailleInit = Integer.parseInt(args[1]);
 
         int nbBebes = 0;
+
 
         for(int i = 0; i < tailleInit / 2; i++) {
             int salaire = Humain.loto.nextInt(1000, 11001);
@@ -25,14 +27,22 @@ public class Main {
                 Humain h1 = population.getHumain(i1);
                 Humain h2 = population.getHumain(i2);
 
-                ArrayList<Humain[]> rencontres = new ArrayList<>();
-
                 Humain bebe = h1.rencontre(h2);
+
                 if(bebe != null) {
                     population.addHumain(bebe);
                     System.out.println("\u001B[31m" + h1.getNom() + " baise " + h2.getNom() + "! Un nouveau bébé est arrivé: " + bebe.getNom());
                     nbBebes++;
                 }
+
+                if(h1.isGarcon() && h2.isFille() || h1.isFille() && h2.isGarcon()){
+                    int accident = Humain.loto.nextInt(0, 101);
+                    if(accident < 50){
+                        population.removeHumain(h1);
+                        System.out.println("\u001B[36m" + h1.getNom() + " " + Humain.genMort());
+                    }
+                }
+
             }
             population.sort();
             population.print();
@@ -45,5 +55,6 @@ public class Main {
         System.out.println("\n\u001B[32mNombre de naissances pendant la simulation: " + nbBebes);
         System.out.println("\u001B[32mNombre de décès pendant la simulation: " + population.getDeadCount());
         System.out.println("\u001B[32mTaille finale de la population: " + population.taille());
+        System.out.println("\u001B[32mNombre de pédophiles: " + pedoCount);
     }
 }

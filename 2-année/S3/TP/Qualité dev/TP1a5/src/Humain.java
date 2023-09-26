@@ -80,6 +80,25 @@ public class Humain implements Comparable<Humain>{
 
         return prenom;
     }
+
+    public static String genMort() {
+        String Mort = "";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("/home/lucas/BUT-Info/2-année/S3/TP/Qualité dev/TP1a5/src/mort.txt"));
+            String line1 = reader.readLine();
+            List<String> Morts = new ArrayList<>();
+            while(line1 != null) {
+                Morts.add(line1);
+                line1 = reader.readLine();
+            }
+            Mort = Morts.get(Humain.loto.nextInt(0, Morts.size()));
+
+        } catch(Exception e) {
+            System.err.println(e);
+        }
+
+        return Mort;
+    }
     public Humain rencontre(Humain h2) {
         return null;
     }
