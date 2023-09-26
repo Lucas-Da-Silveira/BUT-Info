@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>Login</h1>
+    <h1>Bank Account</h1>
 
-    <span>login</span><input v-model="login">
-    <button @click="gatAccountAmount({login})">Login</button>
-    <p v-if="accountAmont">{{accountAmont}}</p>
+    <span>Account Amount</span><input v-model="inputAccount">
+    <button @click="getAccountAmount({inputAccount})">Check account</button>
+  <p v-if="accountAmount">{{accountAmount}}</p>
   </div>
 
 </template>
@@ -13,10 +13,9 @@
 
 import {mapState, mapActions} from 'vuex'
 export default {
-  name: 'ShopLoginView',
+  name: 'BankAccountView',
   data: () => ({
-    login: '',
-    password:'',
+    inputAccount: '',
   }),
   computed: {
     ...mapState(['accountAmount'])

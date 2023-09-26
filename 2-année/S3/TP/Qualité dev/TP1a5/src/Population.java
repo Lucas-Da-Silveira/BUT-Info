@@ -1,9 +1,11 @@
 import java.util.*;
-import java.io.*;
+
 class Population {
     List<Humain> pop;
+    public int deadCount;
     Population() {
         this.pop = new ArrayList<Humain>();
+        this.deadCount = 0;
     }
     public void vider() {
         this.pop.clear();
@@ -24,17 +26,33 @@ class Population {
         return this.pop.size();
     }
     public void vieillir() {
-        for(int i= 0; i < this.taille(); i++){
+        for(int i = 0; i < this.taille(); i++) {
             this.getHumain(i).vieillir();
-            if(this.getHumain(i).isDead()) this.removeHumain(i);
+            if(this.getHumain(i).getAge() == 18 && this.getHumain(i).isGarcon()){
+                Homme h = (Homme)this.getHumain(i);
+                this.addHumain(new Homme(h.getAge(), h.getPoids(), h.getNom(), h.getBatifolage(), 0));
+                this.removeHumain(i);
+            }else if(this.getHumain(i).getAge() == 18 && this.getHumain(i).isFille()){
+                Femme f = (Femme)this.getHumain(i);
+                this.addHumain(new Femme(f.getAge(), f.getPoids(), f.getNom(),f.getFertilite()));
+                this.removeHumain(i);
+            }
+            if(this.getHumain(i).isDead()) {
+                this.deadCount++;
+                this.removeHumain(i);
+            }
         }
     }
-    public void sortAge() {
-        Comparator<Humain> comparator = Comparator.comparing(Humain::getAge);
-        this.pop.sort(comparator);
+
+    public int getDeadCount() {
+        return this.deadCount;
+    }
+
+    public void sort() {
+        Collections.sort(this.pop);
     }
     public void print() {
-        for (Humain h : this.pop){
+        for(Humain h : this.pop) {
             h.print();
         }
     }

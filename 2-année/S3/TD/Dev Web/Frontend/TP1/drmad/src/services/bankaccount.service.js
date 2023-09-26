@@ -5,9 +5,9 @@ function getAccountAmountFromLocalSource(number){
 }
 
 async function getAccountAmount(number){
-    let response = null;
+    let response;
     try {
-        response = getAccountAmountFromLocalSource(number);
+        response = await getAccountAmountFromLocalSource(number);
     }
     catch(err) {
         response = {error: 1, status: 404, data: 'impossible de récupérer le montant du compte'  }

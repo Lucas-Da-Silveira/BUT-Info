@@ -1,139 +1,97 @@
 import java.io.*;
 import java.util.*;
-
 public class Humain implements Comparable<Humain>{
-
     protected static Random loto = new Random(Calendar.getInstance().getTimeInMillis());
     protected int age;
     protected int poids;
     protected String nom;
     protected int esperanceVie;
-    private int salaire;
 
+    Humain() {
+    }
     Humain(String nom) {
         this.nom = nom;
         this.age = 0;
         this.poids = 3;
         this.setEsperanceVie();
     }
-
     Humain(int age, int poids, String nom) {
         this.age = age;
         this.poids = poids;
         this.nom = nom;
         this.setEsperanceVie();
     }
-    public Humain rencontre(Humain h2) {
-        Humain enfant = null;
-
-        if(this.isHomme() && h2.isFemme()) {
-            Homme ho = (Homme)this;
-            Femme fe = (Femme)h2;
-
-            int b = loto.nextInt(0, 101);
-            if(b > ho.getBatifolage()) return null;
-
-            if(fe.age > 15 && fe.age < 50 && ho.age > 15) {
-                if(ho.poids > 150 || fe.poids > 150) return null;
-
-                int c = loto.nextInt(0, 101);
-                if(c > fe.getFertilite()) return null;
-
-                int p = loto.nextInt(0, 101);
-                if(p < 50) {
-                    enfant = new Homme(ho.getNom() + fe.getNom());
-                } else {
-                    enfant = new Femme(ho.getNom() + fe.getNom());
-                }
-
-                int g = loto.nextInt(-10, 11);
-                this.grossir(g);
-                fe.grossir(10);
-
-            }
-        } else if(this.isFemme() && h2.isHomme()) {
-            Femme fe = (Femme)this;
-            Homme ho = (Homme)h2;
-
-            if(fe.age > 15 && fe.age < 50 && ho.getAge() > 15) {
-                if(fe.poids > 150 || ho.getPoids() > 150) return null;
-
-                int f = loto.nextInt(0, 101);
-                if(f > fe.getFertilite()) return null;
-
-                int p = loto.nextInt(0, 101);
-                if(p < 50) {
-                    enfant = new Homme(ho.getNom() + fe.getNom());
-                } else {
-                    enfant = new Femme(ho.getNom() + fe.getNom());
-                }
-
-                int g = loto.nextInt(0, 21);
-                ho.grossir(g);
-                fe.grossir(10);
-            }
-        }
-        return enfant;
+    void setNom(String nom) {
+        this.nom = nom;
     }
+    void setAge(int age) {
+        this.age = age;
+    }
+    void setPoids(int poids) {
+        this.poids = poids;
+    }
+    int getAge() {
+        return this.age;
+    }
+    int getPoids() {
+        return this.poids;
+    }
+    String getNom() {
+        return this.nom;
+    }
+    protected void setEsperanceVie() {
+        this.esperanceVie = 70;
+    }
+    public void vieillir() {
+        this.age++;
+    }
+    public void grossir(int p) {
+        this.poids += p;
+    }
+    public boolean isDead() {
+        return this.age > this.esperanceVie;
+    }
+    public boolean isHomme() {
+        return this instanceof Homme;
+    }
+    public boolean isFemme() {
+        return this instanceof Femme;
+    }
+    public boolean isGarcon() {
+        return this instanceof Garcon;}
+    public boolean isFille() {
+        return this instanceof Fille;
+    }
+    public static String genPrenom() {
+        String prenom = "";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("/home/lucas/BUT-Info/2-année/S3/TP/Qualité dev/TP1a5/src/prenoms.txt"));
+            String line = reader.readLine();
+            List<String> prenoms = new ArrayList<>();
+            while(line != null) {
+                prenoms.add(line);
+                line = reader.readLine();
+            }
+            prenom = prenoms.get(Humain.loto.nextInt(0, prenoms.size()));
 
+        } catch(Exception e) {
+            System.err.println(e);
+        }
+
+        return prenom;
+    }
+    public Humain rencontre(Humain h2) {
+        return null;
+    }
     @Override
     public int compareTo(Humain h) {
         return Integer.compare(this.age, h.age);
     }
-
-    int getBatifolage() {
-        return 0;
-    }
-
-    boolean isHomme(){
-        return this instanceof Homme;
-    }
-
-    boolean isFemme(){
-        return this instanceof Femme;
-    }
-
-    void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    void setAge(int age) {
-        this.age = age;
-    }
-
-    void setPoids(int poids) {
-        this.poids = poids;
-    }
-
-    int getAge() {
-        return this.age;
-    }
-
-    int getPoids() {
-        return this.poids;
-    }
-
-    String getNom() {
-        return this.nom;
-    }
-
-    protected void setEsperanceVie() {
-        this.esperanceVie = 70;
-    }
-
-    public void vieillir() {
-        age ++;
-    }
-
-    public void grossir(int p) {
-        poids += p;
-    }
-
-    public boolean isDead() {
-        return age > esperanceVie;
-    }
-
     public void print() {
-        System.out.println("Nom : " + nom + " Age : " + age + " Poids : " + poids + " Espérence de vie : " + this.esperanceVie + " Salaire : " + this.salaire);
+        if(this.isHomme()) {
+            System.out.print("\u001B[34m\nNom: " + this.nom + " | Age: " + this.age + " ans | Poids: " + this.poids + "kg | Espérence de vie: " + this.esperanceVie + " ans");
+        } else {
+            System.out.println("\u001B[35m\nNom: " + this.nom + " | Age: " + this.age + " ans | Poids: " + this.poids + "kg | Espérence de vie: " + this.esperanceVie + " ans");
+        }
     }
 }

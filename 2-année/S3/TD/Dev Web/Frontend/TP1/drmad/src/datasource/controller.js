@@ -13,7 +13,7 @@ import {v4 as uuidv4} from 'uuid'
 
 function getAccountAmount(number){
   if (number === undefined) return {error: 1, status: 404, data: 'aucun numéro de compte fourni'}
-  let account = bankaccounts.find(e => e.number === number)
+  let account = bankaccounts.find(e => e.account.number === number)
   if (!account) return {error: 1, status: 404, data: 'compte inexistant'}
   return {error: 0, status: 200, data: account.amount}
 }

@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import ShopService from '../services/shop.service'
-import BankaccountService from '../services/bankaccount.service'
+import BankService from '../services/bankaccount.service'
 
 export default new Vuex.Store({
   // state = les données centralisées
@@ -32,8 +32,7 @@ export default new Vuex.Store({
       let response = await ShopService.shopLogin(data)
       if (response.error === 0) {
         commit('updateShopUser', response.data)
-      }
-      else {
+      } else {
         console.log(response.data)
       }
     },
@@ -42,20 +41,18 @@ export default new Vuex.Store({
       let response = await ShopService.getAllViruses()
       if (response.error === 0) {
         commit('updateViruses', response.data)
-      }
-      else {
+      } else {
         console.log(response.data)
       }
     },
-    async getAccountAmount({commit}, number){
+    async getAccountAmount({commit}, number) {
       console.log('récupération du montant du compte');
-      let response = await BankaccountService.getAccountAmount(number)
-      if (response.error === 0){
+      let response = await BankService.getAccountAmount(number)
+      if (response.error === 0) {
         commit('updateAccountAmount', response.data)
-      }
-      else{
+      } else {
         console.log(response.data)
       }
     }
-  }
+  },
 })

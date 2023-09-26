@@ -1,54 +1,49 @@
-import java.util.List;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-
         Population population = new Population();
 
         int nbTours = Integer.parseInt(args[0]);
-        int taillePop = Integer.parseInt(args[1]);
+        int tailleInit = Integer.parseInt(args[1]);
 
-        for (int i = 0; i < taillePop / 2; i++) {
-            population.addHumain(new Homme(20, 70, "H" + i, Humain.loto.nextInt(70, 101),0));
-            population.addHumain(new Femme(20, 55, "F" + i, Humain.loto.nextInt(1, 101)));
+        int nbBebes = 0;
+
+        for(int i = 0; i < tailleInit / 2; i++) {
+            int salaire = Humain.loto.nextInt(1000, 11001);
+            population.addHumain(new Homme(17, 70, Humain.genPrenom(), Humain.loto.nextInt(70, 101), salaire));
+            population.addHumain(new Femme(18, 55, Humain.genPrenom(), Humain.loto.nextInt(1, 101)));
         }
 
-        for (int j = 0; j < nbTours; j++) {
-            int n = taillePop > 0 ? Humain.loto.nextInt(taillePop / 2+1):0;
-
-            for (int i = 0; i < n; i++) {
-                int i1 = population.taille() > 0 ? Humain.loto.nextInt(population.taille()):0;
-                int i2 = population.taille() > 0 ? Humain.loto.nextInt(population.taille()):0;
+        for(int j = 0; j < nbTours; j++) {
+            int n = Humain.loto.nextInt(0, tailleInit / 2 + 1);
+            System.out.println("\u001B[0m\n################# Tour " + (j+1) + " #################");
+            for(int i = 0; i < n; i++) {
+                int i1 = Humain.loto.nextInt(0, population.taille());
+                int i2 = Humain.loto.nextInt(0, population.taille());
 
                 Humain h1 = population.getHumain(i1);
                 Humain h2 = population.getHumain(i2);
-                Homme ho;
-                Femme fe;
 
-                if (h1.isHomme() && h2.isFemme()) {
-                    ho = (Homme) h1;
-                    fe = (Femme) h2;
+                ArrayList<Humain[]> rencontres = new ArrayList<>();
 
-                    Humain bebe = ho.rencontre(fe);
-                    if (bebe != null) {
-                        population.pop.add(bebe);
-                        System.out.println("Un enfant est né !");
-                    }
-                } else if (h1.isFemme() && h2.isHomme()) {
-                    fe = (Femme) h1;
-                    ho = (Homme) h2;
-
-                    Humain bebe = fe.rencontre(ho);
-                    if (bebe != null) {
-                        population.pop.add(bebe);
-                        System.out.println("Un enfant est né !");
-                    }
+                Humain bebe = h1.rencontre(h2);
+                if(bebe != null) {
+                    population.addHumain(bebe);
+                    System.out.println("\u001B[31m" + h1.getNom() + " baise " + h2.getNom() + "! Un nouveau bébé est arrivé: " + bebe.getNom());
+                    nbBebes++;
                 }
-                population.vieillir();
-                population.sortAge();
-                population.print();
+            }
+            population.sort();
+            population.print();
+            population.vieillir();
+            if(population.taille() == 0) {
+                System.out.println("\n\u001B[36mTout le monde est dead :(");
+                break;
             }
         }
+        System.out.println("\n\u001B[32mNombre de naissances pendant la simulation: " + nbBebes);
+        System.out.println("\u001B[32mNombre de décès pendant la simulation: " + population.getDeadCount());
+        System.out.println("\u001B[32mTaille finale de la population: " + population.taille());
     }
 }
