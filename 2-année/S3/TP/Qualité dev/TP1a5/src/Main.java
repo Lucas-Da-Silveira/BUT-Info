@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Main {
     static int pedoCount = 0;
+    static int accidentCount = 0;
     public static void main(String[] args) {
         Population population = new Population();
 
@@ -39,6 +40,7 @@ public class Main {
                     int accident = Humain.loto.nextInt(0, 101);
                     if(accident < 50){
                         population.removeHumain(h1);
+                        accidentCount++;
                         System.out.println("\u001B[36m" + h1.getNom() + " " + Humain.genMort());
                     }
                 }
@@ -54,7 +56,9 @@ public class Main {
         }
         System.out.println("\n\u001B[32mNombre de naissances pendant la simulation: " + nbBebes);
         System.out.println("\u001B[32mNombre de décès pendant la simulation: " + population.getDeadCount());
+        System.out.println("\u001B[32mNombre de morts par accident: " + accidentCount);
         System.out.println("\u001B[32mTaille finale de la population: " + population.taille());
         System.out.println("\u001B[32mNombre de pédophiles: " + pedoCount);
+
     }
 }

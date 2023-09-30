@@ -26,6 +26,22 @@ public class Femme extends Humain {
     }
 
     @Override
+    public int compareTo(Humain h) {
+        if(this.age < h.age) {
+            return -1;
+        } else if (this.age == h.age) {
+            if(h.isHomme()) {
+                return -1;
+            } else {
+                Femme fe = (Femme)h;
+                return this.fertilite - fe.fertilite;
+            }
+        } else {
+            return 1;
+        }
+    }
+
+    @Override
     public Humain rencontre(Humain h2) {
         Humain enfant = null;
 
