@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-public class Humain implements Comparable<Humain> {
+public class Humain /*implements Comparable<Humain>*/ {
     protected static Random loto = new Random(Calendar.getInstance().getTimeInMillis());
     protected int age;
     protected int poids;
@@ -122,16 +122,16 @@ public class Humain implements Comparable<Humain> {
         return null;
     }
 
-    @Override
+/*    @Override
     public int compareTo(Humain h) {
         return Integer.compare(this.age, h.age);
-    }
+    }*/
 
     public void print() {
         if (this.isHomme()) {
             System.out.print("\u001B[34m\nNom: " + this.nom + " | Age: " + this.age + " ans | Poids: " + this.poids + "kg | Espérence de vie: " + this.esperanceVie + " ans");
         } else if (this.isFemme()) {
-            System.out.println("\u001B[35m\nNom: " + this.nom + " | Age: " + this.age + " ans | Poids: " + this.poids + "kg | Espérence de vie: " + this.esperanceVie + " ans");
+            System.out.println("\u001B[35m\nNom: " + this.nom + " | Age: " + this.age + " ans | Poids: " + this.poids + "kg | Espérence de vie: " + this.esperanceVie + " ans" + " | Fertilité: " + ((Femme) this).getFertilite());
         }
     }
 }

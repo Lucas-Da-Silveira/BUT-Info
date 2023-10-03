@@ -44,13 +44,30 @@ class Population {
         }
     }
 
+    public void sort(){
+        this.pop.sort(Comparator.comparing(Humain::getAge).thenComparing((p1, p2) -> {
+            if (p1.isFemme() && p2.isHomme()) {
+                return -1;
+            } else if (p1.isHomme() && p2.isFemme()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }).thenComparing((p1, p2) -> {
+            if (p1.isFemme()) {
+                return Integer.compare(((Femme) p1).getFertilite(), ((Femme) p2).getFertilite());
+            } else {
+                return Integer.compare(((Homme) p1).getSalaire(), ((Homme) p2).getSalaire());
+            }
+        }));
+    }
+
+
+
     public int getDeadCount() {
         return this.deadCount;
     }
 
-    public void sort() {
-        Collections.sort(this.pop);
-    }
     public void print() {
         for(Humain h : this.pop) {
             h.print();

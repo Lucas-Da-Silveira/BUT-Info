@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Collections;
+
 public class Homme extends Humain {
     protected int batifolage;
     private int salaire;
@@ -16,6 +18,10 @@ public class Homme extends Humain {
     }
     public int getBatifolage() {
         return this.batifolage;
+    }
+
+    public int getSalaire() {
+        return this.salaire;
     }
     @Override
     public void vieillir() {
@@ -36,7 +42,7 @@ public class Homme extends Humain {
         this.esperanceVie = loto.nextInt(50, 81);
     }
 
-    @Override
+/*    @Override
     public int compareTo(Humain h) {
         if(this.age < h.age) {
             return -1;
@@ -50,7 +56,7 @@ public class Homme extends Humain {
         } else {
             return 1;
         }
-    }
+    }*/
 
     @Override
     public Humain rencontre(Humain h2) {

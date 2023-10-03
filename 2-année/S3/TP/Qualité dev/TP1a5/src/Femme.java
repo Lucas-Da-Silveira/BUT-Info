@@ -25,7 +25,7 @@ public class Femme extends Humain {
         else if (age >= 50) poids += (age % 2);
     }
 
-    @Override
+/*    @Override
     public int compareTo(Humain h) {
         if(this.age < h.age) {
             return -1;
@@ -39,7 +39,7 @@ public class Femme extends Humain {
         } else {
             return 1;
         }
-    }
+    }*/
 
     @Override
     public Humain rencontre(Humain h2) {
@@ -86,4 +86,5 @@ public class Femme extends Humain {
     protected void setEsperanceVie() {
         this.esperanceVie = loto.nextInt(55, 96);
     }
+
 }
