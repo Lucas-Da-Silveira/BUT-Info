@@ -15,14 +15,13 @@ public class Femme extends Humain {
         return this.fertilite;
     }
     @Override
-    public void vieillir() {
-        super.vieillir();
+    public void vieillir(Aging a) {
+        super.vieillir(a);
         if(this.getAge() == 15) {
             this.fertilite = loto.nextInt(0, 101);
         }
-
-        if (age <= 20) poids = 3 + (int)(2.6 * age);
-        else if (age >= 50) poids += (age % 2);
+        if (age <= 20) a.gainWeight(this);
+        else if (age >= 50) a.gainWeight(this);
     }
 
 /*    @Override

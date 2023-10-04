@@ -24,18 +24,18 @@ public class Homme extends Humain {
         return this.salaire;
     }
     @Override
-    public void vieillir() {
+    public void vieillir(Aging a) {
         if(this.age == 18) {
             this.salaire = loto.nextInt(1000, 11001);
         }
-        super.vieillir();
+        super.vieillir(a);
 
         if(age > 15) this.batifolage = loto.nextInt(70, 101);
         if(age > 30) this.batifolage = loto.nextInt(20, 51);
         if(age > 60) this.batifolage = loto.nextInt(50, 101);
 
-        if (age <= 20) poids = 3+(int)(3.6*age);
-        else if (age >= 50) poids += (age % 2);
+        if (age <= 20) a.gainWeight(this);
+        else if (age >= 50) a.gainWeight(this);
     }
     @Override
     protected void setEsperanceVie() {

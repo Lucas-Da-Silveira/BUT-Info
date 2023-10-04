@@ -9,7 +9,6 @@ public class Humain /*implements Comparable<Humain>*/ {
 
     Humain() {
     }
-
     Humain(String nom) {
         this.nom = nom;
         this.age = 0;
@@ -52,7 +51,7 @@ public class Humain /*implements Comparable<Humain>*/ {
         this.esperanceVie = 70;
     }
 
-    public void vieillir() {
+    public void vieillir(Aging a) {
         this.age++;
     }
 

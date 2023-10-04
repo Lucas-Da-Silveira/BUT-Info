@@ -25,9 +25,9 @@ class Population {
     public int taille() {
         return this.pop.size();
     }
-    public void vieillir() {
+    public void vieillir(Aging a) {
         for(int i = 0; i < this.taille(); i++) {
-            this.getHumain(i).vieillir();
+            this.getHumain(i).vieillir(a);
             if(this.getHumain(i).getAge() == 18 && this.getHumain(i).isGarcon()){
                 Homme h = (Homme)this.getHumain(i);
                 this.addHumain(new Homme(h.getAge(), h.getPoids(), h.getNom(), h.getBatifolage(), 0));
@@ -61,8 +61,6 @@ class Population {
             }
         }));
     }
-
-
 
     public int getDeadCount() {
         return this.deadCount;

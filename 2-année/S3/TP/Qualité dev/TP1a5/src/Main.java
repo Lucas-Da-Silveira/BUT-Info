@@ -48,7 +48,16 @@ public class Main {
             }
             population.sort();
             population.print();
-            population.vieillir();
+            population.vieillir(h -> {
+                if(h.isFemme()) {
+                    if (h.getAge() <= 20) h.poids = 3 + (int)(2.6 * h.getAge());
+                    else if (h.getAge() >= 50) h.poids += (h.getAge() % 2);
+                } else if(h.isHomme()) {
+                    if (h.getAge() <= 20) h.poids = 3+(int)(3.6*h.getAge());
+                    else if (h.getAge() >= 50) h.poids += (h.getAge() % 2);
+                }
+            });
+
             if(population.taille() == 0) {
                 System.out.println("\n\u001B[36mTout le monde est dead :(");
                 break;
