@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 
 alphabet="abcdefghijklmnopqrstuvwxyz"
 
@@ -77,16 +78,64 @@ def inverse(a,n):
             return it
     return 0
 
-def encryptAffine(origMessage, a, b):
-    encryptedMessage = ""
-    for car in origMessage:
+def encryptAffine(orig_message, a, b):
+    encrypted_message = ""
+    if a.isalpha() and b.isalpha():
+        a = numericChar(alphabet, a)
         if math.gcd(a, 26) != 1:
-            print("Erreur non inversible")
-            return
-        if car.lower() in alphabet:
-            encryptedMessage += alphabet[(a * numericChar(alphabet, car) + numericChar(alphabet, b)) % 26]
-        else:
-            encryptedMessage += car
-    return encryptedMessage
+            return "ERREUR: a non inversible"
+        b = numericChar(alphabet, b)
+        for car in orig_message:
+            if car.lower() in alphabet:
+                encrypted_message += alphabet[(a * numericChar(alphabet, car) + b) % 26]
+            else:
+                encrypted_message += car
+    return encrypted_message
 
-print(encryptAffine("Hello World", 5, 2))
+print(encryptAffine("Hello World", "z", "b"))
+
+
+def decryptAffine(orig_message, a, b):
+    decrypted_message = ""
+    if a.isalpha() and b.isalpha():
+        a = numericChar(alphabet, a)
+        if math.gcd(a, 26) != 1:
+            return "ERREUR: a non inversible"
+        b = numericChar(alphabet, b)
+        for car in orig_message:
+            if car.lower() in alphabet:
+                decrypted_message += alphabet[(inverse(a, 26) * (numericChar(alphabet, car) - b)) % 26]
+            else:
+                decrypted_message += car
+    return decrypted_message
+
+print(decryptAffine("uxqqn fnkqy", "z", "b"))
+
+
+print("\n###############################\n")
+
+print(encryptAffine("YES", alphabet[3], alphabet[7]))
+print(decryptAffine("QXFM", alphabet[3], alphabet[7]))
+
+print("\n###############################\n")
+
+#Exercice3 Chiffre de Vigenère
+
+def encryptVigenere(orig_message, key):
+    encrypted_message = ""
+    keyIndex = 0
+    for i in range(len(orig_message)):
+        if orig_message[i].isalpha():
+            encrypted_message += alphabet[(numericChar(alphabet, orig_message[i]) + numericChar(alphabet, key[keyIndex % len(key)])) % 26]
+            keyIndex += 1
+        else:
+            encrypted_message += orig_message[i]
+    return encrypted_message
+
+print(encryptVigenere("Hello World", "def"))
+
+# def decryptVigenere(orig_message, key):
+#     decrypted_message = ""
+#     KeyIndex = 0
+#     for i in range(len(orig_message)):
+#         if
