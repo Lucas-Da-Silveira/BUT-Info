@@ -14,6 +14,10 @@ public class Femme extends Humain {
     int getFertilite() {
         return this.fertilite;
     }
+
+    void setFertilite(int fertilite) {
+        this.fertilite = fertilite;
+    }
     @Override
     public void vieillir(Aging a) {
         super.vieillir(a);
@@ -41,24 +45,29 @@ public class Femme extends Humain {
     }*/
 
     @Override
-    public Humain rencontre(Humain h2) {
+    public Humain rencontre(Humain h2,Meetic m) {
         Humain enfant = null;
+        try{
+            Main.meetCount++;
+            if(h2.isFemme()) throw new BreedingForbiddenException(this, h2);
+            if(h2.isHomme()) {
+                Homme ho = (Homme) h2;
 
-        if(h2.isHomme()) {
-            Homme ho = (Homme) h2;
-
-            if (this.getAge() < 50) {
-                enfant = genEnfant(this, ho);
+                if (this.getAge() < 50) {
+                    enfant = genEnfant(this, ho, m);
+                }
+            } else if(h2.isGarcon() && h2.getAge() >= 15) {
+                Garcon gr = (Garcon) h2;
+                enfant = genEnfant(this, gr, m);
+                Main.pedoCount++;
             }
-        } else if(h2.isGarcon() && h2.getAge() >= 15) {
-            Garcon gr = (Garcon) h2;
-            enfant = genEnfant(this, gr);
-            Main.pedoCount++;
+        }catch(BreedingForbiddenException e){
+            System.out.println(e.getMessage());
         }
         return enfant;
     }
 
-    protected Humain genEnfant(Humain fe, Humain ho) {
+    protected Humain genEnfant(Humain fe, Humain ho, Meetic m) {
         Homme hoh = (Homme) ho;
         Femme fef = (Femme) fe;
         Humain enfant = null;
@@ -75,9 +84,10 @@ public class Femme extends Humain {
             enfant = new Fille(Humain.genPrenom());
         }
 
-        int g = loto.nextInt(0, 21);
-        hoh.grossir(g);
-        fef.grossir(10);
+        //int g = loto.nextInt(0, 21);
+        //hoh.grossir(g);
+        m.gainWeight(hoh, fef);
+        //fef.grossir(10);
 
         return enfant;
     }

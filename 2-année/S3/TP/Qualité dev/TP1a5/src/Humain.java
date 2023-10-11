@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+
 public class Humain /*implements Comparable<Humain>*/ {
     protected static Random loto = new Random(Calendar.getInstance().getTimeInMillis());
     protected int age;
@@ -9,6 +10,7 @@ public class Humain /*implements Comparable<Humain>*/ {
 
     Humain() {
     }
+
     Humain(String nom) {
         this.nom = nom;
         this.age = 0;
@@ -117,7 +119,7 @@ public class Humain /*implements Comparable<Humain>*/ {
         return Mort;
     }
 
-    public Humain rencontre(Humain h2) {
+    public Humain rencontre(Humain h2, Meetic m) throws BreedingForbiddenException {
         return null;
     }
 

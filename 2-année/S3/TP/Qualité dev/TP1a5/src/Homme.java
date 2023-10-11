@@ -59,24 +59,29 @@ public class Homme extends Humain {
     }*/
 
     @Override
-    public Humain rencontre(Humain h2) {
+    public Humain rencontre(Humain h2, Meetic m){
         Humain enfant = null;
+        try{
+            Main.meetCount++;
+            if (h2.isHomme()) throw new BreedingForbiddenException(this, h2);
+            if(h2.isFemme()) {
+                Femme fe = (Femme) h2;
 
-        if(h2.isFemme()) {
-            Femme fe = (Femme) h2;
-
-            if (this.getAge() < 50) {
-                enfant = genEnfant(fe, this);
+                if (this.getAge() < 50) {
+                    enfant = genEnfant(fe, this, m);
+                }
+            } else if(h2.isFille() && h2.getAge() >= 15) {
+                Fille fi = (Fille) h2;
+                enfant = genEnfant(fi, this, m);
+                Main.pedoCount++;
             }
-        } else if(h2.isFille() && h2.getAge() >= 15) {
-            Fille fi = (Fille) h2;
-            enfant = genEnfant(fi, this);
-            Main.pedoCount++;
+        }catch (BreedingForbiddenException e){
+            System.out.println(e.getMessage());
         }
         return enfant;
     }
 
-    protected Humain genEnfant(Humain fe, Humain ho) {
+    protected Humain genEnfant(Humain fe, Humain ho, Meetic m) {
         Homme hoh = (Homme) ho;
         Femme fef = (Femme) fe;
 
@@ -100,9 +105,10 @@ public class Homme extends Humain {
                 enfant = new Fille(Humain.genPrenom());
             }
 
-            int g = loto.nextInt(-10, 11);
-            hoh.grossir(g);
-            fef.grossir(10);
+            //int g = loto.nextInt(-10, 11);
+            //hoh.grossir(g);
+            m.gainWeight(hoh, fef);
+            //fef.grossir(10);
         }
         return enfant;
     }

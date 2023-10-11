@@ -4,14 +4,15 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import ShopService from '../services/shop.service'
-import BankService from '../services/bankaccount.service'
+import BankAccountService from '../services/bankaccount.service'
 
 export default new Vuex.Store({
   // state = les données centralisées
   state: () => ({
     viruses: [],
     shopUser: null,
-    accountAmount: null,
+    accountAmount: 0,
+    accountTransactions: [],
   }),
   // mutations = fonctions synchrones pour mettre à jour le state (!!! interdit de modifier directement le state)
   mutations: {
@@ -21,8 +22,11 @@ export default new Vuex.Store({
     updateShopUser(state, user) {
       state.shopUser = user
     },
-    updateAccountAmount(state, amount){
+    updateAccountAmount(state, amount) {
       state.accountAmount = amount
+    },
+    updateAccountTransactions(state, transactions) {
+      state.accountTransactions = transactions
     }
   },
   // actions = fonctions asynchrone pour mettre à jour le state, en faisant appel aux mutations, via la fonction commit()
@@ -32,7 +36,8 @@ export default new Vuex.Store({
       let response = await ShopService.shopLogin(data)
       if (response.error === 0) {
         commit('updateShopUser', response.data)
-      } else {
+      }
+      else {
         console.log(response.data)
       }
     },
@@ -41,18 +46,30 @@ export default new Vuex.Store({
       let response = await ShopService.getAllViruses()
       if (response.error === 0) {
         commit('updateViruses', response.data)
-      } else {
+      }
+      else {
         console.log(response.data)
       }
     },
     async getAccountAmount({commit}, number) {
-      console.log('récupération du montant du compte');
-      let response = await BankService.getAccountAmount(number)
+      console.log('get account amount');
+      let response = await BankAccountService.getAccountAmount(number)
       if (response.error === 0) {
         commit('updateAccountAmount', response.data)
-      } else {
+      }
+      else {
         console.log(response.data)
       }
-    }
-  },
+    },
+    async getAccountTransactions({commit}, number) {
+      console.log('get account transactions');
+      let response = await BankAccountService.getAccountTransactions(number)
+      if (response.error === 0) {
+        commit('updateAccountTransactions', response.data)
+      }
+      else {
+        console.log(response.data)
+      }
+    },
+  }
 })

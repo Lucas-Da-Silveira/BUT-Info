@@ -17,10 +17,12 @@ const routes = [
     component: () => import('../views/ShopLoginView.vue')
   },
   {
-    path: '/bank/account',
+    path: '/bank/amount',
     name: 'bankamount',
+    // import dynamique du composant, plutôt qu'en début de fichier, comme la route prédécente.
     component: () => import('../views/BankAccountView.vue')
-  },
+  }
+
 ]
 
 const router = new VueRouter({

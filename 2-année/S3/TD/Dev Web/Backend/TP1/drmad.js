@@ -14,14 +14,15 @@ yargs.command({
     command: 'add',
     describe: 'Add a new virus',
     builder: {
-        name: {
-            describe: 'virus title',
+        file:{
+            describe: 'virus file',
             demandOption: true,
-            type: 'string'
-        },
+            type: 'file'
+        }
     },
     handler(argv) {
-        console.log(argv.name);
+        console.log(argv.file);
+        items.addVirus(argv.file);
         //console.log(argv.body);
     }
 });

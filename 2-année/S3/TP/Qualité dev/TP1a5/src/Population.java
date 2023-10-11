@@ -63,7 +63,7 @@ class Population {
     }
 
     public int getDeadCount() {
-        return this.deadCount;
+        return this.deadCount + Main.accidentCount;
     }
 
     public void print() {

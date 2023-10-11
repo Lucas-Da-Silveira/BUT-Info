@@ -3,7 +3,9 @@ import java.util.ArrayList;
 public class Main {
     static int pedoCount = 0;
     static int accidentCount = 0;
-    public static void main(String[] args) {
+
+    static int meetCount = 0;
+    public static void main(String[] args) throws BreedingForbiddenException {
         Population population = new Population();
 
         int nbTours = Integer.parseInt(args[0]);
@@ -28,7 +30,17 @@ public class Main {
                 Humain h1 = population.getHumain(i1);
                 Humain h2 = population.getHumain(i2);
 
-                Humain bebe = h1.rencontre(h2);
+                Humain bebe = h1.rencontre(h2, (h11, h22) -> {
+                    if(h11.isHomme()) {
+                        int g = Humain.loto.nextInt(-10, 11);
+                        h11.grossir(g);
+                        h22.grossir(10);
+                    } else if(h11.isFemme()) {
+                        int g = Humain.loto.nextInt(0, 21);
+                        h22.grossir(g);
+                        h11.grossir(10);
+                    }
+                });
 
                 if(bebe != null) {
                     population.addHumain(bebe);
@@ -38,7 +50,7 @@ public class Main {
 
                 if(h1.isGarcon() && h2.isFille() || h1.isFille() && h2.isGarcon()){
                     int accident = Humain.loto.nextInt(0, 101);
-                    if(accident < 50){
+                    if(accident < 51){
                         population.removeHumain(h1);
                         accidentCount++;
                         System.out.println("\u001B[36m" + h1.getNom() + " " + Humain.genMort());
@@ -48,10 +60,28 @@ public class Main {
             }
             population.sort();
             population.print();
+
+            Fertilite f = f1 -> {
+                if(f1.getAge() >= 15){
+                    if((population.taille() > 50)) {
+                        if(f1.getFertilite() >= 2){
+                            f1.setFertilite(f1.getFertilite() -1);
+                        }
+                        else if((population.taille() >= 21) && (population.taille() <= 50)) {
+                            f1.setFertilite(f1.getFertilite() + 2);
+                    }
+
+                    }
+                }
+            };
+
             population.vieillir(h -> {
                 if(h.isFemme()) {
                     if (h.getAge() <= 20) h.poids = 3 + (int)(2.6 * h.getAge());
                     else if (h.getAge() >= 50) h.poids += (h.getAge() % 2);
+
+                    f.fertility(((Femme)h));
+
                 } else if(h.isHomme()) {
                     if (h.getAge() <= 20) h.poids = 3+(int)(3.6*h.getAge());
                     else if (h.getAge() >= 50) h.poids += (h.getAge() % 2);
@@ -67,6 +97,7 @@ public class Main {
         System.out.println("\u001B[32mNombre de décès pendant la simulation: " + population.getDeadCount());
         System.out.println("\u001B[32mNombre de morts par accident: " + accidentCount);
         System.out.println("\u001B[32mTaille finale de la population: " + population.taille());
+        System.out.println("\u001B[32mNombre de rencontre: " + meetCount);
         System.out.println("\u001B[32mNombre de pédophiles: " + pedoCount);
 
     }
