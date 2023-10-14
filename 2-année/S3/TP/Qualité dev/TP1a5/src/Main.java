@@ -5,7 +5,7 @@ public class Main {
     static int accidentCount = 0;
 
     static int meetCount = 0;
-    public static void main(String[] args) throws BreedingForbiddenException {
+    public static void main(String[] args) {
         Population population = new Population();
 
         int nbTours = Integer.parseInt(args[0]);

@@ -56,7 +56,7 @@ public class Femme extends Humain {
                 if (this.getAge() < 50) {
                     enfant = genEnfant(this, ho, m);
                 }
-            } else if(h2.isGarcon() && h2.getAge() >= 15) {
+            } else if(h2.isGarcon() && h2.getAge() >= 15){
                 Garcon gr = (Garcon) h2;
                 enfant = genEnfant(this, gr, m);
                 Main.pedoCount++;
@@ -72,23 +72,22 @@ public class Femme extends Humain {
         Femme fef = (Femme) fe;
         Humain enfant = null;
 
-        if (fef.getPoids() > 150 || hoh.getPoids() > 150) return null;
+            if (fef.getPoids() > 150 || hoh.getPoids() > 150) return null;
 
-        int f = loto.nextInt(0, 101);
-        if (f > fef.getFertilite()) return null;
+            int f = loto.nextInt(0, 101);
+            if (f > fef.getFertilite()) return null;
 
-        int p = loto.nextInt(0, 101);
-        if (p < 50) {
-            enfant = new Garcon(Humain.genPrenom());
-        } else {
-            enfant = new Fille(Humain.genPrenom());
-        }
+            int p = loto.nextInt(0, 101);
+            if (p < 50) {
+                enfant = new Garcon(Humain.genPrenom());
+            } else {
+                enfant = new Fille(Humain.genPrenom());
+            }
 
-        //int g = loto.nextInt(0, 21);
-        //hoh.grossir(g);
-        m.gainWeight(hoh, fef);
-        //fef.grossir(10);
-
+            //int g = loto.nextInt(0, 21);
+            //hoh.grossir(g);
+            m.gainWeight(hoh, fef);
+            //fef.grossir(10);
         return enfant;
     }
     @Override

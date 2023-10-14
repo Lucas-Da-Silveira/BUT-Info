@@ -119,7 +119,7 @@ public class Humain /*implements Comparable<Humain>*/ {
         return Mort;
     }
 
-    public Humain rencontre(Humain h2, Meetic m) throws BreedingForbiddenException {
+    public Humain rencontre(Humain h2, Meetic m) {
         return null;
     }
 

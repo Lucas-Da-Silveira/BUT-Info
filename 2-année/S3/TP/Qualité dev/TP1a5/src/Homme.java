@@ -67,16 +67,22 @@ public class Homme extends Humain {
             if(h2.isFemme()) {
                 Femme fe = (Femme) h2;
 
-                if (this.getAge() < 50) {
+                if (this.getAge() < 50){
                     enfant = genEnfant(fe, this, m);
                 }
-            } else if(h2.isFille() && h2.getAge() >= 15) {
+                else{
+                    throw new BreedingForbiddenException(this, h2);
+                }
+            } if(h2.isFille() && h2.getAge() >= 15) {
                 Fille fi = (Fille) h2;
                 enfant = genEnfant(fi, this, m);
+
+            }else{
                 Main.pedoCount++;
+                throw new BreedingForbiddenException(this, h2);
             }
         }catch (BreedingForbiddenException e){
-            System.out.println(e.getMessage());
+            System.out.println(h2.getNom() + e.getMessage());
         }
         return enfant;
     }
@@ -86,29 +92,35 @@ public class Homme extends Humain {
         Femme fef = (Femme) fe;
 
         Humain enfant = null;
+        try{
+            if(hoh.isGarcon() && fef.isFille()) return null;
 
-        if(hoh.isGarcon() && fef.isFille()) return null;
+            int b = loto.nextInt(0, 101);
+            if (b > hoh.getBatifolage()) return null;
 
-        int b = loto.nextInt(0, 101);
-        if (b > hoh.getBatifolage()) return null;
+            if (fef.getAge() < 50) {
+                if (hoh.poids > 150 || fef.poids > 150) return null;
 
-        if (fef.getAge() < 50) {
-            if (hoh.poids > 150 || fef.poids > 150) return null;
+                int c = loto.nextInt(0, 101);
+                if (c > fef.getFertilite()) return null;
 
-            int c = loto.nextInt(0, 101);
-            if (c > fef.getFertilite()) return null;
+                int p = loto.nextInt(0, 101);
+                if (p < 50) {
+                    enfant = new Garcon(Humain.genPrenom());
+                } else {
+                    enfant = new Fille(Humain.genPrenom());
+                }
 
-            int p = loto.nextInt(0, 101);
-            if (p < 50) {
-                enfant = new Garcon(Humain.genPrenom());
-            } else {
-                enfant = new Fille(Humain.genPrenom());
+                //int g = loto.nextInt(-10, 11);
+                //hoh.grossir(g);
+                m.gainWeight(hoh, fef);
+                //fef.grossir(10);
             }
-
-            //int g = loto.nextInt(-10, 11);
-            //hoh.grossir(g);
-            m.gainWeight(hoh, fef);
-            //fef.grossir(10);
+            else {
+                throw new BreedingForbiddenException(this, ho);
+            }
+        }catch (BreedingForbiddenException e){
+            System.out.println(getNom() + e.getMessage());
         }
         return enfant;
     }
