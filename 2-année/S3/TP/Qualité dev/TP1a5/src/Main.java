@@ -98,7 +98,7 @@ public class Main {
         System.out.println("\u001B[32mNombre de morts par accident: " + accidentCount);
         System.out.println("\u001B[32mTaille finale de la population: " + population.taille());
         System.out.println("\u001B[32mNombre de rencontre: " + meetCount);
-        System.out.println("\u001B[32mNombre de pédophiles: " + pedoCount);
+        System.out.println("\u001B[32mNombre de rencontre pédophiles: " + pedoCount);
 
     }
 }

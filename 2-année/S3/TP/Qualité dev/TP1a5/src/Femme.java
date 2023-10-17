@@ -72,22 +72,30 @@ public class Femme extends Humain {
         Femme fef = (Femme) fe;
         Humain enfant = null;
 
-            if (fef.getPoids() > 150 || hoh.getPoids() > 150) return null;
+        try {
+            if (fef.getAge() < 50) {
+                if (fef.getPoids() > 150 || hoh.getPoids() > 150) return null;
 
-            int f = loto.nextInt(0, 101);
-            if (f > fef.getFertilite()) return null;
+                int f = loto.nextInt(0, 101);
+                if (f > fef.getFertilite()) return null;
 
-            int p = loto.nextInt(0, 101);
-            if (p < 50) {
-                enfant = new Garcon(Humain.genPrenom());
-            } else {
-                enfant = new Fille(Humain.genPrenom());
+                int p = loto.nextInt(0, 101);
+                if (p < 50) {
+                    enfant = new Garcon(Humain.genPrenom());
+                } else {
+                    enfant = new Fille(Humain.genPrenom());
+                }
+
+                //int g = loto.nextInt(0, 21);
+                //hoh.grossir(g);
+                m.gainWeight(hoh, fef);
+                //fef.grossir(10);
+            }else{
+                throw new BreedingForbiddenException(this, ho);
             }
-
-            //int g = loto.nextInt(0, 21);
-            //hoh.grossir(g);
-            m.gainWeight(hoh, fef);
-            //fef.grossir(10);
+        }catch (BreedingForbiddenException e){
+            System.out.println(e.getMessage());
+        }
         return enfant;
     }
     @Override
