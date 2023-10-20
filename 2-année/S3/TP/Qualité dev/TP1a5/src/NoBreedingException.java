@@ -1,10 +1,16 @@
 public class NoBreedingException extends Exception{
 
-    protected Humain source;
+    protected Humain[] source;
 
-    public NoBreedingException(Humain h, String type, String message){
-        super("Rencontre" + type + "impossible entre " + h.getNom() + " : " + message);
-        source = h;
+    public NoBreedingException(Humain h1, Humain h2){
+
+        source = new Humain[2];
+        source[0] = h1;
+        source[1] = h2;
+    }
+
+    public Humain[] getHumain(){
+        return source;
     }
 
 }

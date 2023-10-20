@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const {v4:uuid4} = require('uuid');
-const filePath = path.join(__dirname, "...", "users.json")
+const filePath = path.join(__dirname, "..", "users.json")
 const createUser = (prenom,nom,callBack) => {
     let users = [];
     try{
@@ -17,6 +17,16 @@ const createUser = (prenom,nom,callBack) => {
         prenom : prenom
         };
     users.push(newUser);
-    fs.writeFileSync(filePath, JSON.stringify(users));
-    callBack("success");
+
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(users));
+        callBack(null,"success");
+    }
+    catch (errorEcriture){
+        callBack(errorEcriture, null);
+    }
+}
+
+module.exports = {
+    createUser:createUser
 }

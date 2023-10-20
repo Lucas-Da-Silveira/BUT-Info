@@ -82,7 +82,7 @@ public class Homme extends Humain {
                 throw new BreedingForbiddenException(this, h2);
             }
         }catch (BreedingForbiddenException e){
-            System.out.println(h2.getNom() + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return enfant;
     }
@@ -93,34 +93,37 @@ public class Homme extends Humain {
 
         Humain enfant = null;
         try{
+
             if(hoh.isGarcon() && fef.isFille()) return null;
+            if (hoh.getBatifolage() >= 0) {
+                int b = loto.nextInt(0, 101);
+                if (b > hoh.getBatifolage()) return null;
 
-            int b = loto.nextInt(0, 101);
-            if (b > hoh.getBatifolage()) return null;
+                if (fef.getAge() < 50) {
+                    if (hoh.poids > 150 || fef.poids > 150) return null;
 
-            if (fef.getAge() < 50) {
-                if (hoh.poids > 150 || fef.poids > 150) return null;
+                    int c = loto.nextInt(0, 101);
+                    if (c > fef.getFertilite()) return null;
 
-                int c = loto.nextInt(0, 101);
-                if (c > fef.getFertilite()) return null;
+                    int p = loto.nextInt(0, 101);
+                    if (p < 50) {
+                        enfant = new Garcon(Humain.genPrenom());
+                    } else {
+                        enfant = new Fille(Humain.genPrenom());
+                    }
 
-                int p = loto.nextInt(0, 101);
-                if (p < 50) {
-                    enfant = new Garcon(Humain.genPrenom());
+                    //int g = loto.nextInt(-10, 11);
+                    //hoh.grossir(g);
+                    m.gainWeight(hoh, fef);
+                    //fef.grossir(10);
                 } else {
-                    enfant = new Fille(Humain.genPrenom());
+                    throw new BreedingForbiddenException(this, ho);
                 }
-
-                //int g = loto.nextInt(-10, 11);
-                //hoh.grossir(g);
-                m.gainWeight(hoh, fef);
-                //fef.grossir(10);
+            }else{
+                throw new NoBreedingException(this, ho);
             }
-            else {
-                throw new BreedingForbiddenException(this, ho);
-            }
-        }catch (BreedingForbiddenException e){
-            System.out.println(getNom() + e.getMessage());
+        }catch (BreedingForbiddenException | NoBreedingException e){
+            System.out.println(e.getMessage());
         }
         return enfant;
     }
