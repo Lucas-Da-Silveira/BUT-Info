@@ -20,5 +20,6 @@ add_executable(Prog_System
 #        TP2/ex1/CopieFichier.c
 #        TP3/TP3.c
 #        TP4/TP4.c
-        TP5/TP5.c
+#        TP5/TP5.c
+        TP6/TP6.c
 )
