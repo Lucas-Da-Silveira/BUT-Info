@@ -9,4 +9,12 @@ router.get("/home", (req, res) => {
 
 router.post("/",usersMiddlewares.validateUserInput ,usersController.saveUser);
 
+router.get("/top",usersController.getTopUsers);
+router.get("/", usersController.getUsers);
+router.get("/:uuid",usersController.getUsersById);
+
+router.put("/:uuid",usersMiddlewares.validateUserInput, usersController.updateUser);
+
+router.delete("/", usersMiddlewares.validateUserInput, usersController.deleteUser);
+
 module.exports = router;
