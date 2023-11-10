@@ -63,6 +63,18 @@ exports.deleteUser = (req, res) => {
         return res.status(400).send("uuid is required");
     }
     userService.deleteUser(uuid, (error, data) => {
+        if(error){
+            return res.status(500).send(error);
+        }
+        return res.status(200).send(data);
+    });
+}
 
+exports.deleteAllUser = (req, res) => {
+    userService.deleteAllUser((error, data) => {
+        if(error){
+            return res.status(500).send(error);
+        }
+        return res.status(200).send(data);
     });
 }

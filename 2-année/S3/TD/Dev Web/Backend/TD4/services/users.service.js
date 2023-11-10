@@ -99,22 +99,49 @@ const updateUser = (uuid, nom, prenom, callback) => {
     }
 }
 
-exports.deleteUser = (req, res) => {
+const deleteUser = (uuid, callback) => {
     let users = [];
     try {
         const data = fs.readFileSync(filePath, 'utf-8');
         const dataStr = data.toString();
         users = JSON.parse(dataStr);
-        try {
-            fs.writeFileSync(filePath, JSON.stringify(users));
-            callback(null, "Update success");
-        } catch (writeError){
-            console.log(writeError);
-            callback(writeError, null);
+        const initLength = users.length;
+        users = users.filter(user => user.id !== uuid);
+        if(users.length === initLength) {
+            return callback("User not found", null);
         }
-    }catch (error) {
+        try{
+            fs.writeFileSync(filePath, JSON.stringify(users));
+            callback(null, "Delete success");
+        }catch (ReadError){
+            console.log(ReadError);
+            callback("Internal error", null);
+        }
+    }catch (WriteError) {
         console.log(error);
-        callback(error, null);
+        callback("internal error", null);
+    }
+}
+
+const deleteAllUser = (callback) => {
+    let users = [];
+    try {
+        const data = fs.readFileSync(filePath, 'utf-8');
+        const dataStr = data.toString();
+        users = JSON.parse(dataStr);
+        if(users.length === 0) {
+            return callback("User not found", null);
+        }
+        try{
+            fs.writeFileSync(filePath, JSON.stringify([]));
+            callback(null, "Delete success");
+        }catch (ReadError){
+            console.log(ReadError);
+            callback("Internal error", null);
+        }
+    }catch (WriteError) {
+        console.log(error);
+        callback("internal error", null);
     }
 }
 
@@ -124,5 +151,7 @@ module.exports = {
     getUserById: getUserById,
     getTopUsers: getTopUsers,
     updateUser: updateUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    deleteAllUser: deleteAllUser
+
 }
