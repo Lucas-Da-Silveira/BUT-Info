@@ -60,12 +60,12 @@ CREATE TABLE JOURNAUX_UTILISATEURS(
     Event VARCHAR(255)
 );
 
-CREATE SEQUENCE users_user_id_seq (
+/*CREATE SEQUENCE users_user_id_seq(
     OWNED BY users.user_id,
     START WITH 100
-);
+);*/
 
-ALTER TABLE UTILISATEURS ALTER COLUMN User_Id
+-- ALTER TABLE UTILISATEURS ALTER COLUMN user_Id;
 
 SELECT * FROM UTILISATEURS;
 
@@ -76,6 +76,24 @@ SELECT
 FROM
     utilisateurs u
     INNER JOIN groupes g ON u.group_id = g.id;
+
+SELECT * FROM DROITS_DE_GROUPES AS dg
+INNER JOIN GROUPES g ON dg.Group_Id = g.Id;
+
+SELECT g.Id, g.Groupe, COUNT(*) FROM DROITS_DE_GROUPES AS dg
+INNER JOIN GROUPES g ON dg.Group_Id = g.Id
+GROUP BY g.Id
+HAVING COUNT(*) > 1;
+
+--Afficher l'ensemble des utilisateurs et l'ensemeble des groupes associés
+
+SELECT u.First_Name,u.Last_Name, g.GROUPE FROM GROUPES g
+FULL JOIN UTILISATEURS u ON g.Id = u.Group_Id
+ORDER BY g.GROUPE;
+
+
+
+
 
 INSERT INTO GROUPES (Groupe) VALUES ('Administrateurs');
 INSERT INTO GROUPES (Groupe) VALUES ('Éditeurs');
