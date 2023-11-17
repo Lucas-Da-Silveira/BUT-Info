@@ -13,6 +13,7 @@ export default new Vuex.Store({
     shopUser: null,
     accountAmount: 0,
     accountTransactions: [],
+    accountNumberError: 0,
   }),
   // mutations = fonctions synchrones pour mettre à jour le state (!!! interdit de modifier directement le state)
   mutations: {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     updateAccountTransactions(state, transactions) {
       state.accountTransactions = transactions
+    },
+    updateAccountNumberError(state, error) {
+      state.accountNumberError = error
     }
   },
   // actions = fonctions asynchrone pour mettre à jour le state, en faisant appel aux mutations, via la fonction commit()
@@ -56,9 +60,11 @@ export default new Vuex.Store({
       let response = await BankAccountService.getAccountAmount(number)
       if (response.error === 0) {
         commit('updateAccountAmount', response.data)
+        commit('updateAccountNumberError', 1)
       }
       else {
         console.log(response.data)
+        commit('updateAccountNumberError', -1)
       }
     },
     async getAccountTransactions({commit}, number) {
@@ -66,10 +72,12 @@ export default new Vuex.Store({
       let response = await BankAccountService.getAccountTransactions(number)
       if (response.error === 0) {
         commit('updateAccountTransactions', response.data)
+        commit('updateAccountNumberError', 1)
       }
       else {
         console.log(response.data)
+        commit('updateAccountNumberError', -1)
       }
     },
-  }
+  },
 })

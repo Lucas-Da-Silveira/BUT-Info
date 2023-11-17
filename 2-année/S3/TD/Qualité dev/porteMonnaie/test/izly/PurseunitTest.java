@@ -14,7 +14,7 @@ public class PurseunitTest {
         pinCode = Mockito.mock(CodeSecret.class);
         Mockito.when(pinCode.verifierCode(codeJuste)).thenReturn(true);
         Mockito.when(pinCode.verifierCode(codeFaux)).thenReturn(false);
-        purse = new Purse(100, pinCode);
+        purse = new Purse(100, pinCode, 100);
     }
     String codeFaux ;
     String codeJuste;
@@ -76,6 +76,17 @@ public class PurseunitTest {
         });
         Assertions.assertThrows(purseBloqueException.class, () -> {
             purse.debit(50, codeJuste);
+        });
+    }
+
+    @Test
+    public void testDureeDeVieLimiteAnOperations() throws Exception{
+        Purse purse = new Purse(100, pinCode, 3);
+        purse.credit(50);
+        purse.debit(20, codeJuste);
+        purse.debit(25, codeJuste);
+        Assertions.assertThrows(NoOpMAxAtteindException.class, ()-> {
+            purse.credit(60);
         });
     }
 }

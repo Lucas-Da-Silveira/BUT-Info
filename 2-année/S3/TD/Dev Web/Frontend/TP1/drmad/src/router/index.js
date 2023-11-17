@@ -17,8 +17,8 @@ const routes = [
     component: () => import('../views/ShopLoginView.vue')
   },
   {
-    path: '/bank/amount',
-    name: 'bankamount',
+    path: '/bank/account',
+    name: 'bankaccount',
     // import dynamique du composant, plutôt qu'en début de fichier, comme la route prédécente.
     component: () => import('../views/BankAccountView.vue')
   }
