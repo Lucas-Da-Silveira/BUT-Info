@@ -1,4 +1,4 @@
 package izly;
 
-public class purseBloqueException extends Exception {
+public class purseBloqueException extends TransactionRejeterException {
 }

@@ -1,4 +1,4 @@
 package izly;
 
-public class NoOpMAxAtteindException extends Exception{
+public class NoOpMAxAtteindException extends TransactionRejeterException{
 }

@@ -1,4 +1,4 @@
 package izly;
 
-public class CodeSecretErroneException extends Exception{
+public class CodeSecretErroneException extends TransactionRejeterException{
 }

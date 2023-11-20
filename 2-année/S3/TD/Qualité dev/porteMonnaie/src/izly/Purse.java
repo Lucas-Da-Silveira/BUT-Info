@@ -6,7 +6,7 @@ public class Purse {
     int nbOperationMax;
     CodeSecret codeSecret;
 
-    private void controlPreOperation(double montant) throws purseBloqueException, MontantNegatifInterditException, NoOpMAxAtteindException {
+    private void controlPreOperation(double montant) throws TransactionRejeterException {
         if(nbOperationMax<=0) throw new NoOpMAxAtteindException();
         if(codeSecret.isBlocked()) throw new purseBloqueException();
         if(montant < 0) throw new MontantNegatifInterditException();
@@ -22,14 +22,14 @@ public class Purse {
         return solde;
     }
 
-    public void credit(double montant) throws PlafondDepasseInterditException , MontantNegatifInterditException , purseBloqueException, NoOpMAxAtteindException{
+    public void credit(double montant) throws TransactionRejeterException{
         controlPreOperation(montant);
         if(solde + montant > this.plafond ) throw new PlafondDepasseInterditException();
         solde += montant;
         nbOperationMax--;
     }
 
-    public void debit(double montant, String code) throws SoldeNegatifInterditException, MontantNegatifInterditException, CodeSecretErroneException, purseBloqueException, NoOpMAxAtteindException {
+    public void debit(double montant, String code) throws TransactionRejeterException {
         controlPreOperation(montant);
         if(!codeSecret.verifierCode(code)) throw new CodeSecretErroneException();
         if(montant >solde) throw new SoldeNegatifInterditException();

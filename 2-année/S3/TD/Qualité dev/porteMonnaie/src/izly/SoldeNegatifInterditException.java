@@ -1,4 +1,4 @@
 package izly;
 
-public class SoldeNegatifInterditException extends Exception{
+public class SoldeNegatifInterditException extends TransactionRejeterException{
 }
