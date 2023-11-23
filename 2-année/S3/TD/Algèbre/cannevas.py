@@ -16,18 +16,17 @@ GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
 
 #-----------------Conditions initiales (au tout début du jeu)---------------
-#------------------------------À COMPLÉTER----------------------------------
 
 global t
 t=0
 
-   
+
 #booleens de clavier
-global keyup,keydown,keyright,keyleft,keyspace 
+global keyup,keydown,keyright,keyleft,keyspace
 keyup,keydown,keyright,keyleft,keyspace=False,False,False,False,False
 
 
-# booleens gestion du jeu 
+# booleens gestion du jeu
 start = False
 
 ##Fenêtre
@@ -37,53 +36,129 @@ screen = pygame.display.set_mode((1600,1000))
 #Temps
 clock = pygame.time.Clock()
 
-#-----------------Fonctions de transformation-----------------
+#---------------- fonctions de transformation ----------------#
+def zoom(P, rapport, x, y, z):
+    P = translation(P, -x, -y, -z)
+    P *= rapport
+    P = translation(P, x, y, z)
 
-def zoom(P, rapport):
-    return P*rapport
-
-def translation(P,x,y,z):
-    for col in range(len(P[0])):
-        P[0][col]+=x
-        P[1][col]+=y
-        P[2][col]+=z
     return P
 
-#-----------------Cube-----------------
+def translation(P, x, y, z):
+    for colone in range(len(P[0])):
+        P[0][colone] += x
+        P[1][colone] += y
+        P[2][colone] += z
+    return P
 
-Pcube = np.array([[-1,-1,-1,-1,1,1,1,1],
-              [-1,-1,1,1,-1,-1,1,1],
-              [-1,1,1,-1,-1,1,1,-1]])
+def rotx(P, angle, x, y, z):
+    c = np.cos(np.radians(angle))
+    s = np.sin(np.radians(angle))
+    R = np.array([[1, 0, 0],
+                  [0, c, -s],
+                  [0, s, c]])
+    P = translation(P, -x, -y, -z)
+    P = np.dot(R, P)
+    P = translation(P, x, y, z)
+    return P
 
-Pcube = zoom(Pcube, 50)
-print(Pcube)
+def roty(P, angle, x, y, z):
+    c = np.cos(np.radians(angle))
+    s = np.sin(np.radians(angle))
+    R = np.array([[c, 0, s],
+                  [0, 1, 0],
+                  [-s, 0, c]])
+    P = translation(P, -x, -y, -z)
+    P = np.dot(R, P)
+    P = translation(P, x, y, z)
+    return P
 
-print("\n####################\n")
+def rotz(P, angle, x, y, z):
+    c = np.cos(np.radians(angle))
+    s = np.sin(np.radians(angle))
+    R = np.array([[c, -s, 0],
+                  [s, c, 0],
+                  [0, 0, 1]])
+    P = translation(P, -x, -y, -z)
+    P = np.dot(R, P)
+    P = translation(P, x, y, z)
+    return P
 
-Pcube = translation(Pcube, 800, 500, 0)
-print(Pcube)
+#---------------- fonction de dessin ----------------#
+def dessiner(P, A):
+    for ligne in range(len(P[0]) - 1):
+        for colone in range(ligne+1, len(P[0])):
+            if A[ligne][colone]:
+                pygame.draw.line(screen, ORANGE, (P[0][ligne],P[1][ligne]), (P[0][colone],P[1][colone]), 2)
 
-print("\n####################\n")
+
+#------------------ CUBE ----------------#
+
+Pcube =  np.array([[-1,-1,-1,-1,1,1,1,1],
+                  [-1,-1,1,1,-1,-1,1,1],
+                  [-1,1,-1,1,-1,1,-1,1]])
 
 Acube = np.array([[False]*8]*8)
-print(Acube)
+
+
+Pcube = zoom(Pcube, 50, 0, 0, 0)
+Pcube = translation(Pcube, 800, 500, 0)
+Pcube = rotx(Pcube, 30, 800, 500, 0)
+Pcube = roty(Pcube, 20, 800, 500, 0)
+
 
 for pt1 in range(8):
     for pt2 in range(8):
-        if(Pcube[0][pt1] - Pcube[0][pt2])**2 + (Pcube[1][pt1] - Pcube[1][pt2])**2 + (Pcube[2][pt1] - Pcube[2][pt2])**2 == 100*100:
-            Acube[pt1][pt2]= True
+        if np.sqrt((Pcube[0][pt1]-Pcube[0][pt2])**2 + (Pcube[1][pt1]-Pcube[1][pt2])**2 + (Pcube[2][pt1]-Pcube[2][pt2])**2) <= 101:
+            Acube[pt1][pt2] = True
             Acube[pt2][pt1] = True
 
-print("\n####################\n")
-print(Acube)
+#------------------ Icosaèdre ----------------#
 
-#-----------------Foncton dessins-----------------
+phi=(1+np.sqrt(5))/2
+Pico = np.array([[phi, phi, -phi, -phi, -1, 1, -1, 1, 0, 0, 0, 0],
+                 [-1, 1, -1, 1, 0, 0, 0, 0, phi, phi, -phi, -phi],
+                 [0, 0, 0, 0, phi, phi, -phi, -phi, -1, 1, -1, 1]])
 
-def desiner(P,A):
-    for ligne in range(len(P[0] - 1)):
-        for colone in range(ligne+1,len(P[0])):
-            if A[ligne][colone]:
-                pygame.draw.line(screen, ORANGE, (P[0][ligne],P[1][ligne]), (P[0][colone],P[1][colone]))
+Pico = zoom(Pico, 25, 0, 0, 0)
+Pico = translation(Pico, 800, 500, 0)
+
+Aico = np.array([[False]*12]*12)
+for pt1 in range(12):
+    for pt2 in range(12):
+        if np.sqrt((Pico[0][pt1]-Pico[0][pt2])**2 + (Pico[1][pt1]-Pico[1][pt2])**2 + (Pico[2][pt1]-Pico[2][pt2])**2) <= 51:
+            Aico[pt1][pt2] = True
+            Aico[pt2][pt1] = True
+
+
+#------------------ Coline ----------------#
+
+Pcol =  np.array([[0]*441]*3)
+c=0
+for x in range(-500, 550, 50):
+    for z in range(-500, 550, 50):
+        y= 0.002*x**2+0.002*z**2
+        Pcol[0][c]=x
+        Pcol[1][c]=y
+        Pcol[2][c]=z
+        c+=1
+
+print(Pcol)
+
+
+
+Pcol = translation(Pcol, 800, 0, 0)
+
+
+Acol = np.array([[False]*441]*441)
+
+for pt1 in range(441):
+    for pt2 in range(441):
+        if np.sqrt((Pcol[0][pt1]-Pcol[0][pt2])**2 + (Pcol[1][pt1]-Pcol[1][pt2])**2 + (Pcol[2][pt1]-Pcol[2][pt2])**2) <= 201:
+            Acol[pt1][pt2] = True
+            Acol[pt2][pt1] = True
+
+print(Acol)
 
 ##Boucle principale
 while True:
@@ -119,7 +194,7 @@ while True:
             if event.key == pygame.K_LEFT:
               keyleft=False
 
-              
+
     #Clearscreen
     screen.fill(BLACK)
 
@@ -136,13 +211,35 @@ while True:
     if not start:
         t = 0
         #Affichage du texte
-        screen.blit(text, textRect)      
-    
+        screen.blit(text, textRect)
+
     if keyspace and not start:
         start = True
 
     if start:
-        desiner(Pcube, Acube)
+        dessiner(Pcube, Acube)
+        Pcube = rotx(Pcube, 1, 800, 500, 0)
+        Pcube = roty(Pcube, 7, 800, 500, 0)
+        Pcube = rotz(Pcube, 3, 800, 500, 0)
+
+        # if t < 2:
+        #     r = 0.01
+        # elif t<4:
+        #     r = 0.09
+        # else:
+        #     t=0
+
+        #Pcube = zoom(Pcube, 1+r*np.cos(t),800, 500, 0)
+        Pcube= zoom(Pcube, 1+0.02*np.cos(t),800, 500, 0)
+
+        dessiner(Pico, Aico)
+        Pico = rotx(Pico, -1, 800, 500, 0)
+        Pico = roty(Pico, -2, 800, 500, 0)
+        Pico = rotz(Pico, -3, 800, 500, 0)
+        #Pico= zoom(Pico, 1+0.04*np.cos(t),800, 500, 0)
+
+        dessiner(Pcol, Acol)
+        Pcol = roty(Pcol, 1, 800, 0, 0)
 
     #Mise Ã  jour de l'Ã©cran
     pygame.display.update()
