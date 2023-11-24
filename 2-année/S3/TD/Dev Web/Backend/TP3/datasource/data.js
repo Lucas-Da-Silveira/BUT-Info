@@ -45,7 +45,7 @@ let auctiontransactions=[
   {"_id":"64762dc9066dd654632aed77","buyer":{"ref":"64762dc9066dd654632aed6c","pseudo":"crime1","email":"crime1@bad.org","account":"FRBADORG78901234567890-0000001"},"seller":{"ref":"64762dc9066dd654632aed69","pseudo":"drmad","email":"drmad@bad.org","account":"FRDRMAD578901234567890-0000666"},"date":{"$date":"2023-05-30T17:09:29.506Z"},"name":"madovirus","price":75000,"lethality":40,"brainVirulence":9,"lungsVirulence":7,"kidneysVirulence":2,"heartVirulence":2,"temperature":{"min":-30,"max":70},"survival":{"air":1000,"ground":30,"water":200}},
 ]
 
-export {
+module.exports = {
   items,
   shopusers,
   orders,
