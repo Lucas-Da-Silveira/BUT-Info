@@ -10,10 +10,13 @@ public class Main {
             System.out.println(s);
         }
         long start=System.currentTimeMillis();
+
+        l.add("qlsjhrgblhqbfsbf");
+        l.add("qlksjjfbslqkjbejfblsbfbs");
+
         ArrayList<String> lfound = lWords.find(l);
         long end=System.currentTimeMillis();
         long timeElapsed = end - start;
-
         for(String s : lfound){
             System.out.println(s);
         }
