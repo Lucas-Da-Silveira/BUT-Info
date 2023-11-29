@@ -20,34 +20,10 @@
         </td>
       </tr>
     </table>
-    <hr />
+    <hr/>
 
-    <!-- version avec liste séparée : décommenter pour tester
+    <CheckedList :data="this.viruses" :fields="['nom', 'prix']" :itemCheck="false" :checked="[]" :itemButton="{}" :listButton="{}" />
 
-    <p>Liste filtrée par prix</p>
-    <ul>
-      <li v-for="(virus, index) in filterVirusesByPrice" :key="index">{{virus.name}} : {{virus.price}}</li>
-    </ul>
-    <hr />
-    <p>Liste filtrée par nom</p>
-    <ul>
-      <li v-for="(virus, index) in filterVirusesByName" :key="index">{{virus.name}} : {{virus.price}}</li>
-    </ul>
-    <hr />
-    <p>Liste filtrée par stock</p>
-    <table>
-      <tr>
-        <th>Nom</th><th>Prix</th>
-      </tr>
-      <tr v-for="(virus, index) in filterVirusesByStock" :key="index">
-        <td>{{virus.name}}</td>
-        <td>{{virus.price}}</td>
-      </tr>
-    </table>
-
-    -->
-
-    <!-- version avec filtre multi-critères -->
     <table>
       <tr>
         <th>Nom</th><th>Prix</th>
@@ -57,8 +33,9 @@
         <td>{{virus.price}}</td>
       </tr>
     </table>
-
   </div>
+
+
 </template>
 
 <script>
@@ -66,6 +43,9 @@
 import {mapState} from 'vuex'
 export default {
   name: 'VirusesView',
+  components: {
+    CheckedList: () => import('@/components/CheckedList.vue')
+  },
   data: () => ({
     priceFilter: 0,
     nameFilter: '',

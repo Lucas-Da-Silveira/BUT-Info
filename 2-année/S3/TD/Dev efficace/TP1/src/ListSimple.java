@@ -81,6 +81,7 @@ public class ListSimple {
         if ((index < 0) || (index >= size)) return null;
 
         if (index == 0) {
+            c = head;
             head = head.next;
         } else {
             p = get(index - 1);

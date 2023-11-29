@@ -1,3 +1,4 @@
+/*
 public class ListDoubleCirc {
 
     public CellDouble head;
@@ -53,4 +54,4 @@ public class ListDoubleCirc {
         // utiliser find
     }
 
-}
+}*/

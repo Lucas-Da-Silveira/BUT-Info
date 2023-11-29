@@ -29,13 +29,13 @@ export default {
     handleMenuClicked(index) {
       switch (index) {
         case 0:
-          this.$router.push('/shop/items'); // Assurez-vous d'avoir défini la route '/viruses' dans votre configuration de routage
+          this.$router.push('/shop/items');
           break;
         case 1:
-          this.$router.push('/bank/account'); // Assurez-vous d'avoir défini la route '/bank-account' dans votre configuration de routage
+          this.$router.push('/bank/account');
           break;
         case 2:
-          this.$router.push('/shop/login'); // Assurez-vous d'avoir défini la route '/login' dans votre configuration de routage
+          this.$router.push('/shop/login');
           break;
         default:
           break;
