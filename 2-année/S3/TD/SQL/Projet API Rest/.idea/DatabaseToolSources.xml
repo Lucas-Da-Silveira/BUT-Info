@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseToolSources">
+    <data-source name="localhost" uuid="da6b74c9-3de1-4541-888e-48d84b6f041f" type="POSTGRES">
+      <base-info connect-type="DB_DEFAULT" product="PostgreSQL" version="14.9 (Ubuntu 14.9-0ubuntu0.22.04.1)" jdbc-name="PostgreSQL JDBC Driver" jdbc-version="42.6.0" />
+      <user-name>ldasilve</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node negative="1">
+            <node kind="database" qname="postgres" operator="@">
+              <node kind="schema">
+                <name qname="public" />
+              </node>
+            </node>
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <url>jdbc:postgresql://localhost:5432/postgres</url>
+      <remarks />
+      <vm-options />
+      <driver-info id="postgresql" />
+      <ssh-properties enabled="false" />
+      <ssl-config enabled="false">
+        <uuid />
+        <caFile />
+        <clientCertificateFile />
+        <clientKeyFile />
+        <sslMode>REQUIRE</sslMode>
+      </ssl-config>
+    </data-source>
+  </component>
+</project>

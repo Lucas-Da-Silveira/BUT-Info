@@ -29,7 +29,7 @@ public class Purse {
         nbOperationMax--;
     }
 
-    public void debit(double montant, String code) throws TransactionRejeterException {
+    public void debit(double montant, String code) throws TransactionRejeterException, CodeBloqueException {
         controlPreOperation(montant);
         if(!codeSecret.verifierCode(code)) throw new CodeSecretErroneException();
         if(montant >solde) throw new SoldeNegatifInterditException();

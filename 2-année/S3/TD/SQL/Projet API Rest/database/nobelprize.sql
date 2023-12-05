@@ -1,26 +1,24 @@
-DROP TABLE IF EXISTS laureatesPrizes, laureates, prizes;
+DROP TABLE IF EXISTS prize_laureates, laureates, prizes;
 
-CREATE TABLE prizes(
-    id INT,
-    year INT,
-    category VARCHAR(255),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE laureates(
-    id INT,
+CREATE TABLE IF NOT EXISTS laureates  (
+    id SERIAL PRIMARY KEY,
     firstname VARCHAR(255),
     surname VARCHAR(255),
-    motivation VARCHAR(255),
-    share INT,
-    PRIMARY KEY (id)
+    share INTEGER,
+    motivation TEXT
 );
 
-CREATE TABLE laureatesPrizes(
-    id INT,
-    laureateId INT,
-    prizeId INT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (laureateId) REFERENCES laureates(id),
-    FOREIGN KEY (prizeId) REFERENCES prizes(id)
-)
+CREATE TABLE IF NOT EXISTS prizes (
+    year INTEGER ,
+    category VARCHAR(255),
+    PRIMARY KEY (year, category)
+);
+
+CREATE TABLE prize_laureates (
+    prize_year INTEGER,
+    prize_category VARCHAR(255),
+    laureate_id INTEGER,
+    PRIMARY KEY (prize_year, prize_category, laureate_id),
+    FOREIGN KEY (prize_year, prize_category) REFERENCES prizes(year, category),
+    FOREIGN KEY (laureate_id) REFERENCES laureates(id)
+);

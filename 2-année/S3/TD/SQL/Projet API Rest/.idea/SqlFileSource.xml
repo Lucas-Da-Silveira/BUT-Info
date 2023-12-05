@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlFileSource">
+    <option name="sources">
+      <map>
+        <entry key="$PROJECT_DIR$/database/nobelprize.sql" value="da6b74c9-3de1-4541-888e-48d84b6f041f" />
+      </map>
+    </option>
+  </component>
+</project>

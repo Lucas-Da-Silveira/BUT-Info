@@ -21,7 +21,7 @@ public class CodeSecret {
 
 
     public boolean verifierCode(String code) throws CodeBloqueException {
-        if (isBlocked().throw new CodeBloqueException());
+        //if (isBlocked().throw new CodeBloqueException();
         if(this.code.equals(code)){
             return true;
         }else {

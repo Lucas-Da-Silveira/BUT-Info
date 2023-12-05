@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 public class PurseunitTest {
     @BeforeEach
-    public void setup()  {
+    public void setup() throws CodeBloqueException {
         codeFaux = "1234";
         codeJuste ="5678";
         pinCode = Mockito.mock(CodeSecret.class);
@@ -61,7 +61,7 @@ public class PurseunitTest {
     }
 
     @Test
-    public void testDebitRejeterSurCodeFaux(){
+    public void testDebitRejeterSurCodeFaux() throws CodeBloqueException {
         Mockito.when(pinCode.verifierCode(codeFaux)).thenReturn(false);
         Assertions.assertThrows(CodeSecretErroneException.class, () -> {
             purse.debit(20, codeFaux);
