@@ -41,7 +41,15 @@ def zoom(P, rapport, x, y, z):
     P = translation(P, -x, -y, -z)
     P *= rapport
     P = translation(P, x, y, z)
+    return P
 
+def reflexionOz(P,x,y,z):
+    P = translation(P, -x, -y, -z)
+    S = R = np.array([[-1, 0, 0],
+                        [0, -1, 0],
+                        [0, 0, 1]])
+    P = np.dot(R, P)
+    P = translation(P, x, y, z)
     return P
 
 def translation(P, x, y, z):
@@ -84,13 +92,42 @@ def rotz(P, angle, x, y, z):
     P = translation(P, x, y, z)
     return P
 
+
+#----------------changmement de base----------------#
+
+def rotation(P,axe, plan1,plan2,x,y,z,angle):
+    c= np.cos(np.radians(angle))
+    s= np.sin(np.radians(angle))
+    mbb = np.array([[1,0,0],
+                    [0,c,-s],
+                    [0,s,c]])
+    pos = np.array([[axe[0],plan1[0],plan2[0]],
+                    [axe[1],plan1[1],plan2[1]],
+                    [axe[2],plan1[2],plan2[2]]])
+    mcan = np.dot(np.dot(pos,mbb),np.linalg.inv(pos))
+    P = translation(P, -x, -y, -z)
+    P = np.dot(mcan, P)
+    P = translation(P, x, y, z)
+    return P
+
 #---------------- fonction de dessin ----------------#
-def dessiner(P, A):
+def dessinerCube(P, A):
     for ligne in range(len(P[0]) - 1):
         for colone in range(ligne+1, len(P[0])):
             if A[ligne][colone]:
                 pygame.draw.line(screen, ORANGE, (P[0][ligne],P[1][ligne]), (P[0][colone],P[1][colone]), 2)
 
+def dessinerIco(P, A):
+    for ligne in range(len(P[0]) - 1):
+        for colone in range(ligne+1, len(P[0])):
+            if A[ligne][colone]:
+                pygame.draw.line(screen, BLUE, (P[0][ligne],P[1][ligne]), (P[0][colone],P[1][colone]), 2)
+
+def dessinerCol(P, A):
+    for ligne in range(len(P[0]) - 1):
+        for colone in range(ligne+1, len(P[0])):
+            if A[ligne][colone]:
+                pygame.draw.line(screen, RED, (P[0][ligne],P[1][ligne]), (P[0][colone],P[1][colone]), 2)
 
 #------------------ CUBE ----------------#
 
@@ -107,6 +144,7 @@ Pcube = rotx(Pcube, 30, 800, 500, 0)
 Pcube = roty(Pcube, 20, 800, 500, 0)
 
 
+
 for pt1 in range(8):
     for pt2 in range(8):
         if np.sqrt((Pcube[0][pt1]-Pcube[0][pt2])**2 + (Pcube[1][pt1]-Pcube[1][pt2])**2 + (Pcube[2][pt1]-Pcube[2][pt2])**2) <= 101:
@@ -116,16 +154,16 @@ for pt1 in range(8):
 #------------------ Icosaèdre ----------------#
 
 phi=(1+np.sqrt(5))/2
-Pico = np.array([[phi, phi, -phi, -phi, -1, 1, -1, 1, 0, 0, 0, 0],
-                 [-1, 1, -1, 1, 0, 0, 0, 0, phi, phi, -phi, -phi],
-                 [0, 0, 0, 0, phi, phi, -phi, -phi, -1, 1, -1, 1]])
+Pico = np.array([[0,phi, phi, -phi, -phi, -1, 1, -1, 1, 0, 0, 0, 0],
+                 [0,-1, 1, -1, 1, 0, 0, 0, 0, phi, phi, -phi, -phi],
+                 [0,0, 0, 0, 0, phi, phi, -phi, -phi, -1, 1, -1, 1]])
 
 Pico = zoom(Pico, 25, 0, 0, 0)
-Pico = translation(Pico, 800, 500, 0)
+Pico = translation(Pico, 800, 500, 600)
 
-Aico = np.array([[False]*12]*12)
-for pt1 in range(12):
-    for pt2 in range(12):
+Aico = np.array([[False]*13]*13)
+for pt1 in range(13):
+    for pt2 in range(13):
         if np.sqrt((Pico[0][pt1]-Pico[0][pt2])**2 + (Pico[1][pt1]-Pico[1][pt2])**2 + (Pico[2][pt1]-Pico[2][pt2])**2) <= 51:
             Aico[pt1][pt2] = True
             Aico[pt2][pt1] = True
@@ -154,7 +192,7 @@ Acol = np.array([[False]*441]*441)
 
 for pt1 in range(441):
     for pt2 in range(441):
-        if np.sqrt((Pcol[0][pt1]-Pcol[0][pt2])**2 + (Pcol[1][pt1]-Pcol[1][pt2])**2 + (Pcol[2][pt1]-Pcol[2][pt2])**2) <= 201:
+        if np.sqrt((Pcol[0][pt1]-Pcol[0][pt2])**2 + (Pcol[1][pt1]-Pcol[1][pt2])**2 + (Pcol[2][pt1]-Pcol[2][pt2])**2) <= 101:
             Acol[pt1][pt2] = True
             Acol[pt2][pt1] = True
 
@@ -217,7 +255,7 @@ while True:
         start = True
 
     if start:
-        dessiner(Pcube, Acube)
+        #dessinerCube(Pcube, Acube)
         Pcube = rotx(Pcube, 1, 800, 500, 0)
         Pcube = roty(Pcube, 7, 800, 500, 0)
         Pcube = rotz(Pcube, 3, 800, 500, 0)
@@ -232,14 +270,24 @@ while True:
         #Pcube = zoom(Pcube, 1+r*np.cos(t),800, 500, 0)
         Pcube= zoom(Pcube, 1+0.02*np.cos(t),800, 500, 0)
 
-        dessiner(Pico, Aico)
-        Pico = rotx(Pico, -1, 800, 500, 0)
-        Pico = roty(Pico, -2, 800, 500, 0)
-        Pico = rotz(Pico, -3, 800, 500, 0)
+        dessinerIco(Pico, Aico)
+        #Pico = rotx(Pico, -1, 800, 500, 0)
+        #Pico = roty(Pico, -2, 800, 500, 0)
+        #Pico = rotz(Pico, -3, 800, 500, 0)
         #Pico= zoom(Pico, 1+0.04*np.cos(t),800, 500, 0)
 
-        dessiner(Pcol, Acol)
-        Pcol = roty(Pcol, 1, 800, 0, 0)
+        Pico = zoom(Pico,1+0.000001*Pico[0][2],Pico[0][0], Pico[0][1], Pico[0][2])
+        Pico = rotation(Pico,(0,1,0),(1,0,0),(0,0,1), 800, 500, 0, 1)
+        Pico = rotation(Pico,(1,-10,0),(10,1,0),(0,0,10), 800, 500, 0, 1)
+
+
+
+        dessinerCol(Pcol, Acol)
+        #Pcol = roty(Pcol, 1, 800, 0, 0)
+        Pcol = rotation(Pcol,(1,-10,0),(10,1,0),(0,0,10), 800, 500, 0, 1)
+        Pcol_mir = reflexionOz(Pcol, 0, 0, 0)
+        Pcol_mir = translation(Pcol_mir, 1600, 1000, 0)
+        dessinerCube(Pcol_mir, Acol)
 
     #Mise Ã  jour de l'Ã©cran
     pygame.display.update()

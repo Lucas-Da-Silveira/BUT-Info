@@ -5,14 +5,14 @@ public class Main {
         liste.insert(10, -5); // insertion en tête
         liste.insert(30, 7); // insertion en fin
         liste.append(50); // ajout en fin
-        liste.insert(40, 3); // insertion en 3
+        liste.insert(40, 3); // insertion en 3*/
         liste.print(); // affiche 10 20 30 40 50
         liste.remove(12); // ne fait rien
         liste.remove(10); // enlève la valeur 10 (la tête)
         liste.removeAt(-2); // ne fait rien
         liste.removeAt(22); // ne fait rien
         liste.removeAt(2); // enleve la valeur en 2 (i.e. 40)
-        liste.print(); // affiche 20 30 50
+        liste.print(); // affiche 20 30 50*/
         CellDouble c = liste.get(-1); // accès en dehors -> renvoie null
         if (c != null) {
             System.out.println("pb with get()");

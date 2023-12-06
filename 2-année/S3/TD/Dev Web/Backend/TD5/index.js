@@ -23,7 +23,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // a port number to expose the server
-const PORT = 3000;
+const PORT = 3001;
 
 app.get("/", (req, res) => {
     let username = req.cookies.username;
@@ -65,7 +65,11 @@ app.post("/process_login", (req, res) => {
         password:"admin"
     }
     if(username === monUser["username"] && password === monUser["password"]){
-        res.cookie("username", username);
+        res.cookie("username", username,{
+            expires: new Date('22 12 2023'),
+            secure: false,
+            httpOnly: true
+        });
         return res.redirect("/welcome");
     }else {
         return res.redirect("/login?msg=fail")

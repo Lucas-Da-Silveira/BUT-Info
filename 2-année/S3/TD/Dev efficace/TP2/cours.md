@@ -98,3 +98,136 @@ Map <Interger, String> map = new HashMap<>();
 ```java
 Set<k> Keyset();
 ```
+
+```java
+Map <String, A> map1 = new HashMap<>();
+Map <A, integer> map2 = new HashMap<>();
+
+A a1 = new A(...);
+A a2 = new A(...);
+Date = new Date();
+
+map1.put("toto", a1);
+map1.put("tata", a2); //Ok événement de la valeur précédente
+map1.put(a1, "tutu"); //erreur de compilation
+
+map2.put(a1, new Integer(10));
+map2.put(d, new Integer(5)); //erreur de compilation
+map2 containsKey(d); //false
+map2 containsKey(a1); //true
+map2.remove(d); //ne fait rien
+map2.remove("toto"); //renvoie a1        
+map2.remove(a1); //supprime la valeur associé à a1
+```
+
+
+## ArrayDeque
+
+```java
+Queue`<String>` queue = new ArrayDeque`<>`();
+```
+### File :
+- boolean offer(E e): ajoute l'élément e en fin de file
+- E poll(): supprime et renvoie l'élément en tête de file. Si la file est vide, renvoie null
+
+### Pile :
+- void push(E e): ajoute l'élément e en tête de pile
+- E pop(): supprime et renvoie l'élément en tête de pile. Si la pile est vide, renvoie null
+
+```java
+Queue<Double> q = new ArrayDeque<>();
+//Fifo 
+q.offer(1.0);
+q.offer(2.0);
+double val = q.poll(); //val = 1.0
+
+//Lifo
+q.push(3.0);
+double val = q.pop(); //val = 3.0
+double val = q.pop(); //val = 2.0
+```
+
+### Autre méthode:
+```java
+boolean offerFirst = q.offer(E e); //ajoute en tête de file
+boolean offerLast = q.offerLast(E e); //ajoute en fin de file
+void addFirst(E e); //ajoute en tête de file
+void addLast(E e); //ajoute en fin de file
+E getFirst(); //Renvoi l'élément en tête de file
+E getLast(); //renvoie l'élément en fin de file
+E peekFirst(); // Renvoi l'élément en tête de file, renvoi null si la file est vide
+E peekLast(); //renvoie l'élément en fin de file
+```
+
+## Parcours d'une collection
+
+- Boucle for MAIS on se modifie pas la collection :
+  - Pas d'ajout/suppression d'élément
+
+### For:
+```java
+Set<String> set = new HashSet<>();
+List<Date> list = new ArrayList<>();
+Map<Interger,String> map = new HashMap<>();
+
+for (String s : set){
+    s...
+}
+for (Date d : list){
+    d...
+}
+for (Map.Entry<Integer, String> e : map.entrySet()){
+    Integer key = e.getKey();
+    String value = e.getValue();
+}
+```
+
+### Iterator:
+```java
+Set<String> set = new HashSet<>();
+List<Date> list = new ArrayList<>();
+Map<Interger,String> map = new HashMap<>();
+
+Iterator<String> is = set.iterator();
+while (is.hasNext()){
+    String s = is.next();
+    ...
+    if(...) is.remove();
+    ...
+}
+
+ListIterator<Date> il = list.listIterator();
+while (il.hasNext()){
+    Date d = il.next();
+    ... //il parcoure la liste dans un sens
+    // il.parcour il.add(E e) il.remove() il.set(E e)
+}
+
+Iterator<Integer> im = map.keySet();
+while (im.hasNext()){
+    Integer key = im.next();
+    String value = map.get(key);
+    ...
+}
+```
+
+## Utilisation:
+```java
+Map<Integer, Double> map = new HashMap<>();
+map.get(5,1,2,3,4);
+double val = map.get(5); //val contient = 1,2,3,4
+
+Double d = 1.1111
+if(d == 1.1111) //false
+``` 
+```java
+Integer i1 = 10; 
+Integer i2 = 10;
+Integer i3 = new Integer(10);
+if(i1 == i2){
+    System.out.println("egal 1"); //s'affiche
+        }
+if(i1 == i3){
+    System.out.println("egal 2"); //ne s'affiche pas
+        }
+```

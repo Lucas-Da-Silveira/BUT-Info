@@ -9,122 +9,169 @@ public class ListDoubleCirc {
     }
 
     public CellDouble find(int value) {
-        CellDouble c = head;
-        while((c != null) && (c.value != value)){
-            c = c.next;
+        CellDouble current = head;
+
+        while (current != null && current.value != value) {
+            current = current.next;
+            if (current == head) {
+                return null;
+            }
         }
-        return c;
+
+        return current;
     }
 
     public CellDouble get(int index) {
-        // pour éviter de tout parcourir, on peut tester si l'indice
-        // est avant ou après la moitié de la liste. S'il est avant,
-        // on explore la liste grâce à next, et sinon grâce à prev
-        CellDouble c = head;
-        int i = 0;
-        while((c != null) && (i < index)){
-            c = c.next;
-            i++;
+        if (index < 0 || index >= size) {
+            return null;
         }
-        return c;
+
+        CellDouble current = head;
+
+        if (index < size / 2) {
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        } else {
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+
+        return current;
     }
 
+
     public CellDouble append(int value) {
-        // pas besoin de trouver la dernière cellule : on y a accès
-        // grâce à prev de la tête. Seul cas particulier, la liste est vide
-        CellDouble c = null;
-        CellDouble newCellD = new CellDouble(value);
+        CellDouble newCell = new CellDouble(value);
+
         if (head == null) {
-            head = newCellD;
+            head = newCell;
             head.next = head;
             head.prev = head;
         } else {
-            c = head.prev;
-            c.next = newCellD;
-            newCellD.prev = c;
-            newCellD.next = head;
-            head.prev = newCellD;
+            CellDouble last = head.prev;
+            last.next = newCell;
+            newCell.prev = last;
+            newCell.next = head;
+            head.prev = newCell;
         }
+
         size++;
-        return newCellD;
+        return newCell;
     }
 
     public CellDouble prepend(int value) {
-        // pas compliqué : insertion en tête = insertion en fin
-        // puis déplacement de la tête
-        CellDouble newCellD = append(value);
-        head = newCellD;
-        return newCellD;
-    }
+        CellDouble newCell = new CellDouble(value);
 
-
-    public CellDouble insert(int value, int index) {
-        // on a get() pour trouver la cellule du point d'insertion
-        // Seul cas particulier, la liste est vide
-        CellDouble c = null;
-        CellDouble newCellD = new CellDouble(value);
         if (head == null) {
-            head = newCellD;
+            head = newCell;
             head.next = head;
             head.prev = head;
         } else {
-            c = get(index);
-            if (c == null) {
-                c = head.prev;
-            }
-            c.next.prev = newCellD;
-            newCellD.next = c.next;
-            c.next = newCellD;
-            newCellD.prev = c;
+            CellDouble last = head.prev;
+            last.next = newCell;
+            newCell.prev = last;
+            newCell.next = head;
+            head.prev = newCell;
+            head = newCell;
         }
-        return c;
+
+        size++;
+        return newCell;
     }
 
-    public CellDouble replace(int value, int index) {
-        // utiliser get()
-        CellDouble c = get(index);
-        if (c != null) {
-            c.value = value;
+    public CellDouble insert(int value, int index) {
+        if (index < 0) {
+            return prepend(value);
+
+        } else if (index >= size) {
+            return append(value);
+
+        } else {
+            CellDouble current = get(index);
+            CellDouble newCell = new CellDouble(value);
+
+            newCell.next = current;
+            newCell.prev = current.prev;
+            current.prev.next = newCell;
+            current.prev = newCell;
+
+            size++;
+            return newCell;
         }
-        return c;
+    }
+
+
+    public CellDouble replace(int value, int index) {
+        CellDouble cellToReplace = get(index);
+
+        if (cellToReplace != null) {
+            cellToReplace.value = value;
+        }
+
+        return cellToReplace;
     }
 
     public CellDouble removeAt(int index) {
-        // utiliser get()
-        CellDouble c = get(index);
-        if (c != null) {
-            c.prev.next = c.next;
-            c.next.prev = c.prev;
-            if (c == head) {
-                head = c.next;
-            }
-            size--;
+        if (index < 0 || index >= size) {
+            return null;
         }
-        return c;
+
+        CellDouble removedCell;
+
+        if (size == 1) {
+
+            removedCell = head;
+            head = null;
+        } else if (index == 0) {
+            removedCell = head;
+            head = head.next;
+            head.prev = removedCell.prev;
+            removedCell.prev.next = head;
+        } else {
+            CellDouble current = get(index);
+            removedCell = current;
+
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+        }
+
+        size--;
+        return removedCell;
     }
 
     public CellDouble remove(int value) {
-        // utiliser find
-        CellDouble c = find(value);
-        if (c != null) {
-            c.prev.next = c.next;
-            c.next.prev = c.prev;
-            if (c == head) {
-                head = c.next;
+        CellDouble cellToRemove = find(value);
+
+        if (cellToRemove != null) {
+            int index = 0;
+            CellDouble current = head;
+            while (current != cellToRemove) {
+                current = current.next;
+                index++;
             }
-            size--;
+
+            removeAt(index);
         }
-        return c;
+
+        return cellToRemove;
     }
 
     public void print() {
-        CellDouble c = head;
-        if (c != null) {
-            do {
-                System.out.print(c.value + " ");
-                c = c.next;
-            } while (c != head);
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
         }
+
+        CellDouble current = head;
+        do {
+            System.out.print(current.value + " ");
+            current = current.next;
+        } while (current != head);
+
         System.out.println();
     }
+
+
 }
