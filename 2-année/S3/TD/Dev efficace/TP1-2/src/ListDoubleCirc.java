@@ -124,11 +124,13 @@ public class ListDoubleCirc {
 
             removedCell = head;
             head = null;
+
         } else if (index == 0) {
             removedCell = head;
             head = head.next;
             head.prev = removedCell.prev;
             removedCell.prev.next = head;
+
         } else {
             CellDouble current = get(index);
             removedCell = current;

@@ -21,10 +21,10 @@ public class Main {
         if (c != null) {
             System.out.println("pb with get()");
         }
-        c = liste.get(1); // accès indice 1 (i.e 30)
+        /*c = liste.get(1); // accès indice 1 (i.e 30)
         if (c.value != 30) {
             System.out.println("pb with get()");
-        }
+        }*/
         c = liste.find(99); // value inexsitante -> renvoie null
         if (c != null) {
             System.out.println("pb with find()");

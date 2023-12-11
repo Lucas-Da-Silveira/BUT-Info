@@ -9,5 +9,7 @@ router.get("/home", (req, res) => {
 });
 router.get("/items", itemsController.getItems);
 
+router.get("/items/:id", itemsController.getItemsById);
 
+router.get("/items/:id/promotion", itemsController.getItemsPromotion);
 module.exports = router;

@@ -17,10 +17,10 @@ public class ListOfWords {
         try (BufferedReader br = new BufferedReader(new FileReader("./src/mots.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                mots.add(line.trim());
+                mots.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de la lecture du fichier mots.txt");
         }
     }
 

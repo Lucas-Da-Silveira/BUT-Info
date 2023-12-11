@@ -1,5 +1,10 @@
 import math
+import random
+import string
 import matplotlib.pyplot as plt
+
+from datetime import datetime
+start_time = datetime.now()
 
 alphabet="abcdefghijklmnopqrstuvwxyz"
 
@@ -134,8 +139,53 @@ def encryptVigenere(orig_message, key):
 
 print(encryptVigenere("Hello World", "def"))
 
-# def decryptVigenere(orig_message, key):
-#     decrypted_message = ""
-#     KeyIndex = 0
-#     for i in range(len(orig_message)):
-#         if
+
+def decryptVigenere(orig_message, key):
+    decrypted_message = ""
+    KeyIndex = 0
+    for i in range(len(orig_message)):
+        if orig_message[i].isalpha():
+            decrypted_message += alphabet[
+                (numericChar(alphabet, orig_message[i]) - numericChar(alphabet, key[KeyIndex % len(key)])) % 26]
+            KeyIndex += 1
+    else:
+        decrypted_message += orig_message[i]
+    return decrypted_message
+
+print(decryptVigenere("kiqos brvqg", "def"))
+
+
+#Exercice4 Fonction analyse de sécurité
+
+def frequenceLettres(encrypted_text):
+    tab = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],
+           ['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],
+           ['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],
+           ['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
+    i = 0
+    for lettre in alphabet:
+        cpt = 0
+        for char in encrypted_text:
+            if char == lettre:
+                cpt = cpt + 1
+        tab[i] = cpt
+        i += 1
+    return tab
+
+
+
+message_claire = "Ceci est mon message clair."
+key = "HelloWorld"
+encrypted_text = "Jotz amq vvx dyomxxn mcrcn."
+
+letter_frequencies = frequenceLettres(encrypted_text)
+
+plt.bar(range(26), letter_frequencies)
+plt.xlabel('Lettres')
+plt.ylabel('Fréquence')
+plt.xticks(range(26), alphabet)
+plt.title('Fréquence des lettres dans le texte crypté')
+plt.show()
+
+
+#exercice 5 test de performance
