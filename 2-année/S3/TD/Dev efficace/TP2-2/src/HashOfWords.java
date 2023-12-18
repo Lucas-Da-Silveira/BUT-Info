@@ -4,19 +4,19 @@ import java.io.IOException;
 import java.util.*;
 
 public class HashOfWords {
-    private HashMap<Integer, String> mots;
-        private Map<Integer, String> hashTable;
+    //private HashMap<Integer, String> mots;
+        private final Map<Integer, String> mots;
 
     public HashOfWords(int tableType) {
         switch (tableType) {
             case 0:
-                this.hashTable = new HashMap<>();
+                this.mots = new HashMap<>();
                 break;
             case 1:
-                this.hashTable = new TreeMap<>();
+                this.mots = new TreeMap<>();
                 break;
             case 2:
-                this.hashTable = new LinkedHashMap<>();
+                this.mots = new LinkedHashMap<>();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid table type");
@@ -29,7 +29,7 @@ public class HashOfWords {
             String line;
             while ((line = br.readLine()) != null) {
                 int hash = line.hashCode();
-                hashTable.put(hash, line);
+                mots.put(hash, line);
             }
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier mots.txt");
@@ -39,7 +39,7 @@ public class HashOfWords {
     public ArrayList<String> findValuesList(ArrayList<String> words) {
         ArrayList<String> foundWords = new ArrayList<>();
         for (String word : words) {
-            if (hashTable.containsValue(word)) {
+            if (mots.containsValue(word)) {
                 foundWords.add(word);
             }
         }

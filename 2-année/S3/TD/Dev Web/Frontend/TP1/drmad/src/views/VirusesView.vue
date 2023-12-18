@@ -20,32 +20,56 @@
         </td>
       </tr>
     </table>
-    <hr/>
+    <hr />
 
-    <CheckedList :data="this.viruses" :fields="['nom', 'prix']" :itemCheck="false" :checked="[]" :itemButton="{}" :listButton="{}" />
+    <!-- version avec liste séparée : décommenter pour tester
 
+    <p>Liste filtrée par prix</p>
+    <ul>
+      <li v-for="(virus, index) in filterVirusesByPrice" :key="index">{{virus.name}} : {{virus.price}}</li>
+    </ul>
+    <hr />
+    <p>Liste filtrée par nom</p>
+    <ul>
+      <li v-for="(virus, index) in filterVirusesByName" :key="index">{{virus.name}} : {{virus.price}}</li>
+    </ul>
+    <hr />
+    <p>Liste filtrée par stock</p>
     <table>
       <tr>
         <th>Nom</th><th>Prix</th>
       </tr>
-      <tr v-for="(virus, index) in filterViruses" :key="index">
+      <tr v-for="(virus, index) in filterVirusesByStock" :key="index">
         <td>{{virus.name}}</td>
         <td>{{virus.price}}</td>
       </tr>
     </table>
+
+    -->
+
+    <!-- version avec filtre multi-critères -->
+    <CheckedList :data="filterViruses"
+                 :fields="['name', 'price']"
+                 item-check
+                 :item-button="{show: true, text:'Info'}"
+                 :list-button="{show: true, text:'Select'}"
+                 :checked="checked"
+                 @checked-changed="changeSelection($event)"
+                 @item-button-clicked="showVirusInfos($event)"
+                 @list-button-clicked="showVirusNames()"
+    >
+
+    </CheckedList>
   </div>
-
-
 </template>
 
 <script>
 
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
+import CheckedList from "@/components/CheckedList";
 export default {
   name: 'VirusesView',
-  components: {
-    CheckedList: () => import('@/components/CheckedList.vue')
-  },
+  components: {CheckedList},
   data: () => ({
     priceFilter: 0,
     nameFilter: '',
@@ -53,9 +77,25 @@ export default {
     filterPriceActive : false,
     filterNameActive : false,
     filterStockActive : false,
+    selected: []
   }),
   computed: {
     ...mapState(['viruses']),
+    checked() {
+      let tab = []
+      this.filterViruses.forEach(v => {
+        // find the index of virus v in this.viruses
+        let idx = this.viruses.findIndex(el => el == v)
+        // if idx is in selected, push true, else push false
+        if (this.selected.includes(idx)) {
+          tab.push(true)
+        }
+        else {
+          tab.push(false)
+        }
+      })
+      return tab
+    },
     filterVirusesByPrice() {
       // no active filter => get whole list
       if (!this.filterPriceActive) return this.viruses
@@ -92,6 +132,38 @@ export default {
       }
       return list
     }
+  },
+  methods: {
+    ...mapActions(['getAllViruses']),
+    changeSelection(idx) {
+      // get the virus in the filtered list
+      let v = this.filterViruses[idx]
+      // search its index in this.viruses
+      let i = this.viruses.findIndex(el => el == v)
+      // if i is in selected, remove it
+      let j = this.selected.findIndex(el => el === i)
+      if (j !== -1) {
+        this.selected.splice(j,1)
+      }
+      else {
+        this.selected.push(i)
+      }
+    },
+    showVirusInfos(idx) {
+      let v = this.filterViruses[idx]
+      let msg = v.name+ ", stock = "+v.stock+", for sell = "+v.sold
+      alert(msg)
+    },
+    showVirusNames() {
+      let msg = ""
+      this.selected.forEach(idx => {
+        msg += this.viruses[idx].name+" "
+      })
+      alert(msg)
+    }
+  },
+  mounted() {
+    this.getAllViruses()
   }
 }
 </script>

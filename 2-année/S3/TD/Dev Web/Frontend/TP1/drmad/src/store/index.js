@@ -79,5 +79,5 @@ export default new Vuex.Store({
         commit('updateAccountNumberError', -1)
       }
     },
-  },
+  }
 })

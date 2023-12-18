@@ -1,4 +1,4 @@
-const sequelize = require('sequelize');
+const sequelize = require("../database/db");
 const {DataTypes} = require('sequelize');
 
 const Sale = sequelize.define('sale', {
@@ -7,7 +7,7 @@ const Sale = sequelize.define('sale', {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
-        primaryKey: true
+        primaryKey: true,
         autoIncrement: true
     },
     saledate: {
@@ -21,3 +21,5 @@ const Sale = sequelize.define('sale', {
         allowNull: false
     },
 });
+
+module.exports = Sale;

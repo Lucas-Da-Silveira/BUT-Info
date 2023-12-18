@@ -35,7 +35,7 @@ Set `<MaClasse>` set = new HashSet`<>`();
 ```java
 public class A(...........){
     public class B(........){
-        public class Main{
+        public class TestPerf{
             .............
             Set`<A>` set = new HashSet`<>`();
             A = new A(..........);
