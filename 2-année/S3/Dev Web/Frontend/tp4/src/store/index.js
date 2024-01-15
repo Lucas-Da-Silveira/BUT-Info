@@ -1,14 +1,13 @@
-// index.js
 import Vue from 'vue';
 import Vuex from 'vuex';
-import shopModule from './shop';
-import bankModule from './bank';
+import shopStore from './shop';
+import bankStore from './bank';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules: {
-    shop: shopModule,
-    bank: bankModule,
-  },
+    modules: {
+        shop: shopStore,
+        bank: bankStore,
+    },
 });

@@ -81,11 +81,11 @@ export default {
   }),
   computed: {
     ...mapState(['viruses']),
-    /*checked() {
+    checked() {
       let tab = []
       this.filterViruses.forEach(v => {
         // find the index of virus v in this.viruses
-        let idx = this.viruses.findIndex(el => el == v)
+        let idx = this.viruses.findIndex(el => el === v)
         // if idx is in selected, push true, else push false
         if (this.selected.includes(idx)) {
           tab.push(true)
@@ -95,7 +95,7 @@ export default {
         }
       })
       return tab
-    },*/
+    },
     filterVirusesByPrice() {
       // no active filter => get whole list
       if (!this.filterPriceActive) return this.viruses
@@ -139,7 +139,7 @@ export default {
       // get the virus in the filtered list
       let v = this.filterViruses[idx]
       // search its index in this.viruses
-      let i = this.viruses.findIndex(el => el == v)
+      let i = this.viruses.findIndex(el => el === v)
       // if i is in selected, remove it
       let j = this.selected.findIndex(el => el === i)
       if (j !== -1) {
@@ -163,7 +163,7 @@ export default {
     }
   },
   mounted() {
-    this.getAllViruses()
+    this.getAllViruses();
   }
 }
 </script>

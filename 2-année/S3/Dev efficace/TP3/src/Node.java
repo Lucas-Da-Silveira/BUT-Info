@@ -36,5 +36,4 @@ public class Node {
         }
         return children.get(index);
     }
-	// à compléter
 }

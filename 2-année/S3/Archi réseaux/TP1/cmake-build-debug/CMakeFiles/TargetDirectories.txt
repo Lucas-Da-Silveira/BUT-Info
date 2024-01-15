@@ -1,3 +1,0 @@
-/home/lucas/BUT-Info/2-année/S3/TD/Archi réseaux/TP1/cmake-build-debug/CMakeFiles/TP1.dir
-/home/lucas/BUT-Info/2-année/S3/TD/Archi réseaux/TP1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lucas/BUT-Info/2-année/S3/TD/Archi réseaux/TP1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

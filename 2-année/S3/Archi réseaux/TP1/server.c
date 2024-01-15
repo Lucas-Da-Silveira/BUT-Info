@@ -111,7 +111,7 @@ int main(void) {
 
             result = read(sock, &size, sizeof(unsigned int));
             VERIFIER(result == sizeof(unsigned int)); 
-            printf("Taille du tableau reçu : %u\n", size);
+            printf("Taille du tableau reçue : %u\n", size);
 
             numbers = malloc(size * sizeof(int));
             result = read(sock, numbers, (size * sizeof(int)));

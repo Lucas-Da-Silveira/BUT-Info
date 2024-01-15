@@ -139,11 +139,39 @@ class Tree {
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            Node current = queue.poll();
-            System.out.print(current.value + " ");
-
-            queue.addAll(current.children);
+            int levelSize = queue.size();
+            for (int i = 0; i < levelSize; i++) {
+                Node current = queue.poll();
+                System.out.print("  ".repeat(getNodeDepth(current)));
+                System.out.println(current.value);
+                queue.addAll(current.children);
+            }
         }
     }
+
+    private int getNodeDepth(Node node) {
+        int depth = 0;
+        while (node != root) {
+            depth++;
+            node = getParent(node);
+        }
+        return depth;
+    }
+
+    private Node getParent(Node node) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            if (current.children.contains(node)) {
+                return current;
+            }
+            queue.addAll(current.children);
+        }
+
+        return null;
+    }
+
 
 }

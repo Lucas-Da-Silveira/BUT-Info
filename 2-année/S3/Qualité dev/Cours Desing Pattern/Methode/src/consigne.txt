@@ -1,0 +1,2 @@
+Vous devez complétez les méthodes jouerManche() et distribuerCartes() pour les 2 jeux: Bataille et BatailleInversée.
+Ces méthodes doivent être soit implémenter directement dans la classe de la bataille ou dans Jeu32Cartes/Jeu52Cartes, à vous de faire le bon choix.

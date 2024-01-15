@@ -1,0 +1,3 @@
+/home/lucas/BUT-Info/2-année/S3/Archi réseaux/TP Note/cmake-build-debug/CMakeFiles/TP_Note.dir
+/home/lucas/BUT-Info/2-année/S3/Archi réseaux/TP Note/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lucas/BUT-Info/2-année/S3/Archi réseaux/TP Note/cmake-build-debug/CMakeFiles/rebuild_cache.dir
