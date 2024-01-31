@@ -12,6 +12,7 @@ struct cryptoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(ForecastsViewModel())
         }
     }
 }

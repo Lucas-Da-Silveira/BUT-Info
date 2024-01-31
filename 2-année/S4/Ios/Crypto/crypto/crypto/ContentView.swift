@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var isEuro = false
+    
+    @EnvironmentObject var forecastViewModel : ForecastsViewModel
+
+    
     var body: some View {
         
         ZStack{
-            
+            Color.black
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 HStack{
@@ -19,27 +26,40 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .bold()
                         .foregroundStyle(.green)
+                    
+                    Button(){
+                        print("reload")
+                        forecastViewModel.reloadPrice()
+                        
+                    }label: {
+                        Image(systemName: "arrow.clockwise.circle")
+                            .font(.title)
+                            .foregroundStyle(.green)
+                    }
                 }
                
                 
                 HStack{
                     
                     Image(systemName: "calendar")
+                        .foregroundStyle(.white)
                     Text("Monday September 13, 2023")
+                        .foregroundStyle(.white)
                 }
                 Spacer()
                 
                 HStack(spacing:18){
-                    CryptoNameView(name: "BTC", imageName: "rectangle", money: "$", price: 51)
-                    CryptoNameView(name: "ETH", imageName: "rectangle", money: "$", price: 21)
-                    CryptoNameView(name: "XRP", imageName: "rectangle", money: "$", price: 6)
-                    CryptoNameView(name: "XLM", imageName: "rectangle", money: "$", price: 11)
+                    CryptoNameView(name: forecastViewModel.getCrypto(for: 0), imageName: "btc", money: isEuro ?"$" : "€", price: forecastViewModel.getPrice(for: 0))
+                    CryptoNameView(name: forecastViewModel.getCrypto(for: 1), imageName: "eth", money: isEuro ?"$" : "€", price: forecastViewModel.getPrice(for: 1))
+                    CryptoNameView(name: forecastViewModel.getCrypto(for: 2), imageName: "xrp", money: isEuro ?"$" : "€", price: forecastViewModel.getPrice(for: 2))
+                    CryptoNameView(name: forecastViewModel.getCrypto(for: 3), imageName: "xlm", money: isEuro ?"$" : "€", price: forecastViewModel.getPrice(for: 3))
                 }
                 
                 Spacer()
                 
                 Button{
                     print("marche")
+                    isEuro.toggle()
                     
                 } label: {
                     Text("Convert to euro")
@@ -64,6 +84,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ForecastsViewModel())
+
     }
 }
 
@@ -78,9 +100,9 @@ struct CryptoNameView: View{
         VStack{
             Text(name)
                 .font(.title2)
-                .foregroundStyle(.black)
+                .foregroundStyle(.white)
             
-            Image(systemName: imageName)
+            Image(imageName)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -89,11 +111,11 @@ struct CryptoNameView: View{
             HStack{
                 Text(money)
                     .font(.title2)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                 
                 Text("\(price) k")
                     .font(.title2)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                 
             }
         }

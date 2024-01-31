@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		914CA03C2B6A8C65003F3932 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914CA03B2B6A8C65003F3932 /* Price.swift */; };
+		914CA03E2B6A8D47003F3932 /* ForecastsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914CA03D2B6A8D47003F3932 /* ForecastsViewModel.swift */; };
 		91C2F1542B61511A00B0103A /* cryptoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C2F1532B61511A00B0103A /* cryptoApp.swift */; };
 		91C2F1562B61511A00B0103A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C2F1552B61511A00B0103A /* ContentView.swift */; };
 		91C2F1582B61511B00B0103A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91C2F1572B61511B00B0103A /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		914CA03B2B6A8C65003F3932 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
+		914CA03D2B6A8D47003F3932 /* ForecastsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastsViewModel.swift; sourceTree = "<group>"; };
 		91C2F1502B61511A00B0103A /* crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91C2F1532B61511A00B0103A /* cryptoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cryptoApp.swift; sourceTree = "<group>"; };
 		91C2F1552B61511A00B0103A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +58,8 @@
 				91C2F1532B61511A00B0103A /* cryptoApp.swift */,
 				91C2F1552B61511A00B0103A /* ContentView.swift */,
 				91C2F1572B61511B00B0103A /* Assets.xcassets */,
+				914CA03D2B6A8D47003F3932 /* ForecastsViewModel.swift */,
+				914CA03B2B6A8C65003F3932 /* Price.swift */,
 				91C2F1592B61511B00B0103A /* Preview Content */,
 			);
 			path = crypto;
@@ -138,7 +144,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				91C2F1562B61511A00B0103A /* ContentView.swift in Sources */,
+				914CA03E2B6A8D47003F3932 /* ForecastsViewModel.swift in Sources */,
 				91C2F1542B61511A00B0103A /* cryptoApp.swift in Sources */,
+				914CA03C2B6A8C65003F3932 /* Price.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
