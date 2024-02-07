@@ -11,6 +11,9 @@ struct AddTodoView: View {
     
     @State var todoTitle: String = ""
     
+    @EnvironmentObject var todoViewModel: TodoViewModel
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         
         VStack{
@@ -21,7 +24,8 @@ struct AddTodoView: View {
                 .cornerRadius(10)
             
             Button{
-                
+                todoViewModel.addItem(title: todoTitle, priority: .normal)
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")
                     .font(.headline)
@@ -31,7 +35,7 @@ struct AddTodoView: View {
                     .foregroundStyle(.white)
                     .cornerRadius(10)
             }
-            
+            Spacer()
         }
         .padding(14)
         .navigationTitle("Add a Todo")
@@ -40,6 +44,8 @@ struct AddTodoView: View {
 
 struct AddTodoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTodoView()
+        NavigationView{
+            AddTodoView()
+        }
     }
 }

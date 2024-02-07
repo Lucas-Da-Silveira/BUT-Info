@@ -9,14 +9,16 @@ import SwiftUI
 
 struct TodoListView: View {
     
-    var data: [Todo]
+    @EnvironmentObject var todoViewModel: TodoViewModel
     
     var body: some View {
         NavigationView{
             List {
-                ForEach(data){todo in
+                ForEach(todoViewModel.todos){todo in
                     RowView(todo: todo)
                 }
+                .onDelete(perform: todoViewModel.deleteItem)
+                .onMove(perform: todoViewModel.moveItem)
             }
             .listStyle(PlainListStyle())
             .navigationTitle("Todo")
@@ -34,6 +36,7 @@ struct TodoListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoListView(data: Todo.testData)
+        TodoListView()
+            .environmentObject(TodoViewModel())
     }
 }

@@ -16,6 +16,7 @@ struct RowView: View {
         HStack{
             Image(systemName: todo.isCompleted ? "checkmark.circle" : "circle")
                 .foregroundColor(todo.isCompleted ? .green : .red)
+            
             Text(todo.title)
             
             Spacer()
