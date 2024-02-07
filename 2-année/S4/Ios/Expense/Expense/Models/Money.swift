@@ -7,19 +7,24 @@
 
 import Foundation
 
+enum typeExpense: String{
+    case perso = "Perso"
+    case vacation = "Vacation"
+    case pro = "Pro"
+}
+
 struct Money : Identifiable{
     var id = UUID()
     var name : String
     var price : Int
-    var isPerso: Bool
-    var isVac: Bool
-    var isPro: Bool
+    var typeExpense: typeExpense
+
     
     static var testData = [
-        Money(name: "Apple", price: 120, isPerso: true, isVac: false, isPro: false),
-        Money(name: "Airbnb", price: 1200, isPerso: true, isVac: false, isPro: false),
-        Money(name: "McDonald", price: 300, isPerso: false, isVac: true, isPro: false),
-        Money(name: "Bakery", price: 10, isPerso: true, isVac: false, isPro: false),
-        Money(name: "Mechanic", price: 1000, isPerso: false, isVac: false, isPro: true)
+        Money(name: "Apple", price: 120, typeExpense: .perso),
+        Money(name: "Airbnb", price: 1200, typeExpense: .perso),
+        Money(name: "McDonald", price: 300, typeExpense: .vacation),
+        Money(name: "Bakery", price: 10, typeExpense: .perso),
+        Money(name: "Mechanic", price: 1000, typeExpense: .pro)
     ]
 }

@@ -14,8 +14,6 @@ struct RowView: View {
     var body: some View {
         HStack{
             Text(money.name)
-            
-            
             Spacer()
         }
     }

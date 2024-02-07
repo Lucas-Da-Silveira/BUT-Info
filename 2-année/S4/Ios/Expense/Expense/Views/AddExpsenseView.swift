@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct AddExpsenseView: View {
-    @State var ExpenseTitle: String = ""
+    @State var ExpenseName: String = ""
     @State var ExpensePrice: Int = 0
+    
+    @EnvironmentObject var expenseViewModel: ExpenseViewModel
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
         VStack{
-            TextField("Enter the destination expense", text: $ExpenseTitle)
+            TextField("Enter the destination expense", text: $ExpenseName)
                 .padding()
                 .frame(height: 55)
                 .background(Color(.systemGray4))
@@ -27,7 +30,8 @@ struct AddExpsenseView: View {
                 .cornerRadius(10)
             Spacer()
             Button{
-                
+                expenseViewModel.addItem(name: ExpenseName, price: ExpensePrice, typeExpense: .perso)
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")
                     .font(.headline)
@@ -46,6 +50,9 @@ struct AddExpsenseView: View {
 
 struct AddExpsenseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpsenseView()
+        NavigationView{
+            AddExpsenseView()
+        }
+    
     }
 }

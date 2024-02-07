@@ -14,6 +14,7 @@
 		912E72F72B73C77500256CA3 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912E72F62B73C77500256CA3 /* Money.swift */; };
 		912E72F92B73CBF500256CA3 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912E72F82B73CBF500256CA3 /* RowView.swift */; };
 		912E72FB2B73CEE400256CA3 /* AddExpsenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912E72FA2B73CEE400256CA3 /* AddExpsenseView.swift */; };
+		912E72FF2B73DB7000256CA3 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912E72FE2B73DB7000256CA3 /* ExpenseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		912E72F62B73C77500256CA3 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		912E72F82B73CBF500256CA3 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		912E72FA2B73CEE400256CA3 /* AddExpsenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpsenseView.swift; sourceTree = "<group>"; };
+		912E72FE2B73DB7000256CA3 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		912E72F52B73C6B900256CA3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				912E72FE2B73DB7000256CA3 /* ExpenseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				912E72F72B73C77500256CA3 /* Money.swift in Sources */,
+				912E72FF2B73DB7000256CA3 /* ExpenseViewModel.swift in Sources */,
 				912E72E82B73C60200256CA3 /* ExpenseView.swift in Sources */,
 				912E72E62B73C60200256CA3 /* ExpenseApp.swift in Sources */,
 				912E72FB2B73CEE400256CA3 /* AddExpsenseView.swift in Sources */,

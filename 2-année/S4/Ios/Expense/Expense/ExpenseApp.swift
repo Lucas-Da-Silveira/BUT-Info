@@ -11,7 +11,8 @@ import SwiftUI
 struct ExpenseApp: App {
     var body: some Scene {
         WindowGroup {
-            ExpenseView(data: Money.testData)
+            ExpenseView()
+                .environmentObject(ExpenseViewModel())
         }
     }
 }

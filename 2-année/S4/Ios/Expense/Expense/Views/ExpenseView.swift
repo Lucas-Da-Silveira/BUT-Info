@@ -9,14 +9,16 @@ import SwiftUI
 
 struct ExpenseView: View {
     
-    var data: [Money]
+    @EnvironmentObject var expenseViewModel: ExpenseViewModel
     
     var body: some View {
         NavigationView{
             List {
-                ForEach(data){money in
+                ForEach(expenseViewModel.money){money in
                     RowView(money: money)
                 }
+                .onDelete(perform: expenseViewModel.deleteItem)
+                .onMove(perform: expenseViewModel.moveItem)
             }
             .listStyle(PlainListStyle())
             .navigationTitle("Expense")
@@ -34,6 +36,7 @@ struct ExpenseView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseView(data: Money.testData)
+        ExpenseView()
+            .environmentObject(ExpenseViewModel())
     }
 }
