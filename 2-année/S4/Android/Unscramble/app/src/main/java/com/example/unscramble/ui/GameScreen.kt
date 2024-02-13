@@ -79,6 +79,9 @@ fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
         )
         GameLayout(
             currentScrambledWord = gameUiState.currentScrambledWord,
+            userGuess = gameViewModel.userGuess,
+            onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
+            onKeyboardDone = { gameViewModel.checkUserGuess() },
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -114,6 +117,16 @@ fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
         }
 
         GameStatus(score = 0, modifier = Modifier.padding(20.dp))
+
+    }
+    Button(
+        modifier = modifier
+            .fillMaxWidth()
+            .weight(1f)
+            .padding(start = 8.dp),
+        onClick = { gameViewModel.checkUserGuess() }
+    ) {
+        Text(stringResource(R.string.submit))
     }
 }
 
@@ -133,6 +146,9 @@ fun GameStatus(score: Int, modifier: Modifier = Modifier) {
 @Composable
 fun GameLayout(
     currentScrambledWord: String,
+    userGuess: String,
+    onUserGuessChanged: (String) -> Unit,
+    onKeyboardDone: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
@@ -168,7 +184,7 @@ fun GameLayout(
                 style = typography.titleMedium
             )
             OutlinedTextField(
-                value = "",
+                value = userGuess,
                 singleLine = true,
                 shape = shapes.large,
                 modifier = Modifier.fillMaxWidth(),
@@ -177,7 +193,7 @@ fun GameLayout(
                     unfocusedContainerColor = colorScheme.surface,
                     disabledContainerColor = colorScheme.surface,
                 ),
-                onValueChange = { },
+                onValueChange = { onUserGuessChanged(it) },
                 label = { Text(stringResource(R.string.enter_your_word)) },
                 isError = false,
                 keyboardOptions = KeyboardOptions.Default.copy(
