@@ -31,4 +31,12 @@ class TodoViewModel: ObservableObject {
     func moveItem(from: IndexSet, to: Int){
         todos.move(fromOffsets: from, toOffset: to)
     }
+    
+    func updateItem(todo: Todo){
+        for(index, td) in todos.enumerated(){
+            if td.id == todo.id{
+                todos[index].isCompleted.toggle()
+            }
+        }
+    }
 }
