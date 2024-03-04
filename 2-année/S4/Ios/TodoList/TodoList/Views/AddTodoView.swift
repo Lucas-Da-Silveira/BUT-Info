@@ -10,6 +10,7 @@ import SwiftUI
 struct AddTodoView: View {
     
     @State var todoTitle: String = ""
+    @State var priority: Priority = .normal
     
     @EnvironmentObject var todoViewModel: TodoViewModel
     @Environment(\.presentationMode) var presentationMode
@@ -23,8 +24,16 @@ struct AddTodoView: View {
                 .background(Color(.systemGray4))
                 .cornerRadius(10)
             
+            Picker("Priority", selection: $priority){
+                ForEach(Priority.allCases, id: \.self){
+                    priority in
+                    Text(priority.rawValue)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            
             Button{
-                todoViewModel.addItem(title: todoTitle, priority: .normal)
+                todoViewModel.addItem(title: todoTitle, priority: priority)
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")

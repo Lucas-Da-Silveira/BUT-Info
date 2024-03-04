@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Priority: String{
+enum Priority: String, CaseIterable {
     case low = "Low"
     case normal = "Normal"
     case high = "High"
