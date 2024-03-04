@@ -1,0 +1,18 @@
+{
+  "name": "webserv_events",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "JAZAR",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "puppeteer": "^19.6.2",
+    "restify": "^11.0.0"
+  }
+}
