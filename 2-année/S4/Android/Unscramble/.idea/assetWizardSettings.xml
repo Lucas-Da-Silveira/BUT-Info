@@ -79,8 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Téléchargements/Tguys.jpg" />
-                                                <entry key="scalingPercent" value="74" />
+                                                <entry key="imagePath" value="$USER_HOME$/Téléchargements/3d-human-character-holding-golden-260nw-346654511.webp" />
+                                                <entry key="scalingPercent" value="56" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -108,6 +108,12 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                     </map>
                                   </option>
                                 </PersistentState>
