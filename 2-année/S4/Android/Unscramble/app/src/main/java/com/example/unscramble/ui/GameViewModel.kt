@@ -107,7 +107,6 @@ class GameViewModel : ViewModel() {
                 )
             }
         } else{
-            // Normal round in the game
             _uiState.update { currentState ->
                 currentState.copy(
                     isGuessedWordWrong = false,
@@ -121,7 +120,6 @@ class GameViewModel : ViewModel() {
 
     private fun shuffleCurrentWord(word: String): String {
         val tempWord = word.toCharArray()
-        // Scramble the word
         tempWord.shuffle()
         while (String(tempWord) == word) {
             tempWord.shuffle()
@@ -130,7 +128,6 @@ class GameViewModel : ViewModel() {
     }
 
     private fun pickRandomWordAndShuffle(): String {
-        // Continue picking up a new random word until you get one that hasn't been used before
         currentWord = allWords.random()
         return if (usedWords.contains(currentWord)) {
             pickRandomWordAndShuffle()
