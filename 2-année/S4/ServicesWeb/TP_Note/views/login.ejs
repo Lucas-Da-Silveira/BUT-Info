@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WhatZap - Register</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<section class="prompt">
+    <h3>WhatZap</h3>
+    <h1>Register</h1>
+    <% if (hasMessages) { %>
+    <section class="messages">
+        <% messages.forEach(function(message) { %>
+        <p><%= message %></p>
+        <% }); %>
+    </section>
+    <% } %>
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="button">Register</button>
+    </form>
+    <a class="button facebook" href="/login/federated/google">Sign in with Google</a>
+</section>
+<footer class="info">
+    <p>Authentication powered by <a href="https://www.passportjs.org">Passport</a></p>
+</footer>
+</body>
+</html>
