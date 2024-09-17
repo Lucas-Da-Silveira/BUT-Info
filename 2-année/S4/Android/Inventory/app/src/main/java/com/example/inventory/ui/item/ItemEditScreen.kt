@@ -29,6 +29,8 @@ import com.example.inventory.R
 import com.example.inventory.ui.AppViewModelProvider
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
 object ItemEditDestination : NavigationDestination {
     override val route = "item_edit"
@@ -45,6 +47,8 @@ fun ItemEditScreen(
     modifier: Modifier = Modifier,
     viewModel: ItemEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             InventoryTopAppBar(
@@ -57,9 +61,14 @@ fun ItemEditScreen(
     ) { innerPadding ->
         ItemEntryBody(
             itemUiState = viewModel.itemUiState,
-            onItemValueChange = { },
-            onSaveClick = { },
-            modifier = Modifier.padding(innerPadding)
+            onItemValueChange = viewModel::updateUiState,
+            onSaveClick = {
+                coroutineScope.launch {
+                    viewModel.updateItem()
+                    navigateBack()
+                }
+            },
+            modifier = modifier.padding(innerPadding)
         )
     }
 }

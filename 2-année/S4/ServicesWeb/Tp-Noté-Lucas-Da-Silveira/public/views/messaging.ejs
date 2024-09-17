@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appli de Chat</title>
+    <style>
+        body {
+            background: #ceb59f;
+        }
+
+        #container {
+            width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        #chatWindow {
+            height: 350px;
+            width: 550px;
+            border: 2px solid #bcbcbc;
+            border-radius: 20px;
+            padding: 20px;
+            background: #efd1b5;
+        }
+
+        #mainWrapper {
+            display: none;
+        }
+
+        #chatWrapper {
+            float: left;
+            border: 1px #ccc solid;
+            border-radius: 10px;
+            background: #f4f4f4;
+            padding: 10px;
+        }
+
+        #userWrapper {
+            float: left;
+            border: 1px #ccc solid;
+            border-radius: 10px;
+            background: #d7b599;
+            padding: 10px;
+            margin-left: 20px;
+            width: 150px;
+            max-height: 200px;
+        }
+
+        #namesWrapper {
+            float: left;
+            border: 1px #ccc solid;
+            border-radius: 10px;
+            background: #dcb699;
+            padding: 10px;
+            margin-left: 20px;
+        }
+
+        input {
+            height: 30px;
+            border: solid 2px #d7d7d7;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="namesWrapper">
+        <h2>ChatIO</h2>
+        <p>Create Username:</p>
+        <div id="error"></div>
+        <form id="usernameForm">
+            <input type="text" size="35" id="userid" value="<%= userid %>" hidden>
+        </form>
+    </div>
+    <div id="mainWrapper">
+        <h2>Chat avec Socket.IO</h2>
+        <div id="chatWrapper">
+            <div id="chatWindow"></div>
+            <form id="messageForm">
+                <input type="text" size="35" id="message" placeholder="Say Something .">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div id="userWrapper">
+            <div id="users"></div>
+        </div>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+    $(function () {
+        var socket = io.connect();
+        var $messageForm = $('#messageForm');
+        var $message = $('#message');
+        var $chat = $('#chatWindow');
+        var $users = $('#users');
+        var $username = $('#userid');
+        var $error = $('#error');
+
+        socket.emit('new user', $username.val(), function (data) {
+            if (data) {
+                $('#namesWrapper').hide();
+                $('#mainWrapper').show();
+            } else {
+                $error.html('Failed to login');
+            }
+        });
+
+        socket.on('usernames', function (data) {
+            var html = '';
+            for (i = 0; i < data.length; i++) {
+                html += data[i] + '<br>';
+            }
+            $users.html(html);
+        });
+
+        $messageForm.submit(function (e) {
+            e.preventDefault();
+            socket.emit('send message', {userid: $username.val(), message: $message.val()});
+            $message.val('');
+        });
+
+        socket.on('new message', function (data) {
+            $chat.append('<strong>' + data.user + '</strong>: ' + data.msg + '<br>');
+        });
+    });
+</script>
+</body>
+</html>

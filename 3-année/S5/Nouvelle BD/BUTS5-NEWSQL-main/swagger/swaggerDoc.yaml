@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: Authentication and Blog API
+  description: API for Google Authentication and Blog Management
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Local server
+
+tags:
+  - name: Authentication
+    description: Authentication related routes
+  - name: Blog
+    description: Blog management related routes
+
+paths:
+  # Authentication routes
+  /auth/google:
+    get:
+      tags:
+        - Authentication
+      summary: Authenticate using Google OAuth
+      operationId: googleAuth
+      description: Redirects the user to the Google OAuth page.
+      responses:
+        '302':
+          description: Redirects to Google's OAuth 2.0 server.
+        '401':
+          description: Unauthorized
+
+  /auth/google/callback:
+    get:
+      tags:
+        - Authentication
+      summary: Google OAuth callback
+      operationId: googleAuthCallback
+      description: Handles the callback after Google has authenticated the user.
+      responses:
+        '302':
+          description: Redirects to the specified route after successful login.
+
+  /auth/logout:
+    get:
+      tags:
+        - Authentication
+      summary: Logout the user
+      operationId: logoutUser
+      description: Logs the user out of the application.
+      responses:
+        '302':
+          description: Redirects to the homepage after logging out.
+
+  /api/current_user:
+    get:
+      tags:
+        - Authentication
+      summary: Get the current user
+      operationId: getCurrentUser
+      description: Returns the current authenticated user data.
+      responses:
+        '200':
+          description: Successfully fetched the user data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "613b7f2e83b41d0015f59e53"
+                  email:
+                    type: string
+                    example: "user@example.com"
+                  name:
+                    type: string
+                    example: "John Doe"
+        '401':
+          description: Unauthorized
+
+  # Blog routes
+  /api/blogs:
+    get:
+      tags:
+        - Blog
+      summary: Get all blogs
+      operationId: getBlogs
+      description: Retrieves all blogs associated with the current user.
+      responses:
+        '200':
+          description: Successfully fetched the blogs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: "614b7f2e83b41d0015f59e5a"
+                    title:
+                      type: string
+                      example: "My Blog Title"
+                    content:
+                      type: string
+                      example: "This is the content of the blog"
+        '401':
+          description: Unauthorized
+
+    post:
+      tags:
+        - Blog
+      summary: Create a new blog
+      operationId: createBlog
+      description: Creates a new blog for the current user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "My New Blog"
+                content:
+                  type: string
+                  example: "This is the content of the new blog."
+      responses:
+        '200':
+          description: Successfully created the blog.
+        '400':
+          description: Validation error
+
+  /api/blogs/{id}:
+    get:
+      tags:
+        - Blog
+      summary: Get a specific blog
+      operationId: getBlog
+      description: Retrieves a specific blog by its ID, belonging to the current user.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the blog to retrieve
+      responses:
+        '200':
+          description: Successfully fetched the blog.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "614b7f2e83b41d0015f59e5a"
+                  title:
+                    type: string
+                    example: "My Blog Title"
+                  content:
+                    type: string
+                    example: "This is the content of the blog"
+        '401':
+          description: Unauthorized
+
+    delete:
+      tags:
+        - Blog
+      summary: Delete a specific blog
+      operationId: deleteBlog
+      description: Deletes a blog by its ID if it belongs to the current user.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the blog to delete
+      responses:
+        '200':
+          description: Successfully deleted the blog.
+        '500':
+          description: Internal server error
