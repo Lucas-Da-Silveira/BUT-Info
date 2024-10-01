@@ -4,3 +4,4 @@ nohup.out
 .env
 .idea
 package-lock.json
+config
