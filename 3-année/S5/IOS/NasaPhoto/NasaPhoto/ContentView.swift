@@ -16,6 +16,13 @@ struct ContentView: View {
             switch viewModel.state{
             case .success(let data):
                 VStack{
+                    AsyncImage(url: data.url){ image in image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 300, height: 300)
+                    }placeholder: {
+                        ProgressView()
+                    }
                     Text(data.title).font(.title.italic())
                     Text(data.explanation).font(.caption)
                     Text(data.copyright ?? "No copyright")
